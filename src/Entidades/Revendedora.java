@@ -6,27 +6,37 @@ public class Revendedora {
     private String apellido;
     private int dni;
     private int telefono;
+    private String mail;
     private boolean activa;
     private int campaña;
+    private boolean anulado;
 
-    public Revendedora(int idRev, String nombre, String apellido, int dni, int telefono, boolean activa, int campaña) {
+    public Revendedora(int idRev, String nombre, String apellido, int dni, int telefono, String mail, boolean activa, int campaña, boolean anulado) {
         this.idRev = idRev;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.telefono = telefono;
+        this.mail = mail;
         this.activa = activa;
         this.campaña = campaña;
+        this.anulado = anulado;
     }
 
-    public Revendedora(String nombre, String apellido, int dni, int telefono, boolean activa, int campaña) {
+    public Revendedora(String nombre, String apellido, int dni, int telefono, String mail , boolean activa, int campaña, boolean anulado) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.telefono = telefono;
+        this.mail = mail;
         this.activa = activa;
         this.campaña = campaña;
+        this.anulado = anulado;
     }
+
+    public Revendedora() {
+    }
+    
 
     public int getIdRev() {
         return idRev;
@@ -68,6 +78,14 @@ public class Revendedora {
         this.telefono = telefono;
     }
 
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+    
     public boolean isActiva() {
         return activa;
     }
@@ -84,9 +102,17 @@ public class Revendedora {
         this.campaña = campaña;
     }
 
+    public boolean isAnulado() {
+        return anulado;
+    }
+
+    public void setAnulado(boolean anulado) {
+        this.anulado = anulado;
+    }
+    
     @Override
     public String toString() {
-        return "ID. Rev.: " + idRev + ". Nombre: " + nombre + ". Apellido: " + apellido + ". DNI: " + dni + ". Telefono: " + telefono + ". Activa: " + activa + ". Campaña: " + campaña;
+        return "ID. Rev.: " + idRev + ". Nombre: " + nombre + ". Apellido: " + apellido + ". DNI: " + dni + ". Telefono: " + telefono +". Mail: "+ mail +". Activa: " + activa + ". Campaña: " + campaña  + ". Anulado: " + anulado;
     }
     
 }
