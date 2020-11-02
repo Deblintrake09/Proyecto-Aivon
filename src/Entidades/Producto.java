@@ -9,6 +9,7 @@ public class Producto {
     private float precioCosto;
     private float precioVenta;
     private int cantEstrellas;
+    private boolean anulado;
 
     public Producto(int idProducto, String codigo, String nombre, String uso, int tamaño, float precioCosto, float precioVenta, int cantEstrellas) {
         this.idProducto = idProducto;
@@ -19,6 +20,7 @@ public class Producto {
         this.precioCosto = precioCosto;
         this.precioVenta = precioVenta;
         this.cantEstrellas = cantEstrellas;
+        this.anulado=false;
     }
 
     public Producto(String codigo, String nombre, String uso, int tamaño, float precioCosto, float precioVenta, int cantEstrellas) {
@@ -29,9 +31,11 @@ public class Producto {
         this.precioCosto = precioCosto;
         this.precioVenta = precioVenta;
         this.cantEstrellas = cantEstrellas;
+        this.anulado=false;
     }
 
     public Producto() {
+        this.anulado=false;
     }
 
     public int getIdProducto() {
@@ -98,9 +102,17 @@ public class Producto {
         this.cantEstrellas = cantEstrellas;
     }
     
+      public boolean isAnulado() {
+        return anulado;
+    }
+
+    public void setAnulado(boolean anulado) {
+        this.anulado = anulado;
+    }
+    
     @Override
     public String toString() {
-        return "ID. Producto: " + idProducto + ". Codigo: " + codigo + ". Nombre:" + nombre + ". Uso: " + uso + ". Tamaño: " + tamaño + ". Precio costo: " + precioCosto + ". Precio venta:" + precioVenta + ". Cant. Estrellas=" + cantEstrellas;
+        return "ID. Producto: " + idProducto + ". Codigo: " + codigo + ". Nombre:" + nombre + ". Uso: " + uso + ". Tamaño: " + tamaño + ". Precio costo: " + precioCosto + ". Precio venta:" + precioVenta + ". Cant. Estrellas=" + cantEstrellas + ". Anulado= "+anulado;
     }
 
     

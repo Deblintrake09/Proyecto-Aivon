@@ -16,18 +16,18 @@ Ver Campaña
 Listar Revendedoras
 --------------------
 
-Producto		Andrés
+Producto		Andrés           Marco con * los completados
 ------------------
-Cargar
-Anular
+Cargar*
+Anular * (Cambiar Estado, permite anular/desanular)
 Modificar
-Buscar por Código
-Listar por Uso (Cremas, Perfumes, Rimmel)
-Listar por Nombre
-Listar por Costo
-Listar por PVP
-Listar por Estrellas
-Listar por Tamaño
+Buscar por Código*
+Listar por Uso (Cremas, Perfumes, Rimmel)*
+Listar por Nombre*
+Listar por Costo*
+Listar por PVP*
+Listar por Estrellas*
+Listar por Tamaño*
 
 Campaña:		Rafael
 ------------------
