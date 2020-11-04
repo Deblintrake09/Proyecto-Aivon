@@ -1,80 +1,152 @@
-AGREGAR CAMPO ANULADO A TODO MENOS HISTORICO CAMPAÑA
----- CONTROLAR SIEMPRE ANTES DE CARGAR QUE NO ESTE ANULADO EN EL SQL
+﻿AGREGAR CAMPO ANULADO A TODO MENOS HISTORICO CAMPAÑA
+
+---- 
+CONTROLAR SIEMPRE ANTES DE CARGAR QUE NO ESTE ANULADO EN EL SQL
 
 Revendedora:		Carlos	
+
 --------------------
+
 Agregar
 Borrar (Anular)
+
 Modificar
 Buscar por DNI
+
 Buscar por Apellido
+
 Buscar Nombre
+
 Buscar Tel
+
 Buscar Mail
+
 Ver si Activa
+
 Ver Campaña
+
 Listar Revendedoras
+
 --------------------
 
-Producto		Andrés           Marco con * los completados
+
+Producto		Andrés           
+Marco con * los completados
+
 ------------------
+
 Cargar*
+
 Anular * (Cambiar Estado, permite anular/desanular)
+
 Modificar
+
 Buscar por Código*
+
 Listar por Uso (Cremas, Perfumes, Rimmel)*
+
 Listar por Nombre*
+
 Listar por Costo*
+
 Listar por PVP*
+
 Listar por Estrellas*
+
 Listar por Tamaño*
 
+
+
 Campaña:		Rafael
+
 ------------------
+
 Crear
+
 Modificar (Nro, Fechas, Montos)
+
 Borrar (Anular)
+
 Listar campañas
+
 buscar campaña por Nro
+
 Obtener Montos 
+
 Comparar Montos(Pasas Monto y te responde si está permitido)
 
+
+
 --------------------
+
 
 
 Histórico Campaña:
+
 ---------------------
+
 Cargar Histórico
+
 Anular Historico
+
 Listar por Revendedora
+
 Listar por Campaña
+
 Actualizar Revendedora (Suma total de Estrellas %50 y la sube al nivel correspondiente)
+
 Mostrar total de Estrellas Por Revendedora (253, --- Vista:  Campaña  Total/Faltante)
-Activar/Desactivar Vendedora (Controlar que lleve minimo 3 campañas, si no esta desactiva)
+
+Activar/Desactivar 
+Vendedora (Controlar que lleve minimo 3 campañas, si no esta desactiva)
+
 Motrar Pedidos Por Revendedora
 
 Pedido
+
 --------------------
+
 Cargar
 Anular (Desactivar)
+
 Modificar (Entregar, Pagar, Cambiar Cajas, Asignar Campaña)
+
 Listar Pedidos de Campaña
+
 Listar Pedidos Por Revendedora
+
 Listar Pedido Por Campaña y Revendedora
-*Consultar si está Vencido (Si pasaron 10 días de la entrega)
-*Listar Contenidos (llama a Renglon Pedido)
-*Precio Costo
-*Precio V.P.
-*Total de Estrellas
-*Consultar cajas
-*Controlar Minimos y Maximos por Campaña
+*
+Consultar si está Vencido (Si pasaron 10 días de la entrega)
+*
+Listar Contenidos (llama a Renglon Pedido)
+*
+Precio Costo
+*
+Precio V.P.
+*
+Total de Estrellas
+*
+Consultar cajas
+*
+Controlar Minimos y Maximos por Campaña
+
+
 
 
 Renglon Producto
+
 -------------------
+
 Agregar
+
 Anular
+
 Modificar
-*Actualizar Cajas Pedido (Controla Cajas del Pedido y te limita a cajas actuales+1)
-*Mostar Datos
+*
+Actualizar Cajas 
+Pedido (Controla Cajas del Pedido y te limita a cajas actuales+1)
+*
+Mostar Datos
+
 Listar Renglones por Pedido

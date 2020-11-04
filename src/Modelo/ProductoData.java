@@ -30,7 +30,8 @@ public class ProductoData {
      */
     public void agregarProducto(Producto prod)
     {   	
-         String query ="INSERT INTO producto (CODIGO, NOMBRE, USO, TAMAÑO_CM3, PRECIO_COSTO, PRECIO_PUBLICO, CANT_ESTRELLAS, ANULADO) VALUES(?,?,?,?,?,?,?,?)";
+         String query ="INSERT INTO producto (CODIGO, NOMBRE, USO, TAMAÑO_CM3, PRECIO_COSTO, "
+                 + "PRECIO_PUBLICO, CANT_ESTRELLAS, ANULADO) VALUES(?,?,?,?,?,?,?,?)";
         try{
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, prod.getCodigo());
@@ -80,7 +81,7 @@ public class ProductoData {
             }
             else
             {
-                 JOptionPane.showMessageDialog(null, "No se pudo encontrar el producto con código: "+codigo);
+                 JOptionPane.showMessageDialog(null, "No se pudo encontrar el producto con código: " + codigo);
                 
             }   
             ps.close();

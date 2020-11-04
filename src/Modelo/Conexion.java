@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-public class Conexion {
-    
+public class Conexion 
+{
     private final String base = "aivon";
     private final String url="jdbc:mysql://localhost:3306/"+base;
     private final String user="root";
@@ -27,6 +27,7 @@ public class Conexion {
                 JOptionPane.showMessageDialog(null, "Error de Conexión");
             }
         }   
-                return con;
+        
+        return con;
     }
 }
