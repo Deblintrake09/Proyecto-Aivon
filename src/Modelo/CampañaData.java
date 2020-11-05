@@ -63,6 +63,7 @@ public class CampañaData
            ps.setDate(3, Date.valueOf(camp.getFechaFin()));
            ps.setFloat(4, camp.getMontoMinimo());
            ps.setFloat(5, camp.getMontoMaximo());
+           
            ResultSet rs = ps.getGeneratedKeys();
            if(rs.next())
            {

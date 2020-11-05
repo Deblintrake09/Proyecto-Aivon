@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -381,7 +380,7 @@ public class ProductoData {
     
     public void cambiarEstado(String codigo, boolean anular)
     {
-    String query = "update producto SET anulado = ? WHERE CODIGO = ?";
+    String query = "UPDATE producto SET ANULADO= ? WHERE CODIGO = ?";
         try
         {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -398,4 +397,5 @@ public class ProductoData {
              JOptionPane.showMessageDialog(null, e.toString());
          }
     }
+    
 }
