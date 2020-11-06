@@ -312,6 +312,28 @@ public class CampañaData
         return campañas;
     }
     
-    
+    public void cambiarEstadoCampaña(Campaña camp, boolean cambio)
+    {
+        String query = "UPDATE campaña SET ANULADO = ? WHERE ID_CAMPAÑA = ?";
+        try
+        {
+           PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+           ps.setBoolean(1, cambio);
+           ps.setInt(2, camp.getIdCampaña());
+           ps.executeUpdate();
+           ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next())
+            {
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar el estado");
+            }
+            ps.close();
+        }
+        
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+    }
 
 }

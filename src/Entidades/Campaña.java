@@ -10,7 +10,7 @@ public class Campaña
     private LocalDate fechaFin;
     private float montoMinimo;
     private float montoMaximo;
-    private int estrellas;
+    private boolean anulado;
     
     public Campaña(int idCampaña, int nroCampaña, LocalDate fechaInicio, LocalDate fechaFin, float montoMinimo, float montoMaximo) 
     {
@@ -20,6 +20,7 @@ public class Campaña
         this.fechaFin = fechaFin;
         this.montoMinimo = montoMinimo;
         this.montoMaximo = montoMaximo;
+        this.anulado = false;
     }
 
     public Campaña(int nroCampaña, LocalDate fechaInicio, LocalDate fechaFin, float montoMinimo, float montoMaximo) 
@@ -29,6 +30,7 @@ public class Campaña
         this.fechaFin = fechaFin;
         this.montoMinimo = montoMinimo;
         this.montoMaximo = montoMaximo;
+        this.anulado = false;
     }
 
     public Campaña() 
@@ -93,6 +95,16 @@ public class Campaña
     public void setMontoMaximo(float montoMaximo) 
     {
         this.montoMaximo = montoMaximo;
+    }
+    
+    public boolean getAnulado() 
+    {
+        return anulado;
+    }
+
+    public void setAnulado(boolean anulado) 
+    {
+        this.anulado = anulado;
     }
 
     @Override
