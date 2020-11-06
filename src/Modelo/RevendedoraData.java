@@ -16,7 +16,7 @@ public class RevendedoraData {
         this.con = con.getConnection();
     }
     public void agregarRevendedora(Revendedora rev){
-        String query ="INSERT INTO revendedora(NOMBRE, APELLIDO, DNI, TEL, MAIL, ACTIVA, CAMPAÑA, ANULADO) VALUES(?,?,?,?,?,?,?,?)";
+        String query ="INSERT INTO revendedora(NOMBRE, APELLIDO, DNI, TEL, MAIL, ACTIVA, NIVEL, ANULADO) VALUES(?,?,?,?,?,?,?,?)";
         try{
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, rev.getNombre());
@@ -25,7 +25,7 @@ public class RevendedoraData {
             ps.setInt(4, rev.getTelefono());
             ps.setString(5, rev.getMail());
             ps.setBoolean(6, rev.isActiva());
-            ps.setInt(7, rev.getCampaña());
+            ps.setInt(7, rev.getNivel());
             ps.setBoolean(8, rev.isAnulado());
             ps.executeUpdate();
             ResultSet rs=ps.getGeneratedKeys();
@@ -57,7 +57,33 @@ public class RevendedoraData {
                 rev.setTelefono(rs.getInt(5));
                 rev.setMail(rs.getString(6));
                 rev.setActiva(rs.getBoolean(7));
-                rev.setCampaña(rs.getInt(8));
+                rev.setNivel(rs.getInt(8));
+                rev.setAnulado(rs.getBoolean(9));  
+            }
+            ps.close();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "No se encontro la revendedora");
+        }
+        return rev;
+    }
+    public Revendedora buscarPorId(int id){
+        Revendedora rev=null;
+        String query ="SELECT * FROM revendedora WHERE ID_REV  = ?";
+        try{
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                rev = new Revendedora();
+                rev.setIdRev(rs.getInt(1));
+                rev.setNombre(rs.getString(2));
+                rev.setApellido(rs.getString(3));
+                rev.setDni(rs.getInt(4));
+                rev.setTelefono(rs.getInt(5));
+                rev.setMail(rs.getString(6));
+                rev.setActiva(rs.getBoolean(7));
+                rev.setNivel(rs.getInt(8));
                 rev.setAnulado(rs.getBoolean(9));  
             }
             ps.close();
@@ -84,7 +110,7 @@ public class RevendedoraData {
                 rev.setTelefono(rs.getInt(5));
                 rev.setMail(rs.getString(6));
                 rev.setActiva(rs.getBoolean(7));
-                rev.setCampaña(rs.getInt(8));
+                rev.setNivel(rs.getInt(8));
                 rev.setAnulado(rs.getBoolean(9));
                 apellidos.add(rev);
             }
@@ -112,7 +138,7 @@ public class RevendedoraData {
                 rev.setTelefono(rs.getInt(5));
                 rev.setMail(rs.getString(6));
                 rev.setActiva(rs.getBoolean(7));
-                rev.setCampaña(rs.getInt(8));
+                rev.setNivel(rs.getInt(8));
                 rev.setAnulado(rs.getBoolean(9));
                 nombres.add(rev);
             }
@@ -140,7 +166,7 @@ public class RevendedoraData {
                 rev.setTelefono(rs.getInt(5));
                 rev.setMail(rs.getString(6));
                 rev.setActiva(rs.getBoolean(7));
-                rev.setCampaña(rs.getInt(8));
+                rev.setNivel(rs.getInt(8));
                 rev.setAnulado(rs.getBoolean(9));
                 telefonos.add(rev);
             }
@@ -168,7 +194,7 @@ public class RevendedoraData {
                 rev.setTelefono(rs.getInt(5));
                 rev.setMail(rs.getString(6));
                 rev.setActiva(rs.getBoolean(7));
-                rev.setCampaña(rs.getInt(8));
+                rev.setNivel(rs.getInt(8));
                 rev.setAnulado(rs.getBoolean(9));
                 mails.add(rev);
             }
@@ -180,7 +206,7 @@ public class RevendedoraData {
         return mails;
     }
      public void modificarRevendedora(Revendedora rev){
-         String query="UPDATE revendedora SET NOMBRE=?, APELLIDO=?, DNI=?, TEL=?, MAIL=?, ACTIVA=?, CAMPAÑA=?, ANULADO=? WHERE ID_REV=?";
+         String query="UPDATE revendedora SET NOMBRE=?, APELLIDO=?, DNI=?, TEL=?, MAIL=?, ACTIVA=?, NIVEL=?, ANULADO=? WHERE ID_REV=?";
          try{
              PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
              ps.setString(1, rev.getNombre());
@@ -189,7 +215,7 @@ public class RevendedoraData {
              ps.setInt(4, rev.getTelefono());
              ps.setString(5, rev.getMail());
              ps.setBoolean(6, rev.isActiva());
-             ps.setInt(7, rev.getCampaña());
+             ps.setInt(7, rev.getNivel());
              ps.setBoolean(8, rev.isAnulado());
              ps.setInt(9, rev.getIdRev());
              ps.executeUpdate();
@@ -221,7 +247,7 @@ public class RevendedoraData {
                  rev.setTelefono(rs.getInt(5));
                  rev.setMail(rs.getString(6));
                  rev.setActiva(rs.getBoolean(7));
-                 rev.setCampaña(rs.getInt(8));
+                 rev.setNivel(rs.getInt(8));
                  rev.setAnulado(rs.getBoolean(9));
                  revendedoras.add(rev);
              
@@ -250,4 +276,23 @@ public class RevendedoraData {
              JOptionPane.showMessageDialog(null, e.toString());
          }
      }
+     public void darBaja(Revendedora rev, boolean db){
+         String query="UPDATE revendedora SET ACTIVA=? WHERE ID_REV = ?";
+         try{
+             PreparedStatement ps=con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+             ps.setBoolean(1, db);
+             ps.setInt(2, rev.getIdRev());
+             ps.executeUpdate();
+             ResultSet rs = ps.getGeneratedKeys();
+             if(rs.next()){
+                 JOptionPane.showMessageDialog(null, "No pudo se dar de baja");
+             }
+             ps.close();
+         }
+         catch(SQLException e){
+             JOptionPane.showMessageDialog(null, e.toString());
+         }
+
+     }   
 }
+

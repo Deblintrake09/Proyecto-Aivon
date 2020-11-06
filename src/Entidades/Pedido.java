@@ -6,34 +6,34 @@ public class Pedido {
     private int idPedido;
     private LocalDate fechaIngreso;
     private LocalDate fechaPago;
-    private LocalDate fechaEnvio;
     private LocalDate fechaEntrega;
-    private boolean vencido;
+    private Revendedora revendedora;
+    private Campaña campaña;
     private int cantCajas;
-    private float costo;
-    private int cantEstrellas;
+    private float totalCosto;
+    private boolean anulado;
 
-    public Pedido(int idPedido, LocalDate fechaIngreso, LocalDate fechaPago, LocalDate fechaEnvio, LocalDate fechaEntrega, boolean vencido, int cantCajas, float costo, int cantEstrellas) {
+    public Pedido(LocalDate fechaIngreso, LocalDate fechaPago, LocalDate fechaEntrega, Revendedora revendedora, Campaña campaña, int cantCajas, float totalCosto) {
+        this.fechaIngreso = fechaIngreso;
+        this.fechaPago = fechaPago;
+        this.fechaEntrega = fechaEntrega;
+        this.revendedora = revendedora;
+        this.campaña = campaña;
+        this.cantCajas = cantCajas;
+        this.totalCosto = totalCosto;
+        this.anulado = false;
+    }
+
+    public Pedido(int idPedido, LocalDate fechaIngreso, LocalDate fechaPago, LocalDate fechaEntrega, Revendedora revendedora, Campaña campaña, int cantCajas, float totalCosto) {
         this.idPedido = idPedido;
         this.fechaIngreso = fechaIngreso;
         this.fechaPago = fechaPago;
-        this.fechaEnvio = fechaEnvio;
         this.fechaEntrega = fechaEntrega;
-        this.vencido = vencido;
+        this.revendedora = revendedora;
+        this.campaña = campaña;
         this.cantCajas = cantCajas;
-        this.costo = costo;
-        this.cantEstrellas = cantEstrellas;
-    }
-
-    public Pedido(LocalDate fechaIngreso, LocalDate fechaPago, LocalDate fechaEnvio, LocalDate fechaEntrega, boolean vencido, int cantCajas, float costo, int cantEstrellas) {
-        this.fechaIngreso = fechaIngreso;
-        this.fechaPago = fechaPago;
-        this.fechaEnvio = fechaEnvio;
-        this.fechaEntrega = fechaEntrega;
-        this.vencido = vencido;
-        this.cantCajas = cantCajas;
-        this.costo = costo;
-        this.cantEstrellas = cantEstrellas;
+        this.totalCosto = totalCosto;
+        this.anulado = false;
     }
 
     public Pedido() {
@@ -63,14 +63,6 @@ public class Pedido {
         this.fechaPago = fechaPago;
     }
 
-    public LocalDate getFechaEnvio() {
-        return fechaEnvio;
-    }
-
-    public void setFechaEnvio(LocalDate fechaEnvio) {
-        this.fechaEnvio = fechaEnvio;
-    }
-
     public LocalDate getFechaEntrega() {
         return fechaEntrega;
     }
@@ -79,12 +71,20 @@ public class Pedido {
         this.fechaEntrega = fechaEntrega;
     }
 
-    public boolean isVencido() {
-        return vencido;
+    public Revendedora getRevendedora() {
+        return revendedora;
     }
 
-    public void setVencido(boolean vencido) {
-        this.vencido = vencido;
+    public void setRevendedora(Revendedora revendedora) {
+        this.revendedora = revendedora;
+    }
+
+    public Campaña getCampaña() {
+        return campaña;
+    }
+
+    public void setCampaña(Campaña campaña) {
+        this.campaña = campaña;
     }
 
     public int getCantCajas() {
@@ -95,25 +95,25 @@ public class Pedido {
         this.cantCajas = cantCajas;
     }
 
-    public float getCosto() {
-        return costo;
+    public float getTotalCosto() {
+        return totalCosto;
     }
 
-    public void setCosto(float costo) {
-        this.costo = costo;
+    public void setTotalCosto(float totalCosto) {
+        this.totalCosto = totalCosto;
     }
 
-    public int getCantEstrellas() {
-        return cantEstrellas;
+    public boolean isAnulado() {
+        return anulado;
     }
 
-    public void setCantEstrellas(int cantEstrellas) {
-        this.cantEstrellas = cantEstrellas;
+    public void setAnulado(boolean anulado) {
+        this.anulado = anulado;
     }
 
     @Override
     public String toString() {
-        return "ID. Pedido: " + idPedido + ". Fecha ingreso: " + fechaIngreso + ". Fecha pago: " + fechaPago + ". Fecha envio: " + fechaEnvio + ". Fecha entrega: " + fechaEntrega + ". Vencido: " + vencido + ". Cant. Cajas: " + cantCajas + ". Costo:" + costo + ". Cant. Estrellas: " + cantEstrellas;
+        return "ID. Pedido: " + idPedido + ". Fecha ingreso: " + fechaIngreso + ". Fecha pago: " + fechaPago + ". Fecha entrega: " + fechaEntrega + ". Revendedora:" + revendedora.getApellido() + ". Campaña: " + campaña.getNroCampaña() + ". Cant. Cajas: " + cantCajas + ". Total costo: " + totalCosto + ". Anulado: " + anulado ;
     }
     
 }
