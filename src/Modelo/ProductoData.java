@@ -380,15 +380,15 @@ public class ProductoData {
     
     public void cambiarEstado(String codigo, boolean anular)
     {
-    String query = "UPDATE producto SET ANULADO= ? WHERE CODIGO = ?";
+    String query = "UPDATE producto SET ANULADO = ? WHERE CODIGO = ?";
         try
         {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setBoolean(1,anular);
             ps.setString(2, codigo);
             ps.executeUpdate();
-             ResultSet rs = ps.getGeneratedKeys();
-             if(rs.next()){
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()){
                  JOptionPane.showMessageDialog(null, "No pudo se dar de baja");
              }
              ps.close();

@@ -75,5 +75,22 @@ public class Aivon2 {
         {
             System.out.println(lista.get(i).toString());
         } */     
+        
+        
+        /*ProductoData pData= new ProductoData(new Conexion());
+        Producto p1= pData.buscarPorCodigo("CR-1001");
+        
+        RenglonData rdata = new RenglonData(new Conexion());
+        /*RenglonPedido renglon = new RenglonPedido(p1.getIdProducto(), 1, 4, 1, p1.getPrecioCosto(), p1.getPrecioVenta(), p1.getCantEstrellas());
+        rdata.agregarRenglon(renglon);
+        
+        renglon.setCantidad(3);       
+        
+        rdata.modificarRenglon(renglon);
+        rdata.cambiarEstado(renglon, true);
+        System.out.print(renglon.toString());
+        
+        RenglonPedido renglon2 = rdata.buscarRenglon(3);
+        System.out.print(renglon2.toString()); */
     
 }
