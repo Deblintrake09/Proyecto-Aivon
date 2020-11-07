@@ -1,6 +1,7 @@
 package Entidades;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Pedido {
     private int idPedido;
@@ -10,29 +11,32 @@ public class Pedido {
     private Revendedora revendedora;
     private Campaña campaña;
     private int cantCajas;
+    private ArrayList<RenglonPedido> renglones;
     private float totalCosto;
     private boolean anulado;
 
-    public Pedido(LocalDate fechaIngreso, LocalDate fechaPago, LocalDate fechaEntrega, Revendedora revendedora, Campaña campaña, int cantCajas, float totalCosto) {
+    public Pedido(LocalDate fechaIngreso, LocalDate fechaPago, LocalDate fechaEntrega, Revendedora revendedora, Campaña campaña, ArrayList<RenglonPedido> renglones, int cantCajas, float totalCosto) {
         this.fechaIngreso = fechaIngreso;
         this.fechaPago = fechaPago;
         this.fechaEntrega = fechaEntrega;
         this.revendedora = revendedora;
         this.campaña = campaña;
+        this.renglones=renglones;
         this.cantCajas = cantCajas;
-        this.totalCosto = totalCosto;
+        this.totalCosto = calcularTotalCosto();
         this.anulado = false;
     }
 
-    public Pedido(int idPedido, LocalDate fechaIngreso, LocalDate fechaPago, LocalDate fechaEntrega, Revendedora revendedora, Campaña campaña, int cantCajas, float totalCosto) {
+    public Pedido(int idPedido, LocalDate fechaIngreso, LocalDate fechaPago, LocalDate fechaEntrega, Revendedora revendedora, Campaña campaña, ArrayList<RenglonPedido> renglones, int cantCajas, float totalCosto) {
         this.idPedido = idPedido;
         this.fechaIngreso = fechaIngreso;
         this.fechaPago = fechaPago;
         this.fechaEntrega = fechaEntrega;
         this.revendedora = revendedora;
         this.campaña = campaña;
+        this.renglones=renglones;
         this.cantCajas = cantCajas;
-        this.totalCosto = totalCosto;
+        this.totalCosto = calcularTotalCosto();
         this.anulado = false;
     }
 
@@ -87,6 +91,14 @@ public class Pedido {
         this.campaña = campaña;
     }
 
+    public ArrayList<RenglonPedido> getRenglones() {
+        return renglones;
+    }
+
+    public void setRenglones(ArrayList<RenglonPedido> renglones) {
+        this.renglones = renglones;
+    }
+
     public int getCantCajas() {
         return cantCajas;
     }
@@ -94,7 +106,7 @@ public class Pedido {
     public void setCantCajas(int cantCajas) {
         this.cantCajas = cantCajas;
     }
-
+    
     public float getTotalCosto() {
         return totalCosto;
     }
@@ -102,7 +114,17 @@ public class Pedido {
     public void setTotalCosto(float totalCosto) {
         this.totalCosto = totalCosto;
     }
-
+    public float calcularTotalCosto()
+    {
+        totalCosto=0;
+        for (int i=0;i<renglones.size();i++)
+        {
+            if(!renglones.get(i).isAnulado())
+                totalCosto+= renglones.get(i).getPrecio_costo()*renglones.get(i).getCantidad();
+        }
+        return totalCosto;
+    }
+    
     public boolean isAnulado() {
         return anulado;
     }
@@ -113,7 +135,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "ID. Pedido: " + idPedido + ". Fecha ingreso: " + fechaIngreso + ". Fecha pago: " + fechaPago + ". Fecha entrega: " + fechaEntrega + ". Revendedora:" + revendedora.getApellido() + ". Campaña: " + campaña.getNroCampaña() + ". Cant. Cajas: " + cantCajas + ". Total costo: " + totalCosto + ". Anulado: " + anulado ;
+        return "Pedido{" + "idPedido=" + idPedido + ", fechaIngreso=" + fechaIngreso + ", fechaPago=" + fechaPago + ", fechaEntrega=" + fechaEntrega + ", revendedora=" + revendedora + ", campa\u00f1a=" + campaña + ", cantCajas=" + cantCajas + ", renglones=" + renglones + ", totalCosto=" + totalCosto + ", anulado=" + anulado + '}';
     }
     
 }

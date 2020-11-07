@@ -30,4 +30,15 @@ public class Conexion
         
         return con;
     }
+    
+    public void cerrarConexion()
+    {
+        try{
+            con.close();
+        }
+        catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "No se pudo cerrar la conexion");
+        }
+        
+    }
 }

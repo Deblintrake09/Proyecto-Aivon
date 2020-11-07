@@ -22,7 +22,7 @@ public class RevendedoraData {
             ps.setString(1, rev.getNombre());
             ps.setString(2, rev.getApellido());
             ps.setInt(3, rev.getDni());
-            ps.setInt(4, rev.getTelefono());
+            ps.setLong(4, rev.getTelefono());
             ps.setString(5, rev.getMail());
             ps.setBoolean(6, rev.isActiva());
             ps.setInt(7, rev.getNivel());
@@ -54,7 +54,7 @@ public class RevendedoraData {
                 rev.setNombre(rs.getString(2));
                 rev.setApellido(rs.getString(3));
                 rev.setDni(rs.getInt(4));
-                rev.setTelefono(rs.getInt(5));
+                rev.setTelefono(rs.getLong(5));
                 rev.setMail(rs.getString(6));
                 rev.setActiva(rs.getBoolean(7));
                 rev.setNivel(rs.getInt(8));
@@ -80,7 +80,7 @@ public class RevendedoraData {
                 rev.setNombre(rs.getString(2));
                 rev.setApellido(rs.getString(3));
                 rev.setDni(rs.getInt(4));
-                rev.setTelefono(rs.getInt(5));
+                rev.setTelefono(rs.getLong(5));
                 rev.setMail(rs.getString(6));
                 rev.setActiva(rs.getBoolean(7));
                 rev.setNivel(rs.getInt(8));
@@ -107,7 +107,7 @@ public class RevendedoraData {
                 rev.setNombre(rs.getString(2));
                 rev.setApellido(rs.getString(3));
                 rev.setDni(rs.getInt(4));
-                rev.setTelefono(rs.getInt(5));
+                rev.setTelefono(rs.getLong(5));
                 rev.setMail(rs.getString(6));
                 rev.setActiva(rs.getBoolean(7));
                 rev.setNivel(rs.getInt(8));
@@ -135,7 +135,7 @@ public class RevendedoraData {
                 rev.setNombre(rs.getString(2));
                 rev.setApellido(rs.getString(3));
                 rev.setDni(rs.getInt(4));
-                rev.setTelefono(rs.getInt(5));
+                rev.setTelefono(rs.getLong(5));
                 rev.setMail(rs.getString(6));
                 rev.setActiva(rs.getBoolean(7));
                 rev.setNivel(rs.getInt(8));
@@ -163,7 +163,7 @@ public class RevendedoraData {
                 rev.setNombre(rs.getString(2));
                 rev.setApellido(rs.getString(3));
                 rev.setDni(rs.getInt(4));
-                rev.setTelefono(rs.getInt(5));
+                rev.setTelefono(rs.getLong(5));
                 rev.setMail(rs.getString(6));
                 rev.setActiva(rs.getBoolean(7));
                 rev.setNivel(rs.getInt(8));
@@ -191,7 +191,7 @@ public class RevendedoraData {
                 rev.setNombre(rs.getString(2));
                 rev.setApellido(rs.getString(3));
                 rev.setDni(rs.getInt(4));
-                rev.setTelefono(rs.getInt(5));
+                rev.setTelefono(rs.getLong(5));
                 rev.setMail(rs.getString(6));
                 rev.setActiva(rs.getBoolean(7));
                 rev.setNivel(rs.getInt(8));
@@ -212,7 +212,7 @@ public class RevendedoraData {
              ps.setString(1, rev.getNombre());
              ps.setString(2, rev.getApellido());
              ps.setInt(3, rev.getDni());
-             ps.setInt(4, rev.getTelefono());
+             ps.setLong(4, rev.getTelefono());
              ps.setString(5, rev.getMail());
              ps.setBoolean(6, rev.isActiva());
              ps.setInt(7, rev.getNivel());
@@ -244,7 +244,7 @@ public class RevendedoraData {
                  rev.setNombre(rs.getString(2));
                  rev.setApellido(rs.getString(3));
                  rev.setDni(rs.getInt(4));
-                 rev.setTelefono(rs.getInt(5));
+                 rev.setTelefono(rs.getLong(5));
                  rev.setMail(rs.getString(6));
                  rev.setActiva(rs.getBoolean(7));
                  rev.setNivel(rs.getInt(8));

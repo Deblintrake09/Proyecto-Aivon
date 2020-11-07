@@ -52,7 +52,7 @@ public class ProductoData {
             ps.close();
         }
         catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "No puedo cargar la Producto. " + e.toString());
+            JOptionPane.showMessageDialog(null, "No puedo cargar la Producto / Producto ya Existente ");
         }
     }
     

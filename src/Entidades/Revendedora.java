@@ -5,13 +5,13 @@ public class Revendedora {
     private String nombre;
     private String apellido;
     private int dni;
-    private int telefono;
+    private long telefono;
     private String mail;
     private boolean activa;
     private int nivel;
     private boolean anulado;
 
-    public Revendedora(int idRev, String nombre, String apellido, int dni, int telefono, String mail, boolean activa, int nivel ) {
+    public Revendedora(int idRev, String nombre, String apellido, int dni, long telefono, String mail, boolean activa, int nivel ) {
         this.idRev = idRev;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -23,7 +23,7 @@ public class Revendedora {
         this.anulado = false;
     }
 
-    public Revendedora(String nombre, String apellido, int dni, int telefono, String mail , boolean activa, int nivel) {
+    public Revendedora(String nombre, String apellido, int dni, long telefono, String mail , boolean activa, int nivel) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -31,6 +31,16 @@ public class Revendedora {
         this.mail = mail;
         this.activa = activa;
         this.nivel = nivel;
+        this.anulado = false;
+    }
+        public Revendedora(String nombre, String apellido, int dni, long telefono, String mail) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.mail = mail;
+        this.activa = true;
+        this.nivel = 1;
         this.anulado = false;
     }
 
@@ -70,11 +80,11 @@ public class Revendedora {
         this.dni = dni;
     }
 
-    public int getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
 

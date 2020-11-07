@@ -33,9 +33,9 @@ public class RenglonData {
             ps.setInt(2, reng.getId_pedido());
             ps.setInt(3, reng.getCantidad());
             ps.setInt(4, reng.getNro_caja());
-            ps.setFloat(5, reng.getPrecio_costo()*reng.getCantidad());
-            ps.setFloat(6, reng.getPrecio_publico()*reng.getCantidad());
-            ps.setInt(7, reng.getCant_estrellas()*reng.getCantidad());
+            ps.setFloat(5, reng.getPrecio_costo());
+            ps.setFloat(6, reng.getPrecio_publico());
+            ps.setInt(7, reng.getCant_estrellas());
             ps.setBoolean(8, reng.isAnulado());
             
             ps.executeUpdate();
@@ -93,9 +93,9 @@ public class RenglonData {
             ps.setInt(2, reng.getId_pedido());
             ps.setInt(3, reng.getCantidad());
             ps.setInt(4, reng.getNro_caja());
-            ps.setFloat(5, reng.getPrecio_costo()*reng.getCantidad());
-            ps.setFloat(6, reng.getPrecio_publico()*reng.getCantidad());
-            ps.setInt(7, reng.getCant_estrellas()*reng.getCantidad());
+            ps.setFloat(5, reng.getPrecio_costo());
+            ps.setFloat(6, reng.getPrecio_publico());
+            ps.setInt(7, reng.getCant_estrellas());
             ps.setInt(8, reng.getId_renglon());
             
             ps.executeUpdate();

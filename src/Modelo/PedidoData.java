@@ -31,6 +31,14 @@ public class PedidoData {
            ResultSet rs=ps.getGeneratedKeys();
            if(rs.next()){
                pedido.setIdPedido(rs.getInt(1));
+               Conexion c = new Conexion();
+               RenglonData rd = new RenglonData(c);
+               for(int i=0;i<pedido.getRenglones().size();i++)
+               {   
+                   pedido.getRenglones().get(i).setId_pedido(pedido.getIdPedido());
+                   rd.agregarRenglon(pedido.getRenglones().get(i));
+               }
+               c.cerrarConexion();
            }
            else {
                JOptionPane.showMessageDialog(null, "No pudo obtener id pedido.");
@@ -71,7 +79,18 @@ public class PedidoData {
             ps.setInt(6, pedido.getIdPedido());
             ps.executeUpdate();
             ResultSet rs=ps.getGeneratedKeys();
-            if(rs.next()){
+            
+            if(!rs.next()){
+               Conexion c = new Conexion();
+               RenglonData rd = new RenglonData(c);
+               for(int i=0;i<pedido.getRenglones().size();i++)
+               {   
+                   pedido.getRenglones().get(i).setId_pedido(pedido.getIdPedido());
+                   rd.agregarRenglon(pedido.getRenglones().get(i));
+               }
+               c.cerrarConexion();
+            } else
+            {
                 JOptionPane.showMessageDialog(null, "No pudo actualizar.");
             }
             ps.close();
@@ -147,17 +166,23 @@ public class PedidoData {
     public Revendedora buscarRevendedora(int dni){
         Conexion c = new Conexion();
         RevendedoraData rd=new RevendedoraData(c);
-        return rd.buscarPorDni(dni);
+        Revendedora rev= rd.buscarPorDni(dni);
+        c.cerrarConexion();
+        return rev;
     }
     public Revendedora buscarporid(int id){
         Conexion c=new Conexion();
         RevendedoraData rd=new RevendedoraData(c);
-        return rd.buscarPorId(id);
+        Revendedora rev=rd.buscarPorId(id);
+        c.cerrarConexion();
+        return rev;
     }
     public Campaña buscarCampaña(int numero){
         Conexion c=new Conexion();
         CampañaData cd=new CampañaData(c);
-        return cd.buscarCampaña(numero);
+        Campaña cam =cd.buscarCampaña(numero);
+        c.cerrarConexion();
+        return cam;
     }
     //Hay que crear el buscar por id en campañaData..
     /*public Campaña buscarCamId(int id){
