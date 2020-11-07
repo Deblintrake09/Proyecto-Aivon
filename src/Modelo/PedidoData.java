@@ -16,7 +16,7 @@ public class PedidoData {
         this.con = con.getConnection();
     }
    public void cargarPedido(Pedido pedido){
-       String query="INSERT INTO pedido(FECHA_INGRESO, FECHA_PAGO, FECHA_ENTREGA, ID_REVENDEDORA, ID_CAMPAÑA, CANT_CAJAS, TOTAL_COSTO, ANULADO) VALUES (?,?,?,?,?,?,?,?)";
+       String query="INSERT INTO pedido(FECHA_INGRESO, FECHA_PAGO, FECHA_ENTREGA, DNI, NRO_CAMPAÑA, CANT_CAJAS, TOTAL_COSTO, ANULADO) VALUES (?,?,?,?,?,?,?,?)";
        try{
            PreparedStatement ps=con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
            ps.setDate(1, Date.valueOf(pedido.getFechaIngreso()));
@@ -101,13 +101,11 @@ public class PedidoData {
     }
     public ArrayList<Pedido> buscarPedidoXRev(int dni){
         Pedido pedido=null;
-        Revendedora a= buscarRevendedora(dni);
-        int id = a.getIdRev();
         ArrayList<Pedido> pedidosrv = new ArrayList<>();
-        String query="SELECT * FROM pedido WHERE pedido.ID_REVENDEDORA = ?";
+        String query="SELECT * FROM pedido WHERE pedido.DNI = ?";
         try{
             PreparedStatement ps=con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, id);
+            ps.setInt(1, dni);
             ResultSet rs= ps.executeQuery();
             while(rs.next()){
                 pedido = new Pedido();
@@ -115,10 +113,10 @@ public class PedidoData {
                 pedido.setFechaIngreso(rs.getDate(2).toLocalDate());
                 pedido.setFechaPago(rs.getDate(3).toLocalDate());
                 pedido.setFechaEntrega(rs.getDate(4).toLocalDate());
-                Revendedora r= buscarporid(rs.getInt(5));
-               // Campaña c= buscarCamId(rs.getInt(6));
+                Revendedora r= buscarRevendedora(rs.getInt(5));
+                Campaña c= buscarCampaña(rs.getInt(6));
                 pedido.setRevendedora(r);
-               // pedido.setCampaña(c);
+                pedido.setCampaña(c);
                 pedido.setCantCajas(rs.getInt(7));
                 pedido.setTotalCosto(rs.getFloat(8));
                 pedido.setAnulado(rs.getBoolean(9));
@@ -133,13 +131,11 @@ public class PedidoData {
     }
     public ArrayList<Pedido> buscarPedidoXCam(int nro){
         Pedido pedido=null;
-        Campaña a= buscarCampaña(nro);
-        int id = a.getIdCampaña();
         ArrayList<Pedido> pedidoscm = new ArrayList<>();
         String query="SELECT * FROM pedido WHERE pedido.ID_REVENDEDORA = ?";
         try{
             PreparedStatement ps=con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, id);
+            ps.setInt(1, nro);
             ResultSet rs= ps.executeQuery();
             while(rs.next()){
                 pedido = new Pedido();
@@ -147,10 +143,10 @@ public class PedidoData {
                 pedido.setFechaIngreso(rs.getDate(2).toLocalDate());
                 pedido.setFechaPago(rs.getDate(3).toLocalDate());
                 pedido.setFechaEntrega(rs.getDate(4).toLocalDate());
-                Revendedora r= buscarporid(rs.getInt(5));
-               // Campaña c= buscarCamId(rs.getInt(6));
+                Revendedora r= buscarRevendedora(rs.getInt(5));
+                Campaña c= buscarCampaña(rs.getInt(6));
                 pedido.setRevendedora(r);
-               // pedido.setCampaña(c);
+                pedido.setCampaña(c);
                 pedido.setCantCajas(rs.getInt(7));
                 pedido.setTotalCosto(rs.getFloat(8));
                 pedido.setAnulado(rs.getBoolean(9));
@@ -170,13 +166,6 @@ public class PedidoData {
         c.cerrarConexion();
         return rev;
     }
-    public Revendedora buscarporid(int id){
-        Conexion c=new Conexion();
-        RevendedoraData rd=new RevendedoraData(c);
-        Revendedora rev=rd.buscarPorId(id);
-        c.cerrarConexion();
-        return rev;
-    }
     public Campaña buscarCampaña(int numero){
         Conexion c=new Conexion();
         CampañaData cd=new CampañaData(c);
@@ -184,10 +173,5 @@ public class PedidoData {
         c.cerrarConexion();
         return cam;
     }
-    //Hay que crear el buscar por id en campañaData..
-    /*public Campaña buscarCamId(int id){
-        Conexion c=new Conexion();
-        CampañaData cd=new CampañaData(c);
-        return cd.buscarCampañaPorId(id);
-    }*/
+    
 }

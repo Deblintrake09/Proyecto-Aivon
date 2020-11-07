@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-11-2020 a las 20:11:07
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.2.33
+-- Tiempo de generación: 07-11-2020 a las 23:17:06
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -33,9 +34,16 @@ CREATE TABLE `campaña` (
   `FECHA_INICIO` date NOT NULL,
   `FECHA_FIN` date NOT NULL,
   `MONTO_MINIMO` float NOT NULL,
-  `MONTO_MAXIMO` int(11) NOT NULL,
+  `MONTO_MAXIMO` float NOT NULL,
   `ANULADO` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `campaña`
+--
+
+INSERT INTO `campaña` (`ID_CAMPAÑA`, `NRO_CAMPAÑA`, `FECHA_INICIO`, `FECHA_FIN`, `MONTO_MINIMO`, `MONTO_MAXIMO`, `ANULADO`) VALUES
+(1, 11, '2020-10-25', '2020-11-15', 1000, 6000, 1);
 
 -- --------------------------------------------------------
 
@@ -48,9 +56,9 @@ CREATE TABLE `pedido` (
   `FECHA_INGRESO` date DEFAULT NULL,
   `FECHA_PAGO` date DEFAULT NULL,
   `FECHA_ENTREGA` date DEFAULT NULL,
-  `ID_REVENDEDORA` int(11) NOT NULL,
-  `ID_CAMPAÑA` int(11) NOT NULL,
-  `CANT_CAJAS` int(11) DEFAULT 1,
+  `DNI` int(11) NOT NULL,
+  `NRO_CAMPAÑA` int(11) NOT NULL,
+  `CANT_CAJAS` int(11) DEFAULT '1',
   `TOTAL_COSTO` float NOT NULL,
   `ANULADO` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -66,10 +74,10 @@ CREATE TABLE `producto` (
   `CODIGO` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
   `NOMBRE` varchar(25) COLLATE utf8_spanish_ci DEFAULT NULL,
   `USO` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
-  `TAMAÑO_CM3` int(11) DEFAULT 1,
-  `PRECIO_COSTO` float DEFAULT 0,
-  `PRECIO_PUBLICO` float DEFAULT 0,
-  `CANT_ESTRELLAS` int(11) DEFAULT 0,
+  `TAMAÑO_CM3` int(11) DEFAULT '1',
+  `PRECIO_COSTO` float DEFAULT '0',
+  `PRECIO_PUBLICO` float DEFAULT '0',
+  `CANT_ESTRELLAS` int(11) DEFAULT '0',
   `ANULADO` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -94,11 +102,11 @@ CREATE TABLE `renglon_pedido` (
   `ID_RENGLON` int(11) NOT NULL,
   `ID_PRODUCTO` int(11) NOT NULL,
   `ID_PEDIDO` int(11) NOT NULL,
-  `CANTIDAD` int(11) NOT NULL DEFAULT 1,
-  `NRO_CAJA` int(11) DEFAULT 1,
-  `PRECIO_COSTO` float NOT NULL DEFAULT 0,
-  `PRECIO_PUBLICO` float NOT NULL DEFAULT 0,
-  `CANT_ESTRELLAS` int(11) DEFAULT 0,
+  `CANTIDAD` int(11) NOT NULL DEFAULT '1',
+  `NRO_CAJA` int(11) DEFAULT '1',
+  `PRECIO_COSTO` float NOT NULL DEFAULT '0',
+  `PRECIO_PUBLICO` float NOT NULL DEFAULT '0',
+  `CANT_ESTRELLAS` int(11) DEFAULT '0',
   `ANULADO` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -112,13 +120,20 @@ CREATE TABLE `revendedora` (
   `ID_REV` int(11) NOT NULL,
   `NOMBRE` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
   `APELLIDO` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `DNI` int(11) DEFAULT NULL,
+  `DNI` int(11) NOT NULL,
   `TEL` int(11) DEFAULT NULL,
   `MAIL` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `ACTIVA` tinyint(1) DEFAULT 1,
-  `NIVEL` int(11) DEFAULT 1,
+  `ACTIVA` tinyint(1) DEFAULT '1',
+  `NIVEL` int(11) DEFAULT '1',
   `ANULADO` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `revendedora`
+--
+
+INSERT INTO `revendedora` (`ID_REV`, `NOMBRE`, `APELLIDO`, `DNI`, `TEL`, `MAIL`, `ACTIVA`, `NIVEL`, `ANULADO`) VALUES
+(3, 'Martha', 'Bazan', 16199280, 437844, 'martha@gmail.com', 1, 1, 0);
 
 --
 -- Índices para tablas volcadas
@@ -136,8 +151,8 @@ ALTER TABLE `campaña`
 --
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`ID_PEDIDO`),
-  ADD KEY `FK_ID_REVENDEDORA` (`ID_REVENDEDORA`) USING BTREE,
-  ADD KEY `FK_ID_CAMPAÑA` (`ID_CAMPAÑA`);
+  ADD KEY `NRO_CAMPAÑA` (`NRO_CAMPAÑA`),
+  ADD KEY `DNI` (`DNI`);
 
 --
 -- Indices de la tabla `producto`
@@ -169,13 +184,13 @@ ALTER TABLE `revendedora`
 -- AUTO_INCREMENT de la tabla `campaña`
 --
 ALTER TABLE `campaña`
-  MODIFY `ID_CAMPAÑA` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_CAMPAÑA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `ID_PEDIDO` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_PEDIDO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -193,7 +208,7 @@ ALTER TABLE `renglon_pedido`
 -- AUTO_INCREMENT de la tabla `revendedora`
 --
 ALTER TABLE `revendedora`
-  MODIFY `ID_REV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_REV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -203,8 +218,8 @@ ALTER TABLE `revendedora`
 -- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD CONSTRAINT `FK_ID_CAMPAÑA` FOREIGN KEY (`ID_CAMPAÑA`) REFERENCES `campaña` (`ID_CAMPAÑA`),
-  ADD CONSTRAINT `FK_ID_REVENDEDOR` FOREIGN KEY (`ID_REVENDEDORA`) REFERENCES `revendedora` (`ID_REV`);
+  ADD CONSTRAINT `FK_ID_CAMPAÑA` FOREIGN KEY (`NRO_CAMPAÑA`) REFERENCES `campaña` (`ID_CAMPAÑA`),
+  ADD CONSTRAINT `FK_ID_REVENDEDOR` FOREIGN KEY (`DNI`) REFERENCES `revendedora` (`ID_REV`);
 
 --
 -- Filtros para la tabla `renglon_pedido`

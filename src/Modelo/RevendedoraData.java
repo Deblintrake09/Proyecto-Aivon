@@ -67,32 +67,6 @@ public class RevendedoraData {
         }
         return rev;
     }
-    public Revendedora buscarPorId(int id){
-        Revendedora rev=null;
-        String query ="SELECT * FROM revendedora WHERE ID_REV  = ?";
-        try{
-            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                rev = new Revendedora();
-                rev.setIdRev(rs.getInt(1));
-                rev.setNombre(rs.getString(2));
-                rev.setApellido(rs.getString(3));
-                rev.setDni(rs.getInt(4));
-                rev.setTelefono(rs.getLong(5));
-                rev.setMail(rs.getString(6));
-                rev.setActiva(rs.getBoolean(7));
-                rev.setNivel(rs.getInt(8));
-                rev.setAnulado(rs.getBoolean(9));  
-            }
-            ps.close();
-        }
-        catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "No se encontro la revendedora");
-        }
-        return rev;
-    }
         public ArrayList <Revendedora> buscarPorApellido(String apellido){
         Revendedora rev=null;
         ArrayList<Revendedora> apellidos = new ArrayList<>();
