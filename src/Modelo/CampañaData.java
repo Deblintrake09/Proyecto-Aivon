@@ -24,7 +24,7 @@ public class CampañaData
     public void agregarCampaña(Campaña camp)
     {
         String query = "INSERT INTO campaña(NRO_CAMPAÑA, FECHA_INICIO, FECHA_FIN,"
-                + "MONTO_MINIMO, MONTO_MAXIMO) VALUES (?,?,?,?,?)";
+                + "MONTO_MINIMO, MONTO_MAXIMO, ANULADO) VALUES (?,?,?,?,?,?)";
         try
         {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -33,6 +33,7 @@ public class CampañaData
             ps.setDate(3, Date.valueOf(camp.getFechaFin()));
             ps.setFloat(4, camp.getMontoMinimo());
             ps.setFloat(5, camp.getMontoMaximo());
+            ps.setBoolean(6, camp.getAnulado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next())
@@ -77,7 +78,7 @@ public class CampañaData
         }
     }
     
-    public Campaña buscarCampaña(int nroCampaña)
+    public Campaña buscarNroCampaña(int nroCampaña)
     {
         Campaña camp = null;
         String query = "SELECT * FROM campaña WHERE NRO_CAMPAÑA = (?)";
@@ -335,5 +336,7 @@ public class CampañaData
         }
         
     }
+    
+    
 
 }
