@@ -132,7 +132,7 @@ public class PedidoData {
     public ArrayList<Pedido> buscarPedidoXCam(int nro){
         Pedido pedido=null;
         ArrayList<Pedido> pedidoscm = new ArrayList<>();
-        String query="SELECT * FROM pedido WHERE pedido.ID_REVENDEDORA = ?";
+        String query="SELECT * FROM pedido WHERE pedido.NRO_CAMPAÑA = ?";
         try{
             PreparedStatement ps=con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, nro);
@@ -173,5 +173,6 @@ public class PedidoData {
         c.cerrarConexion();
         return cam;
     }
-    
+    // falta ActualizarPedido- BuscarPedido 
+
 }
