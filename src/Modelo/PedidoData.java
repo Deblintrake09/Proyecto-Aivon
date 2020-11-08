@@ -169,7 +169,7 @@ public class PedidoData {
     public Campaña buscarCampaña(int numero){
         Conexion c=new Conexion();
         CampañaData cd=new CampañaData(c);
-        Campaña cam =cd.buscarCampaña(numero);
+        Campaña cam =cd.buscarNroCampaña(numero);
         c.cerrarConexion();
         return cam;
     }
