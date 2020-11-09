@@ -25,7 +25,7 @@ public class Aivon
         ProductoData prData=new ProductoData(con);
         PedidoData pedData = new PedidoData(con);
         
-    /*    
+        
         //Creamos  y cargamos Campañas
         Campaña camp = new Campaña(1, LocalDate.of(2020,8,1), LocalDate.of(2020,8,1).plusDays(25), 5000, 10000);
         cData.agregarCampaña(camp);
@@ -35,8 +35,7 @@ public class Aivon
         cData.agregarCampaña(camp);
         camp = new Campaña(4, LocalDate.of(2020,8,1).plusDays(75), LocalDate.of(2020,8,1).plusDays(100), 7500, 15000);       
         cData.agregarCampaña(camp);
-    */
-    /*
+  
         //Creamos y cargamos Revendedoras
         Revendedora rev= new Revendedora("Gabriela", "Martinez", 27537322, 2664426345L, "gabyfernandez@gmail.com" ,true, 1);
         revData.agregarRevendedora(rev);
@@ -44,8 +43,7 @@ public class Aivon
         revData.agregarRevendedora(rev);
         rev= new Revendedora("Mariela", "Luzardi", 29752863, 2657879535L, "maritaluzardi@hotmail.com");
         revData.agregarRevendedora(rev);
-    */
-    /*
+  
         //Creamos y cargamos Productos
         Producto prod= new Producto("CR-0001", "Hidratante EQ10", "Crema", 100, 300, 500, 2);
         prData.agregarProducto(prod);
@@ -57,21 +55,18 @@ public class Aivon
         prData.agregarProducto(prod);
         prod= new Producto("MU-0023", "Cuarteto de Sombras", "Maquillaje", 20, 625, 1090, 7);
         prData.agregarProducto(prod);
-    */
-        
-        
-    /*
+     
         // Inicializamos Pedido con fecha de Entrega, fecha de pago y renglones vacios.
         rev1 = revData.buscarPorDni(25788457);
         camp1 = cData.buscarNroCampaña(1);    
-        Pedido ped1 = new Pedido(LocalDate.of(2020, 8, 10), null, null, rev1, camp1, renglones); // Inicializamos Pedido con fecha de Entrega y Pedido Nulas.
+         ped1 = new Pedido(LocalDate.of(2020, 8, 10), null, null, rev1, camp1, renglones); // Inicializamos Pedido con fecha de Entrega y Pedido Nulas.
         pedData.cargarPedido(ped1);
         
         //Creamos Renglones para Cargar en el pedido (los agregamos al arreglo ya existente en el pedido
-        Producto prod1 = prData.buscarPorCodigo("CR-1002");
-        RenglonPedido renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),1,1, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+        prod1 = prData.buscarPorCodigo("CR-0001");
+        renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),1,1, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
         ped1.getRenglones().add(renglon);
-        prod1 = prData.buscarPorCodigo("CR-1001");
+        prod1 = prData.buscarPorCodigo("LS-0010");
         renglon = new RenglonPedido(prod1,ped1.getIdPedido(),3,1);
         ped1.agregarRenglon(renglon);
         prod1 = prData.buscarPorCodigo("MU-0023");
@@ -81,13 +76,11 @@ public class Aivon
        ped1.imprimirPedido();
        pedData.actualizarPedido(ped1);   //Actualizamos el Pedido Cargando los renglones en el sistema
        ped1.imprimirPedido();
-    */
     
-    /*
       // Creamos nuevo Pedido, asignamos los nuevos renglones a un arreglo y luego se asigna el arreglo de los renglones al pedido.
       //Cargamos el pedido, lo imprimimos en consola para controlar estado. luego pagamos el pedido y lo reimprimimos para controlar estado.
        ped1 = new Pedido(LocalDate.of(2020,8,10),null, LocalDate.of(2020,8,17),revData.buscarPorDni(29752863), camp1,renglones);
-       prod1 = prData.buscarPorCodigo("CR-1004");
+       prod1 = prData.buscarPorCodigo("LS-0010");
        renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),3,1, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
        renglones.add(renglon);
        prod1 = prData.buscarPorCodigo("CR-0001");
@@ -104,21 +97,31 @@ public class Aivon
        ped1.imprimirPedido();
        pedData.pagarPedido(ped1, LocalDate.of(2020,8,23));
        ped1.imprimirPedido();
-    */
     
-    /*
+    
+    
        //Cargamos un nuevo Pedido de la revendedora en la Campaña 2 y 3 -- Usaremos el mismo pedido anterior (repite el pedido en campaña 2 y campaña 3 cambia las cantidades)
-       ped1.setCampaña(cData.buscarNroCampaña(2));
+       ped1 = new Pedido(LocalDate.of(2020,8,10),null, null,revData.buscarPorDni(29752863), cData.buscarNroCampaña(2),renglones);
+       prod1 = prData.buscarPorCodigo("LS-0010");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),3,1, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       prod1 = prData.buscarPorCodigo("CR-0001");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),5,1, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       prod1 = prData.buscarPorCodigo("CR-0003");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),2,2, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       prod1 = prData.buscarPorCodigo("CR-0002");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),3,2, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       ped1.setRenglones(renglones);
        ped1.setFechaIngreso(ped1.getCampaña().getFechaInicio().plusDays(2));
-       ped1.setFechaEntrega(null);
        ped1.setRenglones(renglones);
        pedData.cargarPedido(ped1);
       
-    */
-    /*
        //Limpiamos el arreglo y lo recargamos, porque si no los renglones del array tienen el id del pedido anterior
        renglones.clear();
-       prod1 = prData.buscarPorCodigo("CR-1004");
+       prod1 = prData.buscarPorCodigo("LS-0010");
        renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),5,1, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
        renglones.add(renglon);
        prod1 = prData.buscarPorCodigo("CR-0001");
@@ -134,17 +137,15 @@ public class Aivon
        ped1.setFechaIngreso(ped1.getCampaña().getFechaInicio().plusDays(2));
        ped1.setFechaEntrega(null);
        ped1.setRenglones(renglones);
-       pedData.cargarPedido(ped1);
-    */
+       pedData.cargarPedido(ped1);    
     
-    /*
         //Listamos Todos los Pedidos de una revendedora
         listaPedidos= pedData.buscarPedidoXRev(29752863);
         for(int i=0;i<listaPedidos.size();i++)
         {
          listaPedidos.get(i).imprimirPedido();
         }
-    */  
+     
         //listamos todos los pedidos de una campaña
         listaPedidos=pedData.buscarPedidoXCam(1);
                 for(int i=0;i<listaPedidos.size();i++)
@@ -152,31 +153,6 @@ public class Aivon
          listaPedidos.get(i).imprimirPedido();
         }
     
-       
-               
-      
-        
-        
-        
-        
-        
-        /*
-        
-        
-        
-        RenglonData rdata = new RenglonData(new Conexion());
-      RenglonPedido renglon = new RenglonPedido(p1.getIdProducto(), 1, 4, 1, p1.getPrecioCosto(), p1.getPrecioVenta(), p1.getCantEstrellas());
-        rdata.agregarRenglon(renglon);
-
-        
-        renglon.setCantidad(3);       
-                
-        rdata.modificarRenglon(renglon);
-        rdata.cambiarEstado(renglon, true);
-        System.out.print(renglon.toString());
-        
-        RenglonPedido renglon2 = rdata.buscarRenglon(3);
-        System.out.print(renglon2.toString());*/
 
     }
     
