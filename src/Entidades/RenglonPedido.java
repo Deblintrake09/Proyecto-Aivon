@@ -22,6 +22,7 @@ public class RenglonPedido {
     private boolean anulado;
 
     public RenglonPedido(int id_producto, int id_pedido, int cantidad, int nro_caja, float precio_costo, float precio_publico, int cant_estrellas) {
+        this.id_renglon=0;
         this.id_producto = id_producto;
         this.id_pedido = id_pedido;
         this.cantidad = cantidad;
@@ -31,8 +32,22 @@ public class RenglonPedido {
         this.cant_estrellas = cant_estrellas;
         this.anulado=false;
     }
+    
+    public RenglonPedido(Producto prod, int id_pedido, int cantidad, int nro_caja)
+    {
+        this.id_renglon=0;
+        this.id_producto = prod.getIdProducto();
+        this.id_pedido = id_pedido;
+        this.cantidad = cantidad;
+        this.nro_caja = nro_caja;
+        this.precio_costo = prod.getPrecioCosto();
+        this.precio_publico = prod.getPrecioVenta();
+        this.cant_estrellas = prod.getCantEstrellas();
+        this.anulado=false;
+    }
 
     public RenglonPedido() {
+        this.id_renglon=0;
     }
     
     public int getId_renglon() {

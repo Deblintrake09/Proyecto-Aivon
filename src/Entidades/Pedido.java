@@ -1,5 +1,6 @@
 package Entidades;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -15,32 +16,33 @@ public class Pedido {
     private float totalCosto;
     private boolean anulado;
 
-    public Pedido(LocalDate fechaIngreso, LocalDate fechaPago, LocalDate fechaEntrega, Revendedora revendedora, Campaña campaña, ArrayList<RenglonPedido> renglones, int cantCajas, float totalCosto) {
+    public Pedido(LocalDate fechaIngreso, LocalDate fechaPago, LocalDate fechaEntrega, Revendedora revendedora, Campaña campaña, ArrayList<RenglonPedido> renglones) {
         this.fechaIngreso = fechaIngreso;
         this.fechaPago = fechaPago;
         this.fechaEntrega = fechaEntrega;
         this.revendedora = revendedora;
         this.campaña = campaña;
-        this.renglones=renglones;
-        this.cantCajas = cantCajas;
-        this.totalCosto = calcularTotalCosto();
+        this.totalCosto=0;
+        this.cantCajas=0;
+        setRenglones(renglones);
         this.anulado = false;
     }
 
-    public Pedido(int idPedido, LocalDate fechaIngreso, LocalDate fechaPago, LocalDate fechaEntrega, Revendedora revendedora, Campaña campaña, ArrayList<RenglonPedido> renglones, int cantCajas, float totalCosto) {
+    public Pedido(int idPedido, LocalDate fechaIngreso, LocalDate fechaPago, LocalDate fechaEntrega, Revendedora revendedora, Campaña campaña, ArrayList<RenglonPedido> renglones) {
         this.idPedido = idPedido;
         this.fechaIngreso = fechaIngreso;
         this.fechaPago = fechaPago;
         this.fechaEntrega = fechaEntrega;
-        this.revendedora = revendedora;
+        this.revendedora = revendedora;        
         this.campaña = campaña;
-        this.renglones=renglones;
-        this.cantCajas = cantCajas;
-        this.totalCosto = calcularTotalCosto();
+        this.totalCosto=0;
+        this.cantCajas=0;
+        setRenglones(renglones);
         this.anulado = false;
     }
 
     public Pedido() {
+        setRenglones(new ArrayList());
     }
 
     public int getIdPedido() {
@@ -94,9 +96,21 @@ public class Pedido {
     public ArrayList<RenglonPedido> getRenglones() {
         return renglones;
     }
-
     public void setRenglones(ArrayList<RenglonPedido> renglones) {
         this.renglones = renglones;
+        calcularTotalCosto();
+        actualizarCajas();
+    }
+    public void eliminarRenglon(RenglonPedido renglon){
+        renglones.get(renglon.getId_renglon()).setAnulado(false);
+        calcularTotalCosto();
+        actualizarCajas();
+    }
+    public void agregarRenglon(RenglonPedido renglon)
+    {
+        this.renglones.add(renglon);
+        calcularTotalCosto();
+        actualizarCajas();
     }
 
     public int getCantCajas() {
@@ -105,6 +119,20 @@ public class Pedido {
 
     public void setCantCajas(int cantCajas) {
         this.cantCajas = cantCajas;
+    }
+    
+    public void actualizarCajas()
+    {
+        this.cantCajas=0;
+        if(renglones!=null)
+        {
+            for(int i=0;i<renglones.size();i++)
+            {
+                if(!renglones.get(i).isAnulado())
+                    if(renglones.get(i).getNro_caja()>this.cantCajas)
+                        this.cantCajas=renglones.get(i).getNro_caja();
+            }
+        }
     }
     
     public float getTotalCosto() {
@@ -117,53 +145,60 @@ public class Pedido {
     public float calcularTotalCosto()
     {
         totalCosto=0;
-        for (int i=0;i<renglones.size();i++)
+        if(renglones != null)
         {
-            if(!renglones.get(i).isAnulado())
-                totalCosto+= renglones.get(i).getPrecio_costo()*renglones.get(i).getCantidad();
+            for (int i=0;i<renglones.size();i++)
+            {
+                if(!renglones.get(i).isAnulado())
+                    totalCosto+= renglones.get(i).getPrecio_costo()*renglones.get(i).getCantidad();
+            }
         }
         return totalCosto;
+    }
+    
+    /**Controla si el costo Total Actual es un monto válido. 
+     * @return insuficiente/excedido/permitido, dependiendo de la situación
+    */
+    public String controlarMontos()
+    {
+        if(totalCosto<campaña.getMontoMinimo())
+            return "insuficiente";
+        else if(totalCosto>campaña.getMontoMaximo())
+            return "excedido";
+        return "permitido";
     }
     
     public boolean isAnulado() {
         return anulado;
     }
-
     public void setAnulado(boolean anulado) {
         this.anulado = anulado;
     }
-    public int mostrarEstrellas(){
+    
+    public int mostrarEstrellasTotales(){
          int cantEst=0;
          for(int i=0; i<renglones.size(); i++){
              if(!renglones.get(i).isAnulado()){
-                  cantEst=renglones.get(i).getCant_estrellas();
+                  cantEst+=renglones.get(i).getCant_estrellas()*renglones.get(i).getCantidad();
              }
          }
          return cantEst; 
      }
-    public void crearRenglon(){
-        RenglonPedido rp = new RenglonPedido();
-        renglones.add(rp);
-    }
-    public void eliminarRenglon(RenglonPedido renglon){
-        renglones.get(renglon.getId_renglon()).setAnulado(false);
-    }
-    
-    public void pagarPedido(LocalDate ld){
-        this.setFechaPago(ld);
-    }
-    
     public String devolverEstado(){
         String st = null;
         if(this.fechaEntrega == null){
             st="Ingresado";
         }
         else if(this.getFechaEntrega()!=null && this.fechaPago==null){
-            st="Impago";
+            st="Entregado";
+        }
+        else if(Duration.between(this.getFechaEntrega().plusDays(10).atStartOfDay(),LocalDate.now().atStartOfDay()).toDays()>=1 && this.fechaPago==null)
+        {
+            st="Vencido";
         }
         else if(this.getFechaEntrega()!=null && this.fechaPago!=null){
             st="Pagado";
-        }
+        }        
         else if(this.isAnulado()==true){
             st="Anulado";
         }
@@ -173,6 +208,23 @@ public class Pedido {
     @Override
     public String toString() {
         return "idPedido: " + idPedido + ", fechaIngreso: " + fechaIngreso + ", fechaPago: " + fechaPago + ", fechaEntrega: " + fechaEntrega + ", revendedora: " + revendedora.getDni() + ", campaña: " + campaña.getNroCampaña() + ", cantCajas: " + cantCajas + ", renglones: " + renglones + ", totalCosto: " + totalCosto + ", anulado: " + anulado ;
+    }
+    
+    public void imprimirPedido()
+    {   System.out.println("----------------------------------------");
+        System.out.println("Pedido N° " + idPedido + "    Revendedor: "+revendedora.getNombre()+" "+ revendedora.getApellido());
+        System.out.println("Fecha de Ingreso: " + fechaIngreso);
+        System.out.println("Fecha de Entrega: " + fechaEntrega);
+        System.out.println("Fecha de Pago: " + fechaPago);
+        for(int i=0;i<renglones.size();i++)
+        {
+            System.out.println(renglones.get(i).toString());
+        }
+        System.out.println("Costo Total: " + calcularTotalCosto());
+        System.out.println("Estrellas Totales: " + mostrarEstrellasTotales());
+        System.out.println("Estado de Pedido: " + devolverEstado());
+        System.out.println("El monto del pedido es = "+controlarMontos());
+        System.out.println("----------------------------------------");
     }
       
 }

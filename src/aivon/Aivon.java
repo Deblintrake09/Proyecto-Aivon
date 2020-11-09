@@ -10,43 +10,154 @@ public class Aivon
 
     public static void main(String[] args) 
     {       
+        //Creamos todas las variables que usaremos en las pruebas
+        Revendedora rev1 = new Revendedora();
+        Campaña camp1 = new Campaña();
+        Pedido ped1=new Pedido();
+        Producto prod1= new Producto();
+        RenglonPedido renglon=new RenglonPedido();
+        ArrayList<RenglonPedido> renglones= new ArrayList();
+        ArrayList<Pedido> listaPedidos = new ArrayList();
+        
         Conexion con = new Conexion();
-        
-        //Creamos Campañas
         CampañaData cData = new CampañaData(con);
-        Campaña camp = new Campaña(1, LocalDate.of(2020,11,5), LocalDate.of(2020,11,30), 10000, 20000);
-        cData.agregarCampaña(camp);
-        camp = new Campaña(2, LocalDate.of(2020,12,1), LocalDate.of(2020,12,26), 10000, 20000);
-        cData.agregarCampaña(camp);
-        camp = new Campaña(3, LocalDate.of(2020,12,27), LocalDate.of(2021,1,21), 12500, 25000);
-        cData.agregarCampaña(camp);
-        camp = new Campaña(4, LocalDate.of(2021,1,22), LocalDate.of(2021,1,22).plusDays(25), 12500, 25000);       
-        cData.agregarCampaña(camp);
-            
-        //Creamos Revendedoras
-        RevendedoraData rData = new RevendedoraData(con);
-        Revendedora rev= new Revendedora("Gabriela", "Martinez", 27537322, 2664426345L, "gabyfernandez@gmail.com" ,true, 1);
-        rData.agregarRevendedora(rev);
-        rev= new Revendedora("Adriana", "Gonzalez", 25788457, 2664597528L, "adrigon.77@gmail.com");
-        rData.agregarRevendedora(rev);
-        rev= new Revendedora("Mariela", "Luzardi", 29752863, 2657879535L, "maritaluzardi@hotmail.com");
-        rData.agregarRevendedora(rev);
-        
-        //Creamos Productos
-        ProductoData pData = new ProductoData(con);
-        Producto prod= new Producto("CR-0001", "Hidratante EQ10", "Crema", 100, 300, 500, 2);
-        pData.agregarProducto(prod);
-        prod= new Producto("CR-0002", "Antiage New You", "Crema", 90, 625, 950, 5);
-        pData.agregarProducto(prod);
-        prod= new Producto("CR-0003", "CC Cream", "Crema", 90, 300, 1050, 5);
-        pData.agregarProducto(prod);
-        prod= new Producto("LS-0010", "Rojo Carmín X Glitter", "Labial", 10, 300, 500, 2);
-        pData.agregarProducto(prod);
-        prod= new Producto("MU-0023", "Cuarteto de Sombras", "Maquillaje", 20, 625, 1090, 7);
-        pData.agregarProducto(prod);
-        
-        
+        RevendedoraData revData = new RevendedoraData(con);
+        ProductoData prData=new ProductoData(con);
         PedidoData pedData = new PedidoData(con);
+        
+    /*    
+        //Creamos  y cargamos Campañas
+        Campaña camp = new Campaña(1, LocalDate.of(2020,8,1), LocalDate.of(2020,8,1).plusDays(25), 5000, 10000);
+        cData.agregarCampaña(camp);
+        camp = new Campaña(2, LocalDate.of(2020,8,1).plusDays(25), LocalDate.of(2020,8,1).plusDays(50), 5000, 12000);
+        cData.agregarCampaña(camp);
+        camp = new Campaña(3, LocalDate.of(2020,8,1).plusDays(50), LocalDate.of(2020,8,1).plusDays(75), 6000, 12000);
+        cData.agregarCampaña(camp);
+        camp = new Campaña(4, LocalDate.of(2020,8,1).plusDays(75), LocalDate.of(2020,8,1).plusDays(100), 7500, 15000);       
+        cData.agregarCampaña(camp);
+    */
+    /*
+        //Creamos y cargamos Revendedoras
+        Revendedora rev= new Revendedora("Gabriela", "Martinez", 27537322, 2664426345L, "gabyfernandez@gmail.com" ,true, 1);
+        revData.agregarRevendedora(rev);
+        rev= new Revendedora("Adriana", "Gonzalez", 25788457, 2664597528L, "adrigon.77@gmail.com");
+        revData.agregarRevendedora(rev);
+        rev= new Revendedora("Mariela", "Luzardi", 29752863, 2657879535L, "maritaluzardi@hotmail.com");
+        revData.agregarRevendedora(rev);
+    */
+    /*
+        //Creamos y cargamos Productos
+        Producto prod= new Producto("CR-0001", "Hidratante EQ10", "Crema", 100, 300, 500, 2);
+        prData.agregarProducto(prod);
+        prod= new Producto("CR-0002", "Antiage New You", "Crema", 90, 625, 950, 5);
+        prData.agregarProducto(prod);
+        prod= new Producto("CR-0003", "CC Cream", "Crema", 90, 300, 1050, 5);
+        prData.agregarProducto(prod);
+        prod= new Producto("LS-0010", "Rojo Carmín X Glitter", "Labial", 10, 300, 500, 2);
+        prData.agregarProducto(prod);
+        prod= new Producto("MU-0023", "Cuarteto de Sombras", "Maquillaje", 20, 625, 1090, 7);
+        prData.agregarProducto(prod);
+    */
+        
+        
+    /*
+        // Inicializamos Pedido con fecha de Entrega, fecha de pago y renglones vacios.
+        rev1 = revData.buscarPorDni(25788457);
+        camp1 = cData.buscarNroCampaña(1);    
+        Pedido ped1 = new Pedido(LocalDate.of(2020, 8, 10), null, null, rev1, camp1, renglones); // Inicializamos Pedido con fecha de Entrega y Pedido Nulas.
+        pedData.cargarPedido(ped1);
+        
+        //Creamos Renglones para Cargar en el pedido (los agregamos al arreglo ya existente en el pedido
+        Producto prod1 = prData.buscarPorCodigo("CR-1002");
+        RenglonPedido renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),1,1, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+        ped1.getRenglones().add(renglon);
+        prod1 = prData.buscarPorCodigo("CR-1001");
+        renglon = new RenglonPedido(prod1,ped1.getIdPedido(),3,1);
+        ped1.agregarRenglon(renglon);
+        prod1 = prData.buscarPorCodigo("MU-0023");
+        renglon = new RenglonPedido(prod1,ped1.getIdPedido(),5,2);
+        ped1.agregarRenglon(renglon);
+       
+       ped1.imprimirPedido();
+       pedData.actualizarPedido(ped1);   //Actualizamos el Pedido Cargando los renglones en el sistema
+       ped1.imprimirPedido();
+    */
+    
+    /*
+      // Creamos nuevo Pedido, asignamos los nuevos renglones a un arreglo y luego se asigna el arreglo de los renglones al pedido.
+      //Cargamos el pedido, lo imprimimos en consola para controlar estado. luego pagamos el pedido y lo reimprimimos para controlar estado.
+       ped1 = new Pedido(LocalDate.of(2020,8,10),null, LocalDate.of(2020,8,17),revData.buscarPorDni(29752863), camp1,renglones);
+       prod1 = prData.buscarPorCodigo("CR-1004");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),3,1, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       prod1 = prData.buscarPorCodigo("CR-0001");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),5,1, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       prod1 = prData.buscarPorCodigo("CR-0003");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),2,2, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       prod1 = prData.buscarPorCodigo("CR-0002");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),3,2, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       ped1.setRenglones(renglones);
+       pedData.cargarPedido(ped1);
+       ped1.imprimirPedido();
+       pedData.pagarPedido(ped1, LocalDate.of(2020,8,23));
+       ped1.imprimirPedido();
+    */
+    
+    /*
+       //Cargamos un nuevo Pedido de la revendedora en la Campaña 2 y 3 -- Usaremos el mismo pedido anterior (repite el pedido en campaña 2 y campaña 3 cambia las cantidades)
+       ped1.setCampaña(cData.buscarNroCampaña(2));
+       ped1.setFechaIngreso(ped1.getCampaña().getFechaInicio().plusDays(2));
+       ped1.setFechaEntrega(null);
+       ped1.setRenglones(renglones);
+       pedData.cargarPedido(ped1);
+      
+    */
+    /*
+       //Limpiamos el arreglo y lo recargamos, porque si no los renglones del array tienen el id del pedido anterior
+       renglones.clear();
+       prod1 = prData.buscarPorCodigo("CR-1004");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),5,1, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       prod1 = prData.buscarPorCodigo("CR-0001");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),7,2, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       prod1 = prData.buscarPorCodigo("CR-0003");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),6,3, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       prod1 = prData.buscarPorCodigo("CR-0002");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),4,3, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       ped1.setCampaña(cData.buscarNroCampaña(3));
+       ped1.setFechaIngreso(ped1.getCampaña().getFechaInicio().plusDays(2));
+       ped1.setFechaEntrega(null);
+       ped1.setRenglones(renglones);
+       pedData.cargarPedido(ped1);
+    */
+    
+    /*
+        //Listamos Todos los Pedidos de una revendedora
+        listaPedidos= pedData.buscarPedidoXRev(29752863);
+        for(int i=0;i<listaPedidos.size();i++)
+        {
+         listaPedidos.get(i).imprimirPedido();
+        }
+    */  
+        //listamos todos los pedidos de una campaña
+        listaPedidos=pedData.buscarPedidoXCam(1);
+                for(int i=0;i<listaPedidos.size();i++)
+        {
+         listaPedidos.get(i).imprimirPedido();
+        }
+    
+       
+               
+      
+        
+        
+        
         
         
         /*

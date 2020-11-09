@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 
@@ -134,4 +135,35 @@ public class RenglonData {
          }
     }
     
+    public ArrayList<RenglonPedido> listarRenglonesXPedido(int id_pedido)
+    {
+        String query = "SELECT * FROM renglon_pedido WHERE ID_PEDIDO=?";
+        RenglonPedido reng= new RenglonPedido();
+        ArrayList<RenglonPedido> rlist= new ArrayList();
+        try
+        {
+            PreparedStatement ps = con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id_pedido);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next())
+            {
+                reng= new RenglonPedido();
+                reng.setId_renglon(rs.getInt(1));
+                reng.setId_producto(rs.getInt(2));
+                reng.setId_pedido(rs.getInt(3));
+                reng.setCantidad(rs.getInt(4));
+                reng.setNro_caja(rs.getInt(5));
+                reng.setPrecio_costo(rs.getFloat(6));
+                reng.setPrecio_publico(rs.getFloat(7));
+                reng.setCant_estrellas(rs.getInt(8));
+                reng.setAnulado(rs.getBoolean(9));
+                rlist.add(reng);
+            }
+            
+        } catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        return rlist;
+    }
 }

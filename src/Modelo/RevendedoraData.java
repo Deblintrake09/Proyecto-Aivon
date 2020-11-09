@@ -38,7 +38,7 @@ public class RevendedoraData {
             ps.close();
         }
         catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "No puedo cargar la revendedora o revendedora ya existente");
+            JOptionPane.showMessageDialog(null, "No puedo cargar la revendedora o revendedora ya existente" + e.toString());
         }
     }
     public Revendedora buscarPorDni(int dni){
