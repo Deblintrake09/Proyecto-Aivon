@@ -111,8 +111,8 @@ public class Campaña
     public String toString() 
     {
         return "ID. Campaña: " + idCampaña + ". Nro. Campaña: " 
-                + nroCampaña + ". Fecha inicio: " + fechaInicio 
-                + ". Fecha fin: " + fechaFin + ". Monto minimo: $" + montoMinimo + ". Monto maximo: $" + montoMaximo;
+                + nroCampaña + ". Fecha inicio: " + fechaInicio  
+                + ". Fecha fin: " + fechaFin + ". Monto minimo: $" + montoMinimo + ". Monto maximo: $" + montoMaximo + "\n";
     }
     
 }

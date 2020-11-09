@@ -272,6 +272,7 @@ public class CampañaData
                 ca.setMontoMaximo(rs.getFloat(6));
                 //System.out.println("Numero de campaña: " + ca.getNroCampaña());
                 campañas.add(ca);
+                
             }
             ps.close();
         }

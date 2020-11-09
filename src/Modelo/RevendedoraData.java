@@ -1,5 +1,7 @@
 package Modelo;
 
+import Entidades.Campaña;
+import Entidades.Pedido;
 import Entidades.Revendedora;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -267,6 +269,49 @@ public class RevendedoraData {
              JOptionPane.showMessageDialog(null, e.toString());
          }
 
-     }   
+     }
+     public boolean controlarActividadRevendedora(Revendedora rev)
+    {
+        
+        Conexion con = new Conexion();
+        PedidoData pd = new PedidoData(con);
+        CampañaData cd = new CampañaData(con);
+        RevendedoraData rd = new RevendedoraData(con);
+        ArrayList<Campaña> camps = cd.obtenerCampañas();
+        
+        if(camps.size()<3)
+        {
+            con.cerrarConexion();
+            return true;
+        }
+        
+        ArrayList<Pedido> pedidosRev = pd.buscarPedidoXRev(rev.getDni());
+        
+        for(int i=1; i<4 ; i++)
+        {
+            for(int j=1; j<4 ; j++)
+            {
+                Campaña camp = camps.get(camps.size()-i);
+                Pedido ped = pedidosRev.get(pedidosRev.size()-j);
+                
+                if(ped!=null)
+                {
+                    if(camp.getNroCampaña() == ped.getCampaña().getNroCampaña())
+                    {
+                       rev.setActiva(true);
+                       rd.darBaja(rev, true);
+                       con.cerrarConexion();
+                       return true;
+                    }
+                }
+                
+            }
+        }
+        rev.setActiva(false);
+        rd.darBaja(rev, false);
+        con.cerrarConexion();
+        return false;
+        
+    }
 }
 

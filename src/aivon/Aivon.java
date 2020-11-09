@@ -9,20 +9,20 @@ public class Aivon
 {
 
     public static void main(String[] args) 
-    {       
+    {   /*    
         //Creamos todas las variables que usaremos en las pruebas
         Revendedora rev1 = new Revendedora();
         Campaña camp1 = new Campaña();
-        Pedido ped1=new Pedido();
-        Producto prod1= new Producto();
-        RenglonPedido renglon=new RenglonPedido();
-        ArrayList<RenglonPedido> renglones= new ArrayList();
+        Pedido ped1 = new Pedido();
+        Producto prod1 = new Producto();
+        RenglonPedido renglon = new RenglonPedido();
+        ArrayList<RenglonPedido> renglones = new ArrayList();
         ArrayList<Pedido> listaPedidos = new ArrayList();
         
         Conexion con = new Conexion();
         CampañaData cData = new CampañaData(con);
         RevendedoraData revData = new RevendedoraData(con);
-        ProductoData prData=new ProductoData(con);
+        ProductoData prData = new ProductoData(con);
         PedidoData pedData = new PedidoData(con);
         
         
@@ -37,29 +37,29 @@ public class Aivon
         cData.agregarCampaña(camp);
   
         //Creamos y cargamos Revendedoras
-        Revendedora rev= new Revendedora("Gabriela", "Martinez", 27537322, 2664426345L, "gabyfernandez@gmail.com" ,true, 1);
+        Revendedora rev = new Revendedora("Gabriela", "Martinez", 27537322, 2664426345L, "gabyfernandez@gmail.com" ,true, 1);
         revData.agregarRevendedora(rev);
-        rev= new Revendedora("Adriana", "Gonzalez", 25788457, 2664597528L, "adrigon.77@gmail.com");
+        rev = new Revendedora("Adriana", "Gonzalez", 25788457, 2664597528L, "adrigon.77@gmail.com");
         revData.agregarRevendedora(rev);
-        rev= new Revendedora("Mariela", "Luzardi", 29752863, 2657879535L, "maritaluzardi@hotmail.com");
+        rev = new Revendedora("Mariela", "Luzardi", 29752863, 2657879535L, "maritaluzardi@hotmail.com");
         revData.agregarRevendedora(rev);
   
         //Creamos y cargamos Productos
-        Producto prod= new Producto("CR-0001", "Hidratante EQ10", "Crema", 100, 300, 500, 2);
+        Producto prod = new Producto("CR-0001", "Hidratante EQ10", "Crema", 100, 300, 500, 2);
         prData.agregarProducto(prod);
-        prod= new Producto("CR-0002", "Antiage New You", "Crema", 90, 625, 950, 5);
+        prod = new Producto("CR-0002", "Antiage New You", "Crema", 90, 625, 950, 5);
         prData.agregarProducto(prod);
-        prod= new Producto("CR-0003", "CC Cream", "Crema", 90, 300, 1050, 5);
+        prod = new Producto("CR-0003", "CC Cream", "Crema", 90, 300, 1050, 5);
         prData.agregarProducto(prod);
-        prod= new Producto("LS-0010", "Rojo Carmín X Glitter", "Labial", 10, 300, 500, 2);
+        prod = new Producto("LS-0010", "Rojo Carmín X Glitter", "Labial", 10, 300, 500, 2);
         prData.agregarProducto(prod);
-        prod= new Producto("MU-0023", "Cuarteto de Sombras", "Maquillaje", 20, 625, 1090, 7);
+        prod = new Producto("MU-0023", "Cuarteto de Sombras", "Maquillaje", 20, 625, 1090, 7);
         prData.agregarProducto(prod);
      
         // Inicializamos Pedido con fecha de Entrega, fecha de pago y renglones vacios.
         rev1 = revData.buscarPorDni(25788457);
         camp1 = cData.buscarNroCampaña(1);    
-         ped1 = new Pedido(LocalDate.of(2020, 8, 10), null, null, rev1, camp1, renglones); // Inicializamos Pedido con fecha de Entrega y Pedido Nulas.
+        ped1 = new Pedido(LocalDate.of(2020, 8, 10), null, null, rev1, camp1, renglones); // Inicializamos Pedido con fecha de Entrega y Pedido Nulas.
         pedData.cargarPedido(ped1);
         
         //Creamos Renglones para Cargar en el pedido (los agregamos al arreglo ya existente en el pedido
@@ -73,13 +73,13 @@ public class Aivon
         renglon = new RenglonPedido(prod1,ped1.getIdPedido(),5,2);
         ped1.agregarRenglon(renglon);
        
-       ped1.imprimirPedido();
-       pedData.actualizarPedido(ped1);   //Actualizamos el Pedido Cargando los renglones en el sistema
-       ped1.imprimirPedido();
+        ped1.imprimirPedido();
+        pedData.actualizarPedido(ped1);   //Actualizamos el Pedido Cargando los renglones en el sistema
+        ped1.imprimirPedido();
     
-      // Creamos nuevo Pedido, asignamos los nuevos renglones a un arreglo y luego se asigna el arreglo de los renglones al pedido.
-      //Cargamos el pedido, lo imprimimos en consola para controlar estado. luego pagamos el pedido y lo reimprimimos para controlar estado.
-       ped1 = new Pedido(LocalDate.of(2020,8,10),null, LocalDate.of(2020,8,17),revData.buscarPorDni(29752863), camp1,renglones);
+        // Creamos nuevo Pedido, asignamos los nuevos renglones a un arreglo y luego se asigna el arreglo de los renglones al pedido.
+        //Cargamos el pedido, lo imprimimos en consola para controlar estado. luego pagamos el pedido y lo reimprimimos para controlar estado.
+        ped1 = new Pedido(LocalDate.of(2020,8,10),null, LocalDate.of(2020,8,17),revData.buscarPorDni(29752863), camp1,renglones);
        prod1 = prData.buscarPorCodigo("LS-0010");
        renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),3,1, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
        renglones.add(renglon);
@@ -140,23 +140,52 @@ public class Aivon
        pedData.cargarPedido(ped1);    
     
         //Listamos Todos los Pedidos de una revendedora
-        listaPedidos= pedData.buscarPedidoXRev(29752863);
+        listaPedidos = pedData.buscarPedidoXRev(29752863);
         for(int i=0;i<listaPedidos.size();i++)
         {
          listaPedidos.get(i).imprimirPedido();
         }
      
         //listamos todos los pedidos de una campaña
-        listaPedidos=pedData.buscarPedidoXCam(1);
+        listaPedidos = pedData.buscarPedidoXCam(1);
                 for(int i=0;i<listaPedidos.size();i++)
         {
          listaPedidos.get(i).imprimirPedido();
         }
+        */
+        
+        
+        
+        
+        
+        // Testeo del método:        public boolean controlarActividadRevendedora(Revendedora rev)
+        boolean resp;
+        
+        Conexion c = new Conexion();
+        RevendedoraData rd = new RevendedoraData(c);
+        Revendedora rev = new Revendedora();
+        PedidoData pd = new PedidoData(c);
+        
+        
+        
+        rev = rd.buscarPorDni(25788457);
+        ArrayList<Pedido> pedidosRev = pd.buscarPedidoXRev(rev.getDni());
+        
+        for(Pedido pe : pedidosRev)
+        {
+            System.out.println(pe);
+        }
+        
+        
+        resp = rd.controlarActividadRevendedora(rev);
+        
+//        
+        if(resp)
+            System.out.println("La revendedora: " + rev.getApellido() + " está Activa!");
+        else
+            System.out.println("La revendedora: " + rev.getApellido() + " no está Activa");
     
-
     }
-    
-    
     
     
     
