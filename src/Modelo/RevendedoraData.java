@@ -270,6 +270,45 @@ public class RevendedoraData {
          }
 
      }
+<<<<<<< HEAD
+     
+     
+    public boolean controlarActividadRevendedora(Revendedora rev)
+    {
+        Conexion con=new Conexion();
+        PedidoData pd = new PedidoData(con);
+        RevendedoraData rd=new RevendedoraData(con);
+        CampañaData cd= new CampañaData(con);
+        ArrayList<Campaña> camps= cd.obtenerCampañas();
+        if(camps.size()<3)
+        {
+            return true;
+        }
+        ArrayList<Pedido> pedidosRev= pd.buscarPedidoXRev(rev.getDni());
+        for (int i=1;i<4;i++)
+        {
+            int indC=camps.size();;
+            Campaña camp = camps.get(indC-i);
+            System.out.println(camp.toString());
+            for(int j=1;j<4;j++)
+            {
+                
+                Pedido ped =null;
+                int indP= pedidosRev.size()-j;
+                if(indP>=0)
+                    ped = pedidosRev.get(indP);
+                if(ped!=null)
+                {
+                    System.out.println(ped.toString());
+                    if(camp.getNroCampaña()== ped.getCampaña().getNroCampaña())
+                    {
+                        System.out.println("pedido =");
+                        rev.setActiva(true);
+                        rd.darBaja(rev, true);
+                        return true;
+                    }
+                }
+=======
      public boolean controlarActividadRevendedora(Revendedora rev)
     {
         
@@ -305,13 +344,105 @@ public class RevendedoraData {
                     }
                 }
                 
+>>>>>>> 87929ba232dd2e57edbb896aa3447b7ee9d3ddd7
             }
         }
         rev.setActiva(false);
         rd.darBaja(rev, false);
+<<<<<<< HEAD
+        return false;
+        
+    }
+    
+    
+    public int calcularNivelPorEstrellas(Revendedora rev)
+    {
+        Conexion con=new Conexion();
+        PedidoData pd=new PedidoData(con);
+        ArrayList<Pedido> pedidosRev=pd.buscarPedidoXRev(rev.getDni());
+        
+        int niv=1;
+        int totEstrellas=0;
+        
+        for(int i=0;i<pedidosRev.size();i++)
+        {
+            totEstrellas+=pedidosRev.get(i).mostrarEstrellasTotales();
+        }
+        niv+=totEstrellas/50;
+        System.out.println("Total de Estrellas: "+totEstrellas + " nivel= "+niv);
+        if (niv >rev.getNivel())
+        {
+            rev.setNivel(niv);
+            String query = "UPDATE revendedora SET NIVEL=? WHERE ID_REV=?";
+            con.cerrarConexion();
+            try
+            {
+                PreparedStatement ps = this.con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, niv);
+                ps.setInt(2, rev.getIdRev());
+                ps.executeUpdate();
+
+                ResultSet rs = ps.getGeneratedKeys();
+                if(rs.next())
+                {
+                    JOptionPane.showMessageDialog(null, "No se pudo actualizar Nivel de Revendedora");
+                }
+                ps.close();
+            }
+            catch(SQLException e)
+            {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+        return niv;
+    }
+    
+    public int subirNivelPorPedidos(Revendedora rev)
+    {
+        Conexion con=new Conexion();
+        PedidoData pd=new PedidoData(con);
+        ArrayList<Pedido> pedidosRev=pd.buscarPedidoXRev(rev.getDni());
+        
+        int niveles=0;
+        
+        
+        for(int i=0;i<pedidosRev.size();i++)
+        {
+            if(pedidosRev.get(i).controlarMontos().equalsIgnoreCase("excedido"))
+                niveles++;
+        }
+        if(niveles>0)
+        {
+            niveles=rev.getNivel()+niveles;
+            rev.setNivel(niveles);
+            String query = "UPDATE revendedora SET NIVEL=? WHERE ID_REV=?";
+            con.cerrarConexion();
+            try
+            {
+                PreparedStatement ps = this.con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, rev.getNivel());
+                ps.setInt(2, rev.getIdRev());
+                ps.executeUpdate();
+
+                ResultSet rs = ps.getGeneratedKeys();
+                if(rs.next())
+                {
+                    JOptionPane.showMessageDialog(null, "No se pudo actualizar Nivel de Revendedora");
+                }
+                ps.close();
+            }
+            catch(SQLException e)
+            {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+        return niveles;
+    }
+=======
         con.cerrarConexion();
         return false;
         
     }
+>>>>>>> 87929ba232dd2e57edbb896aa3447b7ee9d3ddd7
 }
 

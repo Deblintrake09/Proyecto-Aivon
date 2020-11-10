@@ -1,6 +1,8 @@
 package Modelo;
 
 import Entidades.Campaña;
+import Entidades.Pedido;
+import Entidades.Revendedora;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -338,6 +340,22 @@ public class CampañaData
         
     }
     
+/*    public void subirNivelxMonto(Revendedora rev, Campaña camp){
+        Conexion con = new Conexion();
+        RevendedoraData rd = new RevendedoraData(con);
+        PedidoData pd=new PedidoData(con);
+        ArrayList<Pedido> pedidos = pd.buscarPedidoXRev(rev.getDni());
+        float x =0;
+        for(int i=0; i< pedidos.size(); i++){
+            Pedido pdi = pedidos.get(i);
+            x += pdi.getTotalCosto();
+            }
+        if( x > camp.getMontoMaximo()){
+            rev.setNivel(rev.getNivel()+1);
+             rd.modificarRevendedora(rev);
+            }
+        }
+  */  
     
-
+   
 }

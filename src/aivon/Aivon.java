@@ -25,7 +25,7 @@ public class Aivon
         ProductoData prData = new ProductoData(con);
         PedidoData pedData = new PedidoData(con);
         
-        
+    /*    
         //Creamos  y cargamos Campañas
         Campaña camp = new Campaña(1, LocalDate.of(2020,8,1), LocalDate.of(2020,8,1).plusDays(25), 5000, 10000);
         cData.agregarCampaña(camp);
@@ -77,9 +77,16 @@ public class Aivon
         pedData.actualizarPedido(ped1);   //Actualizamos el Pedido Cargando los renglones en el sistema
         ped1.imprimirPedido();
     
+<<<<<<< HEAD
+      // Creamos nuevo Pedido, asignamos los nuevos renglones a un arreglo y luego se asigna el arreglo de los renglones al pedido.
+      //Cargamos el pedido, lo imprimimos en consola para controlar estado. luego pagamos el pedido y lo reimprimimos para controlar estado.
+       renglones.clear();
+       ped1 = new Pedido(LocalDate.of(2020,8,10),null, LocalDate.of(2020,8,17),revData.buscarPorDni(29752863), camp1,renglones);
+=======
         // Creamos nuevo Pedido, asignamos los nuevos renglones a un arreglo y luego se asigna el arreglo de los renglones al pedido.
         //Cargamos el pedido, lo imprimimos en consola para controlar estado. luego pagamos el pedido y lo reimprimimos para controlar estado.
         ped1 = new Pedido(LocalDate.of(2020,8,10),null, LocalDate.of(2020,8,17),revData.buscarPorDni(29752863), camp1,renglones);
+>>>>>>> 87929ba232dd2e57edbb896aa3447b7ee9d3ddd7
        prod1 = prData.buscarPorCodigo("LS-0010");
        renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),3,1, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
        renglones.add(renglon);
@@ -101,6 +108,7 @@ public class Aivon
     
     
        //Cargamos un nuevo Pedido de la revendedora en la Campaña 2 y 3 -- Usaremos el mismo pedido anterior (repite el pedido en campaña 2 y campaña 3 cambia las cantidades)
+       renglones.clear();
        ped1 = new Pedido(LocalDate.of(2020,8,10),null, null,revData.buscarPorDni(29752863), cData.buscarNroCampaña(2),renglones);
        prod1 = prData.buscarPorCodigo("LS-0010");
        renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),3,1, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
@@ -138,20 +146,73 @@ public class Aivon
        ped1.setFechaEntrega(null);
        ped1.setRenglones(renglones);
        pedData.cargarPedido(ped1);    
+   */
     
+    
+      /*
         //Listamos Todos los Pedidos de una revendedora
         listaPedidos = pedData.buscarPedidoXRev(29752863);
         for(int i=0;i<listaPedidos.size();i++)
         {
          listaPedidos.get(i).imprimirPedido();
         }
-     
+     */
+    
+      /* 
         //listamos todos los pedidos de una campaña
         listaPedidos = pedData.buscarPedidoXCam(1);
                 for(int i=0;i<listaPedidos.size();i++)
         {
          listaPedidos.get(i).imprimirPedido();
         }
+<<<<<<< HEAD
+      */
+    
+    /*
+        //Controlamos y Cambiamos el estado(Activa/Inactiva) y los niveles de las revendedoras de acuerdo a los pedidos que han realizado.
+        rev1 = revData.buscarPorDni(29752863);
+        boolean estaActiva = revData.controlarActividadRevendedora(rev1);
+        System.out.println("La revendedora con DNI N°" + 29752863+", se encuentra: "+ estaActiva);
+        revData.calcularNivelPorEstrellas(rev1);
+    */
+    /*    
+        rev1 = revData.buscarPorDni(27537322);
+         estaActiva = revData.controlarActividadRevendedora(rev1);
+        System.out.println("La revendedora con DNI N°" + 27537322+", se encuentra: "+ estaActiva);
+        revData.calcularNivelPorEstrellas(rev1);
+    */
+    /*
+        rev1 = revData.buscarPorDni(29752863);
+        estaActiva = revData.controlarActividadRevendedora(rev1);
+        System.out.println("La revendedora con DNI N°" + 25788457+", se encuentra: "+ estaActiva);
+        revData.calcularNivelPorEstrellas(rev1);
+    */
+    
+    /*  
+      //CREAMOS UN PEDIDO QUE EXCEDA EL MONTO MAXIMO DE UNA CAMPAÑA, PARA PODER CONTROLAR QUE SUBAN DE NIVEL SI LO ALCANZAN.
+       rev1= revData.buscarPorDni(25788457); 
+       ped1 = new Pedido(LocalDate.of(2020,8,28),null, LocalDate.of(2020,8,30),rev1, cData.buscarNroCampaña(2),renglones);
+       renglones.clear();
+       prod1 = prData.buscarPorCodigo("LS-0010");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),15,1, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       prod1 = prData.buscarPorCodigo("CR-0001");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),10,2, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       prod1 = prData.buscarPorCodigo("CR-0003");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),12,3, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       prod1 = prData.buscarPorCodigo("CR-0002");
+       renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),14,4, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
+       renglones.add(renglon);
+       ped1.setRenglones(renglones);
+       pedData.cargarPedido(ped1);
+       
+       int nivel = rev1.getNivel();
+       int nuevonivel= revData.subirNivelPorPedidos(rev1);
+       System.out.println("Nivel antes de controlar Pedidos = "+ nivel + ". Nuevo Nivel= "+ nuevonivel);
+    */  
+=======
         */
         
         
@@ -184,6 +245,7 @@ public class Aivon
             System.out.println("La revendedora: " + rev.getApellido() + " está Activa!");
         else
             System.out.println("La revendedora: " + rev.getApellido() + " no está Activa");
+>>>>>>> 87929ba232dd2e57edbb896aa3447b7ee9d3ddd7
     
     }
     
