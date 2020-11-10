@@ -77,16 +77,10 @@ public class Aivon
         pedData.actualizarPedido(ped1);   //Actualizamos el Pedido Cargando los renglones en el sistema
         ped1.imprimirPedido();
     
-<<<<<<< HEAD
       // Creamos nuevo Pedido, asignamos los nuevos renglones a un arreglo y luego se asigna el arreglo de los renglones al pedido.
       //Cargamos el pedido, lo imprimimos en consola para controlar estado. luego pagamos el pedido y lo reimprimimos para controlar estado.
        renglones.clear();
        ped1 = new Pedido(LocalDate.of(2020,8,10),null, LocalDate.of(2020,8,17),revData.buscarPorDni(29752863), camp1,renglones);
-=======
-        // Creamos nuevo Pedido, asignamos los nuevos renglones a un arreglo y luego se asigna el arreglo de los renglones al pedido.
-        //Cargamos el pedido, lo imprimimos en consola para controlar estado. luego pagamos el pedido y lo reimprimimos para controlar estado.
-        ped1 = new Pedido(LocalDate.of(2020,8,10),null, LocalDate.of(2020,8,17),revData.buscarPorDni(29752863), camp1,renglones);
->>>>>>> 87929ba232dd2e57edbb896aa3447b7ee9d3ddd7
        prod1 = prData.buscarPorCodigo("LS-0010");
        renglon = new RenglonPedido(prod1.getIdProducto(),ped1.getIdPedido(),3,1, prod1.getPrecioCosto(),prod1.getPrecioVenta(),prod1.getCantEstrellas());
        renglones.add(renglon);
@@ -165,7 +159,6 @@ public class Aivon
         {
          listaPedidos.get(i).imprimirPedido();
         }
-<<<<<<< HEAD
       */
     
     /*
@@ -212,40 +205,6 @@ public class Aivon
        int nuevonivel= revData.subirNivelPorPedidos(rev1);
        System.out.println("Nivel antes de controlar Pedidos = "+ nivel + ". Nuevo Nivel= "+ nuevonivel);
     */  
-=======
-        */
-        
-        
-        
-        
-        
-        // Testeo del método:        public boolean controlarActividadRevendedora(Revendedora rev)
-        boolean resp;
-        
-        Conexion c = new Conexion();
-        RevendedoraData rd = new RevendedoraData(c);
-        Revendedora rev = new Revendedora();
-        PedidoData pd = new PedidoData(c);
-        
-        
-        
-        rev = rd.buscarPorDni(25788457);
-        ArrayList<Pedido> pedidosRev = pd.buscarPedidoXRev(rev.getDni());
-        
-        for(Pedido pe : pedidosRev)
-        {
-            System.out.println(pe);
-        }
-        
-        
-        resp = rd.controlarActividadRevendedora(rev);
-        
-//        
-        if(resp)
-            System.out.println("La revendedora: " + rev.getApellido() + " está Activa!");
-        else
-            System.out.println("La revendedora: " + rev.getApellido() + " no está Activa");
->>>>>>> 87929ba232dd2e57edbb896aa3447b7ee9d3ddd7
     
     }
     
