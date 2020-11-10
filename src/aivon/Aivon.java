@@ -9,7 +9,7 @@ public class Aivon
 {
 
     public static void main(String[] args) 
-    {   /*    
+    {      
         //Creamos todas las variables que usaremos en las pruebas
         Revendedora rev1 = new Revendedora();
         Campaña camp1 = new Campaña();
@@ -160,9 +160,9 @@ public class Aivon
          listaPedidos.get(i).imprimirPedido();
         }
       */
-    
-    /*
-        //Controlamos y Cambiamos el estado(Activa/Inactiva) y los niveles de las revendedoras de acuerdo a los pedidos que han realizado.
+   
+       //Controlamos y Cambiamos el estado(Activa/Inactiva) y los niveles de las revendedoras de acuerdo a los pedidos que han realizado.
+    /* 
         rev1 = revData.buscarPorDni(29752863);
         boolean estaActiva = revData.controlarActividadRevendedora(rev1);
         System.out.println("La revendedora con DNI N°" + 29752863+", se encuentra: "+ estaActiva);

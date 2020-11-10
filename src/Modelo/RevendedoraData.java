@@ -269,10 +269,7 @@ public class RevendedoraData {
              JOptionPane.showMessageDialog(null, e.toString());
          }
 
-     }
-<<<<<<< HEAD
-     
-     
+     }/*
     public boolean controlarActividadRevendedora(Revendedora rev)
     {
         Conexion con=new Conexion();
@@ -308,7 +305,13 @@ public class RevendedoraData {
                         return true;
                     }
                 }
-=======
+            }   
+        }
+        con.cerrarConexion();
+        return false;
+        
+    }
+        */
      public boolean controlarActividadRevendedora(Revendedora rev)
     {
         
@@ -343,13 +346,11 @@ public class RevendedoraData {
                        return true;
                     }
                 }
-                
->>>>>>> 87929ba232dd2e57edbb896aa3447b7ee9d3ddd7
+
             }
         }
         rev.setActiva(false);
         rd.darBaja(rev, false);
-<<<<<<< HEAD
         return false;
         
     }
@@ -438,11 +439,5 @@ public class RevendedoraData {
         }
         return niveles;
     }
-=======
-        con.cerrarConexion();
-        return false;
-        
-    }
->>>>>>> 87929ba232dd2e57edbb896aa3447b7ee9d3ddd7
 }
 
