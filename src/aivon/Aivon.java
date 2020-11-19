@@ -9,7 +9,15 @@ public class Aivon
 {
 
     public static void main(String[] args) 
-    {      
+    {   Conexion con = new Conexion();
+        ProductoData prData = new ProductoData(con);
+        ArrayList<String> usos=prData.listarUsos();
+        for(int i=0; i<usos.size();i++)
+        {
+            System.out.println(usos.get(i));
+        }
+        
+        /*    
         //Creamos todas las variables que usaremos en las pruebas
         Revendedora rev1 = new Revendedora();
         Campaña camp1 = new Campaña();

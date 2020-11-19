@@ -2,6 +2,7 @@ package Vistas;
 
 import Vistas.Campaña.*;
 import Vistas.Revendedora.*;
+import Vistas.Producto.*;
 import javax.swing.JOptionPane;
 
 public class Ventana extends javax.swing.JFrame {
@@ -28,6 +29,8 @@ public class Ventana extends javax.swing.JFrame {
         jMenuListarRev = new javax.swing.JMenuItem();
         jMProducto = new javax.swing.JMenu();
         jMenuFormProd = new javax.swing.JMenuItem();
+        jmModifProd = new javax.swing.JMenuItem();
+        jmListarProductos = new javax.swing.JMenuItem();
         jMPedido = new javax.swing.JMenu();
         jMenuFormPedido = new javax.swing.JMenuItem();
         jMenuRenglon = new javax.swing.JMenu();
@@ -104,8 +107,31 @@ public class Ventana extends javax.swing.JFrame {
         jMProducto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jMenuFormProd.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jMenuFormProd.setText("Formulario");
+        jMenuFormProd.setText("Agregar Producto");
+        jMenuFormProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFormProdActionPerformed(evt);
+            }
+        });
         jMProducto.add(jMenuFormProd);
+
+        jmModifProd.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jmModifProd.setText("Modificar Producto");
+        jmModifProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmModifProdActionPerformed(evt);
+            }
+        });
+        jMProducto.add(jmModifProd);
+
+        jmListarProductos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jmListarProductos.setText("Listar Productos");
+        jmListarProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmListarProductosActionPerformed(evt);
+            }
+        });
+        jMProducto.add(jmListarProductos);
 
         jMenuBar1.add(jMProducto);
 
@@ -222,6 +248,36 @@ public class Ventana extends javax.swing.JFrame {
         escritorio.moveToFront(buscarRev);
     }//GEN-LAST:event_jMenuBuscarActionPerformed
 
+    private void jMenuFormProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFormProdActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        JIFAgregarProducto prod = new JIFAgregarProducto();
+        prod.setVisible(true);
+        prod.setBounds(500, 150, 340, 420);
+        escritorio.add(prod);
+        escritorio.moveToFront(prod);
+    }//GEN-LAST:event_jMenuFormProdActionPerformed
+
+    private void jmListarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListarProductosActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        JIFListarProductos prod = new JIFListarProductos();
+        prod.setVisible(true);
+        prod.setBounds(500, 150, 800, 500);
+        escritorio.add(prod);
+        escritorio.moveToFront(prod);
+    }//GEN-LAST:event_jmListarProductosActionPerformed
+
+    private void jmModifProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmModifProdActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        JIFModificarProductos prod = new JIFModificarProductos();
+        prod.setVisible(true);
+        prod.setBounds(500, 150, 340, 454);
+        escritorio.add(prod);
+        escritorio.moveToFront(prod);
+    }//GEN-LAST:event_jmModifProdActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -282,5 +338,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuListarRev;
     private javax.swing.JMenuItem jMenuNivel;
     private javax.swing.JMenu jMenuRenglon;
+    private javax.swing.JMenuItem jmListarProductos;
+    private javax.swing.JMenuItem jmModifProd;
     // End of variables declaration//GEN-END:variables
 }

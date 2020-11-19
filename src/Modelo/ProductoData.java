@@ -91,7 +91,7 @@ public class ProductoData {
         return prod;
     }
     
-    public ArrayList<Producto> listarUSO(String uso){
+    public ArrayList<Producto> listarPorUSO(String uso){
         String query = "SELECT * FROM producto WHERE USO = ?";
         ArrayList<Producto> lista= new ArrayList();
         Producto p1;
@@ -122,7 +122,29 @@ public class ProductoData {
         return lista;            
     }
     
-        public ArrayList<Producto> listarnombre(String nombre){
+    public ArrayList<String> listarUsos(){
+        String query = "SELECT DISTINCT USO FROM producto";
+        ArrayList<String> lista= new ArrayList();
+        String uso;
+        try{
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next())
+            {
+                
+                uso =rs.getString(1);
+                lista.add(uso);
+            }
+            ps.close();
+        }
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        return lista;            
+    }
+    
+        public ArrayList<Producto> listarNombre(String nombre){
         String query = "SELECT * FROM producto WHERE NOMBRE LIKE ?";
         ArrayList<Producto> lista= new ArrayList();
         Producto p1;
@@ -212,13 +234,7 @@ public class ProductoData {
         return lista;            
     }
         
-        /** Lista los productos por precio de Vental al Público
-         * @param pventa es el valor de cossto
-         * @param simbolo ingresar '<', '>' o '=' para buscar
-         * @param dir ingresar 'a' para ordenar ascendentemente, cualquier otro valor es descendente
-         * @return retorna una Lista con los productos
-     */
-    public ArrayList<Producto> listarPorPVP(float pventa, char simbolo, char dir){
+        public ArrayList<Producto> listarPorPVP(float pventa, char simbolo, char dir){
         ArrayList<Producto> lista= new ArrayList();
         Producto p1;
         String s1;
@@ -242,6 +258,43 @@ public class ProductoData {
              String query = "SELECT * FROM producto WHERE PRECIO_PUBLICO"+s1+" ? ORDER BY PRECIO_PUBLICO "+s2;
              PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setFloat(1,pventa);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next())
+            {
+                p1=new Producto();
+                p1.setIdProducto(rs.getInt(1));
+                p1.setCodigo(rs.getString(2));
+                p1.setNombre(rs.getString(3));
+                p1.setUso(rs.getString(4));
+                p1.setTamaño(rs.getInt(5));
+                p1.setPrecioCosto(rs.getFloat(6));
+                p1.setPrecioVenta(rs.getFloat(7));
+                p1.setCantEstrellas(rs.getInt(8));
+                p1.setAnulado(rs.getBoolean(9));
+                lista.add(p1);
+            }
+            ps.close();
+        }
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        return lista;            
+    }
+        
+        
+        /** Lista los productos por precio de Vental al Público
+         * @param pventa es el valor de cossto
+         * @param simbolo ingresar '<', '>' o '=' para buscar
+         * @param dir ingresar 'a' para ordenar ascendentemente, cualquier otro valor es descendente
+         * @return retorna una Lista con los productos
+     */
+    public ArrayList<Producto> listarProductos(){
+        ArrayList<Producto> lista= new ArrayList();
+        Producto p1;
+        try{
+            String query = "SELECT * FROM producto";
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs=ps.executeQuery();
             while(rs.next())
             {

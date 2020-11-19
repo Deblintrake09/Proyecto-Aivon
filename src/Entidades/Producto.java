@@ -24,6 +24,7 @@ public class Producto {
     }
 
     public Producto(String codigo, String nombre, String uso, int tamaño, float precioCosto, float precioVenta, int cantEstrellas) {
+        this.idProducto=-1;
         this.codigo = codigo;
         this.nombre = nombre;
         this.uso = uso;
@@ -35,6 +36,7 @@ public class Producto {
     }
 
     public Producto() {
+        this.idProducto=-1;
         this.anulado=false;
     }
 
