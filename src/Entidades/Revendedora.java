@@ -122,7 +122,7 @@ public class Revendedora {
     
     @Override
     public String toString() {
-        return "ID. Rev.: " + idRev + ". Nombre: " + nombre + ". Apellido: " + apellido + ". DNI: " + dni + ". Telefono: " + telefono +". Mail: "+ mail +". Activa: " + activa + ". Nivel: " + nivel  + ". Anulado: " + anulado;
+        return  nombre +" "+ apellido;
     }
     
 }

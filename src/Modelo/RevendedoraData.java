@@ -269,7 +269,7 @@ public class RevendedoraData {
              JOptionPane.showMessageDialog(null, e.toString());
          }
 
-     }/*
+     }
     public boolean controlarActividadRevendedora(Revendedora rev)
     {
         Conexion con=new Conexion();
@@ -307,12 +307,13 @@ public class RevendedoraData {
                 }
             }   
         }
-        con.cerrarConexion();
+        rev.setActiva(false);
+        rd.darBaja(rev, false);
         return false;
         
     }
-        */
-     public boolean controlarActividadRevendedora(Revendedora rev)
+        
+   /*  public boolean controlarActividadRevendedora(Revendedora rev)
     {
         
         Conexion con = new Conexion();
@@ -353,7 +354,7 @@ public class RevendedoraData {
         rd.darBaja(rev, false);
         return false;
         
-    }
+    }*/
     
     
     public int calcularNivelPorEstrellas(Revendedora rev)

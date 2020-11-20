@@ -24,8 +24,7 @@ public class Ventana extends javax.swing.JFrame {
         jMenuAgregarRev = new javax.swing.JMenuItem();
         jMenuBuscar = new javax.swing.JMenuItem();
         jMenuNivel = new javax.swing.JMenuItem();
-        jMenuBajaRev = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuAnular = new javax.swing.JMenuItem();
         jMenuListarRev = new javax.swing.JMenuItem();
         jMProducto = new javax.swing.JMenu();
         jMenuFormProd = new javax.swing.JMenuItem();
@@ -81,16 +80,22 @@ public class Ventana extends javax.swing.JFrame {
         jMRevendedora.add(jMenuBuscar);
 
         jMenuNivel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jMenuNivel.setText("Subir nivel");
+        jMenuNivel.setText("Controlar (Nivel y Actividad)");
+        jMenuNivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuNivelActionPerformed(evt);
+            }
+        });
         jMRevendedora.add(jMenuNivel);
 
-        jMenuBajaRev.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jMenuBajaRev.setText("Cambiar estado");
-        jMRevendedora.add(jMenuBajaRev);
-
-        jMenuItem2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jMenuItem2.setText("Anular");
-        jMRevendedora.add(jMenuItem2);
+        jMenuAnular.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jMenuAnular.setText("Dar de baja - Dar de alta");
+        jMenuAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAnularActionPerformed(evt);
+            }
+        });
+        jMRevendedora.add(jMenuAnular);
 
         jMenuListarRev.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jMenuListarRev.setText("Mostrar Todas");
@@ -278,6 +283,28 @@ public class Ventana extends javax.swing.JFrame {
         escritorio.moveToFront(prod);
     }//GEN-LAST:event_jmModifProdActionPerformed
 
+    private void jMenuNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNivelActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        JIFNivel nivelrev = new JIFNivel();
+        nivelrev.setVisible(true);
+        nivelrev.setBounds(500, 190, 385, 320);
+        escritorio.add(nivelrev);
+        escritorio.moveToFront(nivelrev);
+    }//GEN-LAST:event_jMenuNivelActionPerformed
+
+    private void jMenuAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAnularActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        JIFAnular anularrev = new JIFAnular();
+        anularrev.setVisible(true);
+        anularrev.setBounds(500, 190, 385, 320);
+        escritorio.add(anularrev);
+        escritorio.moveToFront(anularrev);
+    }//GEN-LAST:event_jMenuAnularActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -328,13 +355,12 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuItem jMenuAgregarRev;
-    private javax.swing.JMenuItem jMenuBajaRev;
+    private javax.swing.JMenuItem jMenuAnular;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuBuscar;
     private javax.swing.JMenuItem jMenuFormPedido;
     private javax.swing.JMenuItem jMenuFormProd;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuListarRev;
     private javax.swing.JMenuItem jMenuNivel;
     private javax.swing.JMenu jMenuRenglon;

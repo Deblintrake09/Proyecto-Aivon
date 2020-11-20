@@ -228,7 +228,6 @@ public class JIFBuscarRev extends javax.swing.JInternalFrame {
             }
             catch(NumberFormatException e){
                 JOptionPane.showMessageDialog(this, "Ingrese un número");
-                limpiar();
             }
             if(rev!=null){
                 jTFApellido.setText(rev.getApellido());
@@ -253,16 +252,20 @@ public class JIFBuscarRev extends javax.swing.JInternalFrame {
             }
             catch(NumberFormatException e){
                 JOptionPane.showMessageDialog(this, "Ingrese un número");
-                limpiar();
             }
             if(rev!=null){
-                rev.setDni(Integer.parseInt(jTFDni.getText()));
-                rev.setApellido(jTFApellido.getText());
-                rev.setNombre(jTFNombre.getText());
-                rev.setTelefono(Long.parseLong(jTFTelefono.getText()));
-                rev.setMail(jTFMail.getText());
-                revdta.modificarRevendedora(rev);
+                try{
+                    rev.setDni(Integer.parseInt(jTFDni.getText()));
+                    rev.setApellido(jTFApellido.getText());
+                    rev.setNombre(jTFNombre.getText());
+                    rev.setTelefono(Long.parseLong(jTFTelefono.getText()));
+                    rev.setMail(jTFMail.getText());
+                    revdta.modificarRevendedora(rev);
                 JOptionPane.showMessageDialog(this, "Actualizada");
+                }
+                catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(this, "Ingrese un número");;
+                }
             }
         }
     }//GEN-LAST:event_jBModificarActionPerformed
