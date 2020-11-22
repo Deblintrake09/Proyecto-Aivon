@@ -12,7 +12,7 @@ public class Campaña
     private float montoMaximo;
     private boolean anulado;
     
-    public Campaña(int idCampaña, int nroCampaña, LocalDate fechaInicio, LocalDate fechaFin, float montoMinimo, float montoMaximo) 
+    public Campaña(int idCampaña, int nroCampaña, LocalDate fechaInicio, LocalDate fechaFin, float montoMinimo, float montoMaximo, boolean anulado) 
     {
         this.idCampaña = idCampaña;
         this.nroCampaña = nroCampaña;
@@ -20,7 +20,8 @@ public class Campaña
         this.fechaFin = fechaFin;
         this.montoMinimo = montoMinimo;
         this.montoMaximo = montoMaximo;
-        this.anulado = false;
+        anulado = false;
+        this.anulado = anulado;
     }
 
     public Campaña(int nroCampaña, LocalDate fechaInicio, LocalDate fechaFin, float montoMinimo, float montoMaximo) 

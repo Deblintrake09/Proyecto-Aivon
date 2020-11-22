@@ -161,11 +161,12 @@ public class Pedido {
     */
     public String controlarMontos()
     {
+        String resp=null;
         if(totalCosto<campaña.getMontoMinimo())
-            return "insuficiente";
+            resp="insuficiente";
         else if(totalCosto>campaña.getMontoMaximo())
-            return "excedido";
-        return "permitido";
+            resp="excedido";
+        return resp;
     }
     
     public boolean isAnulado() {

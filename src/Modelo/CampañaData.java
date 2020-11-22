@@ -57,7 +57,7 @@ public class CampañaData
     public void modificarCampaña(Campaña camp)
     {
         String query = "UPDATE campaña SET NRO_CAMPAÑA = ?, FECHA_INICIO = ?,"
-                + " FECHA_FIN = ?, MONTO_MINIMO = ?, MONTO_MAXIMO = ? WHERE ID_CAMPAÑA = ?";
+                + " FECHA_FIN = ?, MONTO_MINIMO = ?, MONTO_MAXIMO = ?, ANULADO = ? WHERE ID_CAMPAÑA = ?";
         try
         {
            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -66,7 +66,9 @@ public class CampañaData
            ps.setDate(3, Date.valueOf(camp.getFechaFin()));
            ps.setFloat(4, camp.getMontoMinimo());
            ps.setFloat(5, camp.getMontoMaximo());
-           
+           ps.setBoolean(6, camp.getAnulado());
+           ps.setInt(7, camp.getIdCampaña());
+           ps.executeUpdate();
            ResultSet rs = ps.getGeneratedKeys();
            if(rs.next())
            {
@@ -98,6 +100,7 @@ public class CampañaData
                 camp.setFechaFin(rs.getDate(4).toLocalDate());
                 camp.setMontoMinimo(rs.getFloat(5));
                 camp.setMontoMaximo(rs.getFloat(6));
+                camp.setAnulado(rs.getBoolean(7));
             }
             else
             {
@@ -272,6 +275,7 @@ public class CampañaData
                 ca.setFechaFin(rs.getDate(4).toLocalDate());
                 ca.setMontoMinimo(rs.getFloat(5));
                 ca.setMontoMaximo(rs.getFloat(6));
+                ca.setAnulado(rs.getBoolean(7));
                 //System.out.println("Numero de campaña: " + ca.getNroCampaña());
                 campañas.add(ca);
                 

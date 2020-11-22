@@ -36,6 +36,7 @@ public class Ventana extends javax.swing.JFrame {
         jMCampaña = new javax.swing.JMenu();
         jMFormCamp = new javax.swing.JMenuItem();
         jMListarCamp = new javax.swing.JMenuItem();
+        jMModificarCamp = new javax.swing.JMenuItem();
         jMSalir = new javax.swing.JMenu();
         jMISalir = new javax.swing.JMenuItem();
 
@@ -158,6 +159,11 @@ public class Ventana extends javax.swing.JFrame {
 
         jMFormCamp.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jMFormCamp.setText("Formulario");
+        jMFormCamp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMFormCampActionPerformed(evt);
+            }
+        });
         jMCampaña.add(jMFormCamp);
 
         jMListarCamp.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -168,6 +174,14 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
         jMCampaña.add(jMListarCamp);
+
+        jMModificarCamp.setText("Modificar");
+        jMModificarCamp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMModificarCampActionPerformed(evt);
+            }
+        });
+        jMCampaña.add(jMModificarCamp);
 
         jMenuBar1.add(jMCampaña);
 
@@ -305,6 +319,28 @@ public class Ventana extends javax.swing.JFrame {
         escritorio.moveToFront(anularrev);
     }//GEN-LAST:event_jMenuAnularActionPerformed
 
+    private void jMFormCampActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMFormCampActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        JIFAgregarCampaña agregarCam = new JIFAgregarCampaña();
+        agregarCam.setVisible(true);
+        agregarCam.setBounds(500, 150, 417, 397);
+        escritorio.add(agregarCam);
+        escritorio.moveToFront(agregarCam);
+    }//GEN-LAST:event_jMFormCampActionPerformed
+
+    private void jMModificarCampActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMModificarCampActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        JIFModificarCampaña modCamp = new JIFModificarCampaña();
+        modCamp.setVisible(true);
+        modCamp.setBounds(500, 150, 437, 420);
+        escritorio.add(modCamp);
+        escritorio.moveToFront(modCamp);
+    }//GEN-LAST:event_jMModificarCampActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -348,6 +384,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMFormCamp;
     private javax.swing.JMenuItem jMISalir;
     private javax.swing.JMenuItem jMListarCamp;
+    private javax.swing.JMenuItem jMModificarCamp;
     private javax.swing.JMenu jMPedido;
     private javax.swing.JMenu jMProducto;
     private javax.swing.JMenu jMRevendedora;

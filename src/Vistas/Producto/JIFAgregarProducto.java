@@ -83,6 +83,11 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Precio Costo");
 
+        jTFNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFNombreActionPerformed(evt);
+            }
+        });
         jTFNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTFNombreKeyReleased(evt);
@@ -223,6 +228,10 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
             jBGuardar.setEnabled(true);
         }
     }//GEN-LAST:event_jTFNombreKeyReleased
+
+    private void jTFNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFNombreActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -124,18 +124,22 @@ public class JIFListarCamp extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTCamp;
     // End of variables declaration//GEN-END:variables
-    private void armarCabecera(){
+    private void armarCabecera()
+    {
         ArrayList<Object> columnas = new ArrayList<>();
         columnas.add("ID");
         columnas.add("Numero");
-        columnas.add("Inicio");
-        columnas.add("Fin");
-        columnas.add("Monto Max.");
+        columnas.add("Fecha Inicio");
+        columnas.add("Fecha Fin");
         columnas.add("Monto Min.");
+        columnas.add("Monto Max.");
         columnas.add("Anulada");
-        for(Object o:columnas){
+        
+        for(Object o:columnas)
+        {
             modelo.addColumn(o);
         }
+        
         jTCamp.setModel(modelo);
         jTCamp.getColumnModel().getColumn(0).setPreferredWidth(30);
         jTCamp.getColumnModel().getColumn(1).setPreferredWidth(60);
@@ -145,19 +149,24 @@ public class JIFListarCamp extends javax.swing.JInternalFrame {
         jTCamp.getColumnModel().getColumn(5).setPreferredWidth(90);
         jTCamp.getColumnModel().getColumn(6).setPreferredWidth(70);
     }
-    private void borrarFilas(){
+    private void borrarFilas()
+    {
         int a = modelo.getRowCount()-1;
-        for (int i =a; i>=0; i--){
+        
+        for (int i=a; i>=0; i--)
+        {
             modelo.removeRow(i);
         }
     }
-    private void cargarDatos(){
+    private void cargarDatos()
+    {
         borrarFilas();
         listc = cpdta.obtenerCampañas();
-        for( Campaña camp : listc){
+        for( Campaña camp : listc)
+        {
             modelo.addRow(new Object[]{camp.getIdCampaña(), camp.getNroCampaña(),
-            camp.getFechaFin(), camp.getFechaFin(), camp.getMontoMaximo(),
-            camp.getMontoMinimo(), camp.getAnulado()});
+            camp.getFechaInicio(), camp.getFechaFin(), camp.getMontoMinimo(), camp.getMontoMaximo(),
+             camp.getAnulado()});
         }
     }
 }
