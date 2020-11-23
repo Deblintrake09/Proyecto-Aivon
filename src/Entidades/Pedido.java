@@ -163,9 +163,11 @@ public class Pedido {
     {
         String resp=null;
         if(totalCosto<campaña.getMontoMinimo())
-            resp="insuficiente";
+            resp="Menor a Mínimo";
+        else if(totalCosto>campaña.getMontoMinimo()&&totalCosto<campaña.getMontoMaximo())
+            resp="Válido";
         else if(totalCosto>campaña.getMontoMaximo())
-            resp="excedido";
+            resp="Alcanzado";
         return resp;
     }
     

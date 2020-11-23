@@ -1,6 +1,7 @@
 package Vistas;
 
 import Vistas.Campaña.*;
+import Vistas.Pedido.*;
 import Vistas.Revendedora.*;
 import Vistas.Producto.*;
 import javax.swing.JOptionPane;
@@ -32,6 +33,7 @@ public class Ventana extends javax.swing.JFrame {
         jmListarProductos = new javax.swing.JMenuItem();
         jMPedido = new javax.swing.JMenu();
         jMenuFormPedido = new javax.swing.JMenuItem();
+        jmiListarPedidoPorCampaña = new javax.swing.JMenuItem();
         jMenuRenglon = new javax.swing.JMenu();
         jMCampaña = new javax.swing.JMenu();
         jMFormCamp = new javax.swing.JMenuItem();
@@ -146,7 +148,21 @@ public class Ventana extends javax.swing.JFrame {
 
         jMenuFormPedido.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jMenuFormPedido.setText("Formulario");
+        jMenuFormPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFormPedidoActionPerformed(evt);
+            }
+        });
         jMPedido.add(jMenuFormPedido);
+
+        jmiListarPedidoPorCampaña.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jmiListarPedidoPorCampaña.setText("Listar Por Campaña");
+        jmiListarPedidoPorCampaña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiListarPedidoPorCampañaActionPerformed(evt);
+            }
+        });
+        jMPedido.add(jmiListarPedidoPorCampaña);
 
         jMenuBar1.add(jMPedido);
 
@@ -341,6 +357,28 @@ public class Ventana extends javax.swing.JFrame {
         escritorio.moveToFront(modCamp);
     }//GEN-LAST:event_jMModificarCampActionPerformed
 
+    private void jMenuFormPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFormPedidoActionPerformed
+
+        escritorio.removeAll();
+        escritorio.repaint();
+        JIFListarPedidosRevendedora modCamp = new JIFListarPedidosRevendedora();
+        modCamp.setVisible(true);
+        modCamp.setBounds(500, 150, 820, 420);
+        escritorio.add(modCamp);
+        escritorio.moveToFront(modCamp);
+        
+    }//GEN-LAST:event_jMenuFormPedidoActionPerformed
+
+    private void jmiListarPedidoPorCampañaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarPedidoPorCampañaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        JIFListarPedidosCampaña modCamp = new JIFListarPedidosCampaña();
+        modCamp.setVisible(true);
+        modCamp.setBounds(500, 150, 950, 420);
+        escritorio.add(modCamp);
+        escritorio.moveToFront(modCamp);
+    }//GEN-LAST:event_jmiListarPedidoPorCampañaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -403,5 +441,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuRenglon;
     private javax.swing.JMenuItem jmListarProductos;
     private javax.swing.JMenuItem jmModifProd;
+    private javax.swing.JMenuItem jmiListarPedidoPorCampaña;
     // End of variables declaration//GEN-END:variables
 }

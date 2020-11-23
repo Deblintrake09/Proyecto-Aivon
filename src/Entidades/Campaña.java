@@ -111,9 +111,7 @@ public class Campaña
     @Override
     public String toString() 
     {
-        return "ID. Campaña: " + idCampaña + ". Nro. Campaña: " 
-                + nroCampaña + ". Fecha inicio: " + fechaInicio  
-                + ". Fecha fin: " + fechaFin + ". Monto minimo: $" + montoMinimo + ". Monto maximo: $" + montoMaximo + "\n";
+        return nroCampaña+"";
     }
     
 }
