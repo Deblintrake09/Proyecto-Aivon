@@ -71,19 +71,42 @@ public class JIFBuscarRev extends javax.swing.JInternalFrame {
         jLabel6.setText("Mail");
 
         jTFNombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTFNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFNombreKeyTyped(evt);
+            }
+        });
 
         jTFApellido.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTFApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFApellidoKeyTyped(evt);
+            }
+        });
 
         jTFDni.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTFDni.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTFDniKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFDniKeyTyped(evt);
+            }
         });
 
         jTFTelefono.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTFTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFTelefonoKeyTyped(evt);
+            }
+        });
 
         jTFMail.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTFMail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFMailKeyTyped(evt);
+            }
+        });
 
         jBBuscar.setText("Buscar");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -201,7 +224,7 @@ public class JIFBuscarRev extends javax.swing.JInternalFrame {
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         // TODO add your handling code here:
-        int opcion = JOptionPane.showConfirmDialog(null, "Realmente desea salir?", "Confirmar salida", JOptionPane.CLOSED_OPTION, JOptionPane.CANCEL_OPTION);
+        int opcion = JOptionPane.showConfirmDialog(this, "Realmente desea salir?", "Confirmar salida", JOptionPane.CLOSED_OPTION, JOptionPane.CANCEL_OPTION);
         if(opcion==0){
             dispose();
         }
@@ -214,21 +237,19 @@ public class JIFBuscarRev extends javax.swing.JInternalFrame {
 
     private void jTFDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFDniKeyReleased
         // TODO add your handling code here:
-        if(jTFDni.getText()!=null){
+        if(!(jTFDni.getText().isEmpty())){
             jBBuscar.setEnabled(true);
+        }
+        else{
+            jBBuscar.setEnabled(false);
         }
     }//GEN-LAST:event_jTFDniKeyReleased
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         // TODO add your handling code here:
-        if(jTFDni.getText()!=null){
-            try{
-                int dni= Integer.parseInt(jTFDni.getText());
-                rev = revdta.buscarPorDni(dni);
-            }
-            catch(NumberFormatException e){
-                JOptionPane.showMessageDialog(this, "Ingrese un número");
-            }
+        if(!(jTFDni.getText().isEmpty())){
+            int dni= Integer.parseInt(jTFDni.getText());
+            rev = revdta.buscarPorDni(dni);
             if(rev!=null){
                 jTFApellido.setText(rev.getApellido());
                 jTFNombre.setText(rev.getNombre());
@@ -236,40 +257,87 @@ public class JIFBuscarRev extends javax.swing.JInternalFrame {
                 jTFMail.setText(rev.getMail());
                 jLID.setText(String.valueOf(rev.getIdRev()));
                 jBModificar.setEnabled(true);
+                JOptionPane.showMessageDialog(this, "Revendedora encontrada.");
             }
             else{
-                JOptionPane.showMessageDialog(this, "Revendedora no encontrada");
+                JOptionPane.showMessageDialog(this, "Revendedora no encontrada.");
             }
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
         // TODO add your handling code here:
-        if(jTFDni.getText()!=null){
-            try{
-                int dni= Integer.parseInt(jTFDni.getText());
-                rev = revdta.buscarPorDni(dni);
-            }
-            catch(NumberFormatException e){
-                JOptionPane.showMessageDialog(this, "Ingrese un número");
-            }
+        if(!(jTFDni.getText().isEmpty()) && !(jTFApellido.getText().isEmpty())){
+            int dni= Integer.parseInt(jTFDni.getText());
+            rev = revdta.buscarPorDni(dni);
             if(rev!=null){
-                try{
                     rev.setDni(Integer.parseInt(jTFDni.getText()));
                     rev.setApellido(jTFApellido.getText());
                     rev.setNombre(jTFNombre.getText());
                     rev.setTelefono(Long.parseLong(jTFTelefono.getText()));
                     rev.setMail(jTFMail.getText());
                     revdta.modificarRevendedora(rev);
-                JOptionPane.showMessageDialog(this, "Actualizada");
-                }
-                catch(NumberFormatException e){
-                    JOptionPane.showMessageDialog(this, "Ingrese un número");;
-                }
+                JOptionPane.showMessageDialog(this, "Revendedora Actualizada con exito");
+                limpiar();
             }
+            else{
+                JOptionPane.showMessageDialog(this, "No Actualizada");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "No Actualizada, DNI y Apellido requerido");
         }
     }//GEN-LAST:event_jBModificarActionPerformed
 
+    private void jTFDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFDniKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if(!(Character.isDigit(validar)) && validar != 8){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo números");
+        }  
+    }//GEN-LAST:event_jTFDniKeyTyped
+
+    private void jTFApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFApellidoKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if(Character.isDigit(validar)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+        }
+    }//GEN-LAST:event_jTFApellidoKeyTyped
+
+    private void jTFNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNombreKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if(Character.isDigit(validar)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+        }
+    }//GEN-LAST:event_jTFNombreKeyTyped
+
+    private void jTFTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTelefonoKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if(!(Character.isDigit(validar)) && validar != 8){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo números");
+        } 
+    }//GEN-LAST:event_jTFTelefonoKeyTyped
+
+    private void jTFMailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFMailKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if(validar == 32){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se permiten espacios en el mail");
+        }
+    }//GEN-LAST:event_jTFMailKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;

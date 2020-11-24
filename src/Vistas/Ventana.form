@@ -205,6 +205,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMModificarCamp">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="12" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
               <Events>

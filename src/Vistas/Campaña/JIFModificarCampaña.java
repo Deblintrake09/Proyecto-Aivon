@@ -7,8 +7,8 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
-import java.sql.SQLException;
 
 
 public class JIFModificarCampaña extends javax.swing.JInternalFrame 
@@ -20,14 +20,13 @@ public class JIFModificarCampaña extends javax.swing.JInternalFrame
     public JIFModificarCampaña() 
     {
         initComponents();
-        jTFNumero.requestFocus();
         con = new Conexion();
         campañaData = new CampañaData(con);
-        campaña = null;
-        jDCFechaInicio.setEnabled(false);
+        jDCFechaInicio.getDateEditor().setEnabled(false);
+        jDCFechaInicio.getCalendarButton().setEnabled(false);
         jDCFechaDeFin.setEnabled(false);
         jCheckBoxAnulada.setEnabled(false);
-        habilitar(false);
+        jBModificar.setEnabled(false);
         limpiar();
     }
 
@@ -65,11 +64,6 @@ public class JIFModificarCampaña extends javax.swing.JInternalFrame
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Monto máximo");
 
-        jTFMontoMaximo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFMontoMaximoActionPerformed(evt);
-            }
-        });
         jTFMontoMaximo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTFMontoMaximoKeyTyped(evt);
@@ -106,6 +100,15 @@ public class JIFModificarCampaña extends javax.swing.JInternalFrame
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Nro de campaña");
+
+        jTFNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFNumeroKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFNumeroKeyTyped(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Fecha Inicio");
@@ -229,46 +232,38 @@ public class JIFModificarCampaña extends javax.swing.JInternalFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTFMontoMinimoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFMontoMinimoKeyTyped
-   
-    }//GEN-LAST:event_jTFMontoMinimoKeyTyped
-
-    private void jTFMontoMaximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFMontoMaximoActionPerformed
-
-    }//GEN-LAST:event_jTFMontoMaximoActionPerformed
-
-    private void jTFMontoMaximoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFMontoMaximoKeyTyped
-   
-    }//GEN-LAST:event_jTFMontoMaximoKeyTyped
-
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
-        
+        if(!(jTFMontoMinimo.getText().isEmpty()) && !(jTFMontoMaximo.getText().isEmpty()))
+         { 
             int numeroCampaña = Integer.parseInt(jTFNumero.getText());
             campaña = campañaData.buscarNroCampaña(numeroCampaña);                
-            if(campaña != null)
-            {
-                jDCFechaInicio.setEnabled(true);
-                jDCFechaDeFin.setEnabled(true);
-                campaña.setNroCampaña(numeroCampaña);
-                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-                String fechaInicio = formato.format(jDCFechaInicio.getDate());
-                LocalDate fechaI = LocalDate.parse(fechaInicio, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            campaña.setNroCampaña(numeroCampaña);
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaInicio = formato.format(jDCFechaInicio.getDate());
+            LocalDate fechaI = LocalDate.parse(fechaInicio, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            campaña.setFechaInicio(fechaI);
+            String fechaFin = formato.format(validarLapso());
+            LocalDate fechaF = LocalDate.parse(fechaFin, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            float montMin = Float.parseFloat(jTFMontoMinimo.getText());
+            float montMax = Float.parseFloat(jTFMontoMaximo.getText());
+            if(montMin < montMax){
                 campaña.setFechaInicio(fechaI);
-                String fechaFin = formato.format(jDCFechaDeFin.getDate());
-                LocalDate fechaF = LocalDate.parse(fechaFin, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 campaña.setFechaFin(fechaF);
-                campaña.setMontoMinimo(Float.parseFloat(jTFMontoMinimo.getText()));
-                campaña.setMontoMaximo(Float.parseFloat(jTFMontoMaximo.getText()));
+                campaña.setMontoMinimo(montMin);
+                campaña.setMontoMaximo(montMax);
                 campaña.setAnulado(jCheckBoxAnulada.isSelected());
                 campañaData.modificarCampaña(campaña);
                 JOptionPane.showMessageDialog(this, "Campaña Actualizada");
-                jDCFechaInicio.setEnabled(false);
-                jDCFechaDeFin.setEnabled(false);
-                jCheckBoxAnulada.setEnabled(false);
-                habilitar(false);
                 limpiar();
             }
-
+            else{
+                JOptionPane.showMessageDialog(this, "El monto máximo debe ser mayor al mínimo");
+            }
+        }
+        else
+            {
+                JOptionPane.showMessageDialog(this,"Por favor llene todos los campos");
+            }
     }//GEN-LAST:event_jBModificarActionPerformed
 
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
@@ -278,58 +273,82 @@ public class JIFModificarCampaña extends javax.swing.JInternalFrame
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         // TODO add your handling code here:
-        int opcion = JOptionPane.showConfirmDialog(null, "Realmente desea salir?", "Confirmar salida", JOptionPane.CLOSED_OPTION, JOptionPane.CANCEL_OPTION);
+        int opcion = JOptionPane.showConfirmDialog(this, "Realmente desea salir?", "Confirmar salida", JOptionPane.CLOSED_OPTION, JOptionPane.CANCEL_OPTION);
         if(opcion==0){
             dispose();
         }
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        if(jTFNumero.getText()!=null)
+        if(!(jTFNumero.getText().isEmpty()))
         {
             int numeroCampaña = Integer.parseInt(jTFNumero.getText());
             campaña = campañaData.buscarNroCampaña(numeroCampaña);
-            if (campaña.getIdCampaña() != -1)
+            if (campaña !=  null)
             {
-                habilitar(true);
-                jDCFechaInicio.setEnabled(true);
-                jDCFechaDeFin.setEnabled(true);
+                jDCFechaInicio.getCalendarButton().setEnabled(true);
+                jBModificar.setEnabled(true);
+                jCheckBoxAnulada.setEnabled(true);
                 jTFNumero.setText(campaña.getNroCampaña()+"");
                 jDCFechaInicio.setDate(Date.valueOf(campaña.getFechaInicio()));
                 jDCFechaDeFin.setDate(Date.valueOf(campaña.getFechaFin()));
                 jTFMontoMinimo.setText(campaña.getMontoMinimo()+"");
                 jTFMontoMaximo.setText(campaña.getMontoMaximo()+"");
                 jCheckBoxAnulada.setSelected(campaña.getAnulado());
-                jBModificar.setEnabled(true);                
+                JOptionPane.showMessageDialog(this, "Campaña encontrada");
+                jTFNumero.setEditable(false);
             }    
             else
             {
-                JOptionPane.showMessageDialog(null, "No se encontró campaña con ése número");
+                JOptionPane.showMessageDialog(this, "No se encontró campaña con ése número");
                 limpiar();
             }
         }
+        else{
+            JOptionPane.showMessageDialog(this, "Ingrese un número");
+        }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
-    private void limpiar()
-    {
-        jTFNumero.setText("");
-        jDCFechaInicio.setDateFormatString(null);
-        jDCFechaDeFin.setDateFormatString(null);
-        jTFMontoMinimo.setText("");
-        jTFMontoMaximo.setText("");
-        jDCFechaInicio.setEnabled(false);
-        jDCFechaDeFin.setEnabled(false);
-        jCheckBoxAnulada.setEnabled(false);
-        jTFNumero.requestFocus();
-    }
-    private void habilitar(boolean b)
-    {
-        jTFMontoMaximo.setEnabled(b);
-        jTFMontoMinimo.setEnabled(b);
-        jBModificar.setEnabled(b);
-        jBLimpiar.setEnabled(b);
-        jCheckBoxAnulada.setEnabled(true);
-    }
+    private void jTFNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNumeroKeyTyped
+        // TODO add your handling code here:
+         char validar = evt.getKeyChar();
+        if(!(Character.isDigit(validar)) && validar != 8){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo números");
+        }  
+    }//GEN-LAST:event_jTFNumeroKeyTyped
+
+    private void jTFNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNumeroKeyReleased
+        // TODO add your handling code here:
+        if(!(jTFNumero.getText().isEmpty())){
+            jBBuscar.setEnabled(true);
+        }
+        else{
+            jBBuscar.setEnabled(false);
+        }
+    }//GEN-LAST:event_jTFNumeroKeyReleased
+
+    private void jTFMontoMinimoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFMontoMinimoKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if(!(Character.isDigit(validar)) && validar != 8 && validar !=46){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo números");
+        } 
+    }//GEN-LAST:event_jTFMontoMinimoKeyTyped
+
+    private void jTFMontoMaximoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFMontoMaximoKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if(!(Character.isDigit(validar)) && validar != 8 && validar !=46){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo números");
+        } 
+    }//GEN-LAST:event_jTFMontoMaximoKeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBLimpiar;
@@ -350,4 +369,27 @@ public class JIFModificarCampaña extends javax.swing.JInternalFrame
     private javax.swing.JTextField jTFMontoMinimo;
     private javax.swing.JTextField jTFNumero;
     // End of variables declaration//GEN-END:variables
+    
+    private java.util.Date validarLapso(){
+        java.util.Date t = jDCFechaInicio.getDate();
+        Calendar c = Calendar.getInstance();
+        c.setTime(t);
+        c.add(Calendar.DAY_OF_YEAR, 25);
+        java.util.Date n = c.getTime();
+        jDCFechaDeFin.setDate(n);
+        return n;
+    }
+    
+    private void limpiar(){
+        jTFNumero.setText(null);
+        jDCFechaInicio.setDate(null);
+        jDCFechaDeFin.setDate(null);
+        jTFMontoMinimo.setText(null);
+        jTFMontoMaximo.setText(null);
+        jCheckBoxAnulada.setEnabled(false);
+        jDCFechaInicio.getCalendarButton().setEnabled(false);
+        jBBuscar.setEnabled(false);
+        jBModificar.setEnabled(false);
+        jTFNumero.setEditable(true);
+    }
 }

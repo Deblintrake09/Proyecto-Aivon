@@ -115,6 +115,7 @@ public class JIFListarRev extends javax.swing.JInternalFrame {
     private void JBCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCargarActionPerformed
         // TODO add your handling code here:
         cargarRev();
+        JOptionPane.showMessageDialog(this, "Listado con éxito.");
     }//GEN-LAST:event_JBCargarActionPerformed
 
 

@@ -196,6 +196,7 @@ public class Ventana extends javax.swing.JFrame {
         });
         jMCampaña.add(jMListarCamp);
 
+        jMModificarCamp.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jMModificarCamp.setText("Modificar");
         jMModificarCamp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

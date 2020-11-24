@@ -104,7 +104,7 @@ public class CampañaData
             }
             else
             {
-                 JOptionPane.showMessageDialog(null, "No se pudo encontrar la campaña con numero de campaña: " + nroCampaña);
+                 System.out.println("Campaña no encontrada.");
                 
             }   
             ps.close();

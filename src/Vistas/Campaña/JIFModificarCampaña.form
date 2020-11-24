@@ -163,7 +163,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jTFMontoMaximo">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFMontoMaximoActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFMontoMaximoKeyTyped"/>
       </Events>
     </Component>
@@ -218,6 +217,10 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFNumero">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFNumeroKeyReleased"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFNumeroKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>

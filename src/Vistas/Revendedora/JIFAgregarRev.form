@@ -181,17 +181,30 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFNomb">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFNombKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFApellido">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFApellidoKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFDni">
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFDniKeyReleased"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFDniKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFTel">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFTelKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFMail">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFMailKeyTyped"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

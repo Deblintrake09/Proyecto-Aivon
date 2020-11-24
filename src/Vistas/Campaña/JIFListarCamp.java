@@ -114,6 +114,7 @@ public class JIFListarCamp extends javax.swing.JInternalFrame {
     private void jBCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCargarActionPerformed
         // TODO add your handling code here:
         cargarDatos();
+        JOptionPane.showMessageDialog(this, "Listado con éxito.");
     }//GEN-LAST:event_jBCargarActionPerformed
 
 

@@ -77,9 +77,36 @@ public class JIFAgregarRev extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Mail");
 
+        jTFNomb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFNombKeyTyped(evt);
+            }
+        });
+
+        jTFApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFApellidoKeyTyped(evt);
+            }
+        });
+
         jTFDni.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTFDniKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFDniKeyTyped(evt);
+            }
+        });
+
+        jTFTel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFTelKeyTyped(evt);
+            }
+        });
+
+        jTFMail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFMailKeyTyped(evt);
             }
         });
 
@@ -167,7 +194,7 @@ public class JIFAgregarRev extends javax.swing.JInternalFrame {
 
     private void jTFDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFDniKeyReleased
         // TODO add your handling code here:
-        if(jTFDni.getText()!=null){
+        if(!(jTFDni.getText().isEmpty())){
             jBGuardar.setEnabled(true);
         }
         else{
@@ -177,7 +204,7 @@ public class JIFAgregarRev extends javax.swing.JInternalFrame {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         // TODO add your handling code here:
-        if(jTFApellido.getText()!=null){
+        if(!(jTFApellido.getText().isEmpty()) && !(jTFDni.getText().isEmpty())){
             String nom = jTFNomb.getText();
             String ape = jTFApellido.getText();
             int dni = Integer.parseInt(jTFDni.getText());
@@ -185,9 +212,63 @@ public class JIFAgregarRev extends javax.swing.JInternalFrame {
             String mail = jTFMail.getText();
             rev = new Revendedora(nom, ape, dni, tel, mail);
             revdta.agregarRevendedora(rev);
+            JOptionPane.showMessageDialog(this, "Revendedora Guardada con éxito.");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Revendedora no guardada, DNI y Apellido obligatorio");
         }
         limpiar();
     }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jTFNombKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNombKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if(Character.isDigit(validar)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+        }
+    }//GEN-LAST:event_jTFNombKeyTyped
+
+    private void jTFApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFApellidoKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if(Character.isDigit(validar)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+        }
+    }//GEN-LAST:event_jTFApellidoKeyTyped
+
+    private void jTFDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFDniKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if(!(Character.isDigit(validar)) && validar != 8){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo números");
+        }  
+    }//GEN-LAST:event_jTFDniKeyTyped
+
+    private void jTFTelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTelKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if(!(Character.isDigit(validar)) && validar != 8){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo números");
+        }  
+    }//GEN-LAST:event_jTFTelKeyTyped
+
+    private void jTFMailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFMailKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if(validar == 32){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se permiten espacios en el mail");
+        }
+    }//GEN-LAST:event_jTFMailKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
