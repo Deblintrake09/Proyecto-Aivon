@@ -112,10 +112,13 @@ public class Producto {
         this.anulado = anulado;
     }
     
-    @Override
+    /*@Override
     public String toString() {
         return "ID. Producto: " + idProducto + ". Codigo: " + codigo + ". Nombre:" + nombre + ". Uso: " + uso + ". Tamaño: " + tamaño + ". Precio costo: " + precioCosto + ". Precio venta:" + precioVenta + ". Cant. Estrellas=" + cantEstrellas + ". Anulado= "+anulado;
+    }*/
+    @Override
+    public String toString() {
+        return nombre;
     }
-
     
 }

@@ -34,7 +34,7 @@ public class Ventana extends javax.swing.JFrame {
         jMPedido = new javax.swing.JMenu();
         jMenuFormPedido = new javax.swing.JMenuItem();
         jmiListarPedidoPorCampaña = new javax.swing.JMenuItem();
-        jMenuRenglon = new javax.swing.JMenu();
+        jMenuListRev = new javax.swing.JMenuItem();
         jMCampaña = new javax.swing.JMenu();
         jMFormCamp = new javax.swing.JMenuItem();
         jMListarCamp = new javax.swing.JMenuItem();
@@ -164,11 +164,16 @@ public class Ventana extends javax.swing.JFrame {
         });
         jMPedido.add(jmiListarPedidoPorCampaña);
 
-        jMenuBar1.add(jMPedido);
+        jMenuListRev.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jMenuListRev.setText("Listar Por Revendedora");
+        jMenuListRev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuListRevActionPerformed(evt);
+            }
+        });
+        jMPedido.add(jMenuListRev);
 
-        jMenuRenglon.setText("Renglon");
-        jMenuRenglon.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jMenuBar1.add(jMenuRenglon);
+        jMenuBar1.add(jMPedido);
 
         jMCampaña.setText("Campaña");
         jMCampaña.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -358,15 +363,12 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jMModificarCampActionPerformed
 
     private void jMenuFormPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFormPedidoActionPerformed
-
         escritorio.removeAll();
         escritorio.repaint();
-        JIFListarPedidosRevendedora modCamp = new JIFListarPedidosRevendedora();
-        modCamp.setVisible(true);
-        modCamp.setBounds(500, 150, 820, 420);
-        escritorio.add(modCamp);
-        escritorio.moveToFront(modCamp);
-        
+        JIFIniciarPedido inipd = new JIFIniciarPedido();
+        inipd.setVisible(true);
+        escritorio.add(inipd);
+        escritorio.moveToFront(inipd);
     }//GEN-LAST:event_jMenuFormPedidoActionPerformed
 
     private void jmiListarPedidoPorCampañaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarPedidoPorCampañaActionPerformed
@@ -378,6 +380,17 @@ public class Ventana extends javax.swing.JFrame {
         escritorio.add(modCamp);
         escritorio.moveToFront(modCamp);
     }//GEN-LAST:event_jmiListarPedidoPorCampañaActionPerformed
+
+    private void jMenuListRevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListRevActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        JIFListarPedidosRevendedora modCamp = new JIFListarPedidosRevendedora();
+        modCamp.setVisible(true);
+        modCamp.setBounds(500, 150, 820, 420);
+        escritorio.add(modCamp);
+        escritorio.moveToFront(modCamp);
+    }//GEN-LAST:event_jMenuListRevActionPerformed
 
     /**
      * @param args the command line arguments
@@ -436,9 +449,9 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuBuscar;
     private javax.swing.JMenuItem jMenuFormPedido;
     private javax.swing.JMenuItem jMenuFormProd;
+    private javax.swing.JMenuItem jMenuListRev;
     private javax.swing.JMenuItem jMenuListarRev;
     private javax.swing.JMenuItem jMenuNivel;
-    private javax.swing.JMenu jMenuRenglon;
     private javax.swing.JMenuItem jmListarProductos;
     private javax.swing.JMenuItem jmModifProd;
     private javax.swing.JMenuItem jmiListarPedidoPorCampaña;
