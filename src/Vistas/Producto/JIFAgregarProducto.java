@@ -83,6 +83,20 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Precio Costo");
 
+        jTFCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFCodigoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFCodigoKeyTyped(evt);
+            }
+        });
+
+        jTFNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTFNombreMouseClicked(evt);
+            }
+        });
         jTFNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFNombreActionPerformed(evt);
@@ -92,6 +106,36 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTFNombreKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFNombreKeyTyped(evt);
+            }
+        });
+
+        jTFUso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFUsoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFUsoKeyTyped(evt);
+            }
+        });
+
+        jTFTamaño.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFTamañoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFTamañoKeyTyped(evt);
+            }
+        });
+
+        jTFCosto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFCostoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFCostoKeyTyped(evt);
+            }
         });
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -99,6 +143,15 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel8.setText("Estrellas");
+
+        jtfVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfVentaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfVentaKeyTyped(evt);
+            }
+        });
 
         JspinEstrellas.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
@@ -207,7 +260,10 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         // TODO add your handling code here:
-        if(jTFNombre.getText()!=null&&jTFCodigo.getText()!=null)
+     try   
+     {
+         if(jTFNombre.getText()!=null && jTFCodigo.getText()!=null && jTFUso.getText()!=null 
+                && jTFTamaño.getText()!=null && jTFCosto.getText()!=null && jtfVenta.getText()!=null)
         {
             String codigo = jTFCodigo.getText();
             String nombre= jTFNombre.getText();
@@ -218,21 +274,167 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
             int estrellas = (Integer)JspinEstrellas.getValue();
             prod=new Producto(codigo,nombre,uso,tam,costo,venta,estrellas);
             pData.agregarProducto(prod);
+            JOptionPane.showMessageDialog(null,"Se ha guardado el producto con exito!");
+            limpiar();
         }
-        limpiar();
+     }
+     catch(Exception e)
+     {
+         JOptionPane.showMessageDialog(null,"No se ha guardado");
+     }
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jTFNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNombreKeyReleased
-        if(jTFNombre.getText()!=null&&jTFCodigo.getText()!=null)
+        chequeo1();
+        if((!jTFNombre.getText().isEmpty()) && (!jTFCodigo.getText().isEmpty()) && (!jTFUso.getText().isEmpty())
+                && (!jTFTamaño.getText().isEmpty()) && (!jTFCosto.getText().isEmpty()) && (!jtfVenta.getText().isEmpty()))
         {
             jBGuardar.setEnabled(true);
         }
+        else
+            jBGuardar.setEnabled(false);
     }//GEN-LAST:event_jTFNombreKeyReleased
 
     private void jTFNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFNombreActionPerformed
 
+    private void jTFCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCodigoKeyReleased
+        chequeo1();
+        if((!jTFNombre.getText().isEmpty()) && (!jTFCodigo.getText().isEmpty()) && (!jTFUso.getText().isEmpty())
+                && (!jTFTamaño.getText().isEmpty()) && (!jTFCosto.getText().isEmpty()) && (!jtfVenta.getText().isEmpty()))
+        {
+            jBGuardar.setEnabled(true);
+        }
+        else
+            jBGuardar.setEnabled(false);
+    }//GEN-LAST:event_jTFCodigoKeyReleased
+
+    private void jTFUsoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsoKeyReleased
+        chequeo1();
+        if((!jTFNombre.getText().isEmpty()) && (!jTFCodigo.getText().isEmpty()) && (!jTFUso.getText().isEmpty())
+                && (!jTFTamaño.getText().isEmpty()) && (!jTFCosto.getText().isEmpty()) && (!jtfVenta.getText().isEmpty()))
+        {
+            jBGuardar.setEnabled(true);
+        }
+        else
+            jBGuardar.setEnabled(false);
+    }//GEN-LAST:event_jTFUsoKeyReleased
+
+    private void jTFTamañoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTamañoKeyReleased
+        chequeo1();
+        if((!jTFNombre.getText().isEmpty()) && (!jTFCodigo.getText().isEmpty()) && (!jTFUso.getText().isEmpty())
+                && (!jTFTamaño.getText().isEmpty()) && (!jTFCosto.getText().isEmpty()) && (!jtfVenta.getText().isEmpty()))
+        {
+            jBGuardar.setEnabled(true);
+        }
+        else
+            jBGuardar.setEnabled(false);
+    }//GEN-LAST:event_jTFTamañoKeyReleased
+
+    private void jTFCostoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCostoKeyReleased
+        chequeo1();
+        if((!jTFNombre.getText().isEmpty()) && (!jTFCodigo.getText().isEmpty()) && (!jTFUso.getText().isEmpty())
+                && (!jTFTamaño.getText().isEmpty()) && (!jTFCosto.getText().isEmpty()) && (!jtfVenta.getText().isEmpty()))
+        {
+            jBGuardar.setEnabled(true);
+        }
+        else
+            jBGuardar.setEnabled(false);
+    }//GEN-LAST:event_jTFCostoKeyReleased
+
+    private void jtfVentaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfVentaKeyReleased
+        chequeo1(); 
+        if((!jTFNombre.getText().isEmpty()) && (!jTFCodigo.getText().isEmpty()) && (!jTFUso.getText().isEmpty())
+                && (!jTFTamaño.getText().isEmpty()) && (!jTFCosto.getText().isEmpty()) && (!jtfVenta.getText().isEmpty()))
+        {
+            jBGuardar.setEnabled(true);
+        }
+        else
+            jBGuardar.setEnabled(false);
+    }//GEN-LAST:event_jtfVentaKeyReleased
+
+    private void jTFNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFNombreMouseClicked
+    
+    }//GEN-LAST:event_jTFNombreMouseClicked
+
+    private void jTFNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNombreKeyTyped
+        char c = evt.getKeyChar();
+        String letra = String.valueOf(c);
+        
+        
+        if(!letra.matches("[A-Za-zÑñ ]*$") && c != 8)
+        {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+        }
+//        else{JOptionPane.showMessageDialog(this, "Ingrese solo letras");}
+    }//GEN-LAST:event_jTFNombreKeyTyped
+
+    private void jTFCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCostoKeyTyped
+         char validar = evt.getKeyChar();
+        if(!(Character.isDigit(validar)) && validar != 8 && validar !=46){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo números");
+        }
+    }//GEN-LAST:event_jTFCostoKeyTyped
+
+    private void jtfVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfVentaKeyTyped
+         char validar = evt.getKeyChar();
+        if(!(Character.isDigit(validar)) && validar != 8 && validar !=46){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo números");
+        }
+    }//GEN-LAST:event_jtfVentaKeyTyped
+
+    private void jTFTamañoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTamañoKeyTyped
+         char validar = evt.getKeyChar();
+        if(!(Character.isDigit(validar)) && validar != 8 && validar !=46){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo números");
+        }
+    }//GEN-LAST:event_jTFTamañoKeyTyped
+
+    private void jTFUsoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsoKeyTyped
+        char c = evt.getKeyChar();
+        String letra = String.valueOf(c);
+        
+        
+        if(!letra.matches("[A-Za-zñÑ ]*$") && c != 8)
+        {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+        }
+    }//GEN-LAST:event_jTFUsoKeyTyped
+
+    private void jTFCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCodigoKeyTyped
+        char c = evt.getKeyChar();
+        String letra = String.valueOf(c);
+        
+        
+        if(!letra.matches("[A-Za-z0-9-/Ññ ]*$") && c != 8)
+        {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo admite los signos: ( / - ) letras y números");
+        }
+    }//GEN-LAST:event_jTFCodigoKeyTyped
+    
+    private void chequeo1()
+    {
+        if((!jTFNombre.getText().isEmpty()) && (!jTFCodigo.getText().isEmpty()) && (!jTFUso.getText().isEmpty())
+                && (!jTFTamaño.getText().isEmpty()) && (!jTFCosto.getText().isEmpty()) && (!jtfVenta.getText().isEmpty()))
+        {
+            jBGuardar.setEnabled(true);
+        }
+        else
+            jBGuardar.setEnabled(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner JspinEstrellas;

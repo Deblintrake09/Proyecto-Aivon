@@ -95,11 +95,35 @@ public class JIFModificarProductos extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTFCodigoKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFCodigoKeyTyped(evt);
+            }
         });
 
         jTFNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTFNombreKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFNombreKeyTyped(evt);
+            }
+        });
+
+        jTFUso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFUsoKeyTyped(evt);
+            }
+        });
+
+        jTFTamaño.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFTamañoKeyTyped(evt);
+            }
+        });
+
+        jTFCosto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFCostoKeyTyped(evt);
             }
         });
 
@@ -108,6 +132,12 @@ public class JIFModificarProductos extends javax.swing.JInternalFrame {
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel8.setText("Estrellas");
+
+        jtfVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfVentaKeyTyped(evt);
+            }
+        });
 
         JspinEstrellas.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
@@ -244,7 +274,13 @@ public class JIFModificarProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
-        // TODO add your handling code here:
+     
+      if(jBCambiarEstado.getText()=="Reactivar")
+      {
+          JOptionPane.showMessageDialog(this, "No se puede modificar un Producto anulado");
+      }
+      if(jBCambiarEstado.getText()=="Anular Producto")
+      {
         if(jTFNombre.getText()!=null&&jTFCodigo.getText()!=null)
         {
             String codigo = jTFCodigo.getText();
@@ -258,6 +294,7 @@ public class JIFModificarProductos extends javax.swing.JInternalFrame {
             pData.modificarProducto(prodMod);
         }
         limpiar();
+      } 
     }//GEN-LAST:event_jBModificarActionPerformed
 
     private void jTFNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNombreKeyReleased
@@ -307,6 +344,72 @@ public class JIFModificarProductos extends javax.swing.JInternalFrame {
             jBBuscar.setEnabled(true);
         }
     }//GEN-LAST:event_jTFCodigoKeyReleased
+
+    private void jTFCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCodigoKeyTyped
+        char c = evt.getKeyChar();
+        String letra = String.valueOf(c);
+        
+        
+        if(!letra.matches("[A-Za-z0-9-/Ññ ]*$") && c != 8)
+        {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo admite los signos: ( / - ) letras y números");
+        }
+    }//GEN-LAST:event_jTFCodigoKeyTyped
+
+    private void jTFNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNombreKeyTyped
+        char c = evt.getKeyChar();
+        String letra = String.valueOf(c);
+        
+        
+        if(!letra.matches("[A-Za-zÑñ ]*$") && c != 8)
+        {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+        }
+    }//GEN-LAST:event_jTFNombreKeyTyped
+
+    private void jTFUsoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsoKeyTyped
+        char c = evt.getKeyChar();
+        String letra = String.valueOf(c);
+        
+        
+        if(!letra.matches("[A-Za-zñÑ ]*$") && c != 8)
+        {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo letras");
+        }
+    }//GEN-LAST:event_jTFUsoKeyTyped
+
+    private void jTFTamañoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTamañoKeyTyped
+        char validar = evt.getKeyChar();
+        if(!(Character.isDigit(validar)) && validar != 8 && validar !=46){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo números");
+        }
+    }//GEN-LAST:event_jTFTamañoKeyTyped
+
+    private void jTFCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCostoKeyTyped
+        char validar = evt.getKeyChar();
+        if(!(Character.isDigit(validar)) && validar != 8 && validar !=46){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo números");
+        }
+    }//GEN-LAST:event_jTFCostoKeyTyped
+
+    private void jtfVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfVentaKeyTyped
+        char validar = evt.getKeyChar();
+        if(!(Character.isDigit(validar)) && validar != 8 && validar !=46){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Ingrese solo números");
+        }
+    }//GEN-LAST:event_jtfVentaKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

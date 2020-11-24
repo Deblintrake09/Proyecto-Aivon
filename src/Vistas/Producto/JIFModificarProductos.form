@@ -235,18 +235,29 @@
     <Component class="javax.swing.JTextField" name="jTFCodigo">
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFCodigoKeyReleased"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFCodigoKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFNombre">
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFNombreKeyReleased"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFNombreKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFUso">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFUsoKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFTama&#xf1;o">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFTama&#xf1;oKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFCosto">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFCostoKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
@@ -265,6 +276,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtfVenta">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfVentaKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSpinner" name="JspinEstrellas">
       <Properties>
