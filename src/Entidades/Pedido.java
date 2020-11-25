@@ -101,8 +101,8 @@ public class Pedido {
         calcularTotalCosto();
         actualizarCajas();
     }
-    public void eliminarRenglon(RenglonPedido renglon){
-        renglones.get(renglon.getId_renglon()).setAnulado(false);
+    public void eliminarRenglon(int indice){
+        renglones.remove(indice);
         calcularTotalCosto();
         actualizarCajas();
     }

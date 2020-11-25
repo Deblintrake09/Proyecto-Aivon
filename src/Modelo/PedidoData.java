@@ -41,7 +41,7 @@ public class PedidoData
                 ps.setInt(4, pedido.getRevendedora().getDni());
                 ps.setInt(5, pedido.getCampaña().getNroCampaña());
                 ps.setInt(6, pedido.getCantCajas());
-                ps.setFloat(7, pedido.getTotalCosto());
+                ps.setFloat(7, pedido.calcularTotalCosto());
                 ps.setBoolean(8, pedido.isAnulado());
                 ps.executeUpdate();
                 ResultSet rs=ps.getGeneratedKeys();
@@ -95,7 +95,7 @@ public class PedidoData
             else
                 ps.setDate(3, Date.valueOf(pedido.getFechaEntrega()));
             ps.setInt(4, pedido.getCantCajas());
-            ps.setFloat(5, pedido.getTotalCosto());
+            ps.setFloat(5, pedido.calcularTotalCosto());
             ps.setInt(6, pedido.getIdPedido());
             ps.executeUpdate();
             ResultSet rs=ps.getGeneratedKeys();
@@ -106,7 +106,7 @@ public class PedidoData
                for(int i=0;i<pedido.getRenglones().size();i++)
                {   
                    pedido.getRenglones().get(i).setId_pedido(pedido.getIdPedido());
-                   if(pedido.getRenglones().get(i).getId_renglon()==0)
+                   if(pedido.getRenglones().get(i).getId_renglon()<0)
                    {
                        rd.agregarRenglon(pedido.getRenglones().get(i));
                    }

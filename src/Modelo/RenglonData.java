@@ -115,18 +115,17 @@ public class RenglonData {
         }
     }
     
-    public void cambiarEstado(RenglonPedido reng, boolean anular)
+    public void BorrarRenglon(RenglonPedido reng)
     {
-    String query = "UPDATE renglon_pedido SET ANULADO = ? WHERE ID_RENGLON = ?";
+    String query = "DELETE FROM renglon_pedido WHERE ID_RENGLON = ?";
         try
         {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setBoolean(1,anular);
-            ps.setInt(2, reng.getId_renglon());
+            ps.setInt(1, reng.getId_renglon());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()){
-                 JOptionPane.showMessageDialog(null, "No pudo se dar de baja");
+                 JOptionPane.showMessageDialog(null, "No pudo se dar de baja/No se encontro el renglón");
              }
              ps.close();
          }

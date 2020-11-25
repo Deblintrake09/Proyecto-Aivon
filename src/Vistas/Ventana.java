@@ -33,6 +33,7 @@ public class Ventana extends javax.swing.JFrame {
         jmListarProductos = new javax.swing.JMenuItem();
         jMPedido = new javax.swing.JMenu();
         jMenuFormPedido = new javax.swing.JMenuItem();
+        jmModificarPedido = new javax.swing.JMenuItem();
         jmiListarPedidoPorCampaña = new javax.swing.JMenuItem();
         jMenuListRev = new javax.swing.JMenuItem();
         jMCampaña = new javax.swing.JMenu();
@@ -147,7 +148,7 @@ public class Ventana extends javax.swing.JFrame {
         jMPedido.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jMenuFormPedido.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jMenuFormPedido.setText("Formulario");
+        jMenuFormPedido.setText("Iniciar Pedido");
         jMenuFormPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuFormPedidoActionPerformed(evt);
@@ -155,7 +156,16 @@ public class Ventana extends javax.swing.JFrame {
         });
         jMPedido.add(jMenuFormPedido);
 
-        jmiListarPedidoPorCampaña.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jmModificarPedido.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jmModificarPedido.setText("Modificar Pedido");
+        jmModificarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmModificarPedidoActionPerformed(evt);
+            }
+        });
+        jMPedido.add(jmModificarPedido);
+
+        jmiListarPedidoPorCampaña.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jmiListarPedidoPorCampaña.setText("Listar Por Campaña");
         jmiListarPedidoPorCampaña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -393,6 +403,15 @@ public class Ventana extends javax.swing.JFrame {
         escritorio.moveToFront(modCamp);
     }//GEN-LAST:event_jMenuListRevActionPerformed
 
+    private void jmModificarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmModificarPedidoActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        JIFModificarPedido inipd = new JIFModificarPedido();
+        inipd.setVisible(true);
+        escritorio.add(inipd);
+        escritorio.moveToFront(inipd);
+    }//GEN-LAST:event_jmModificarPedidoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -455,6 +474,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuNivel;
     private javax.swing.JMenuItem jmListarProductos;
     private javax.swing.JMenuItem jmModifProd;
+    private javax.swing.JMenuItem jmModificarPedido;
     private javax.swing.JMenuItem jmiListarPedidoPorCampaña;
     // End of variables declaration//GEN-END:variables
 }
