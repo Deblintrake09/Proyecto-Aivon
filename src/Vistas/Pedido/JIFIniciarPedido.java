@@ -2,10 +2,14 @@ package Vistas.Pedido;
 
 import Entidades.*;
 import Modelo.*;
+//import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -40,12 +44,13 @@ public class JIFIniciarPedido extends javax.swing.JInternalFrame {
                 return false;
             }
         };
+        fechaActual();
         armarCabecera();
         cargarProd();
         campActual();
         cargarRev();
         cargarFiltroSelector();
-        jDFecha.getDateEditor().setEnabled(false);
+        jDFecha.setEnabled(false);
         jCBProduc.setEnabled(false);
         jBConfirmarPedido.setEnabled(false);
         jBCargarRenglon.setEnabled(false);
@@ -484,10 +489,24 @@ public class JIFIniciarPedido extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
     private void campActual(){
         int cam;
+        //SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha = fecha();
+        LocalDate dT = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         ArrayList<Campaña> listCamp = campdta.obtenerCampañas();
-        cam = listCamp.size();
-        jLNumCamp.setText(String.valueOf(cam));
+        for(int i =0; i<listCamp.size(); i++){
+            if(listCamp.get(i).getFechaInicio().isBefore(dT) && listCamp.get(i).getFechaFin().isAfter(dT)){
+                cam= listCamp.get(i).getNroCampaña();
+                jLNumCamp.setText(String.valueOf(cam));
+            }
+        }
     }
+    
+    private String fecha(){
+        Date fecha = new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        return formato.format(fecha);
+    }
+    
     private void cargarRev(){
         ArrayList<Revendedora> listrev = revdta.mostrarRevendedoras();
         for(Revendedora r: listrev){
@@ -547,5 +566,8 @@ public class JIFIniciarPedido extends javax.swing.JInternalFrame {
         }
     }
 
-    
+    private void fechaActual(){
+        Calendar c2 = new GregorianCalendar();
+        jDFecha.setCalendar(c2);
+    }
 }
