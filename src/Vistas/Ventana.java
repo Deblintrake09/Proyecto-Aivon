@@ -157,7 +157,7 @@ public class Ventana extends javax.swing.JFrame {
         jMPedido.add(jMenuFormPedido);
 
         jmModificarPedido.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jmModificarPedido.setText("Modificar Pedido");
+        jmModificarPedido.setText("Ver y Modificar Pedido");
         jmModificarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmModificarPedidoActionPerformed(evt);
@@ -406,10 +406,11 @@ public class Ventana extends javax.swing.JFrame {
     private void jmModificarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmModificarPedidoActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        JIFModificarPedido inipd = new JIFModificarPedido();
-        inipd.setVisible(true);
-        escritorio.add(inipd);
-        escritorio.moveToFront(inipd);
+        JIFModificarPedido modPed = new JIFModificarPedido();
+        modPed.setVisible(true);
+        modPed.setBounds(500, 150, 800, 600);
+        escritorio.add(modPed);
+        escritorio.moveToFront(modPed);
     }//GEN-LAST:event_jmModificarPedidoActionPerformed
 
     /**

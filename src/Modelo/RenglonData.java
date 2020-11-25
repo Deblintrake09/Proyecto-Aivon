@@ -103,7 +103,7 @@ public class RenglonData {
             ResultSet rs = ps.getGeneratedKeys();
             if(!rs.next())
             {
-                JOptionPane.showMessageDialog(null, "El Renglón ha sido actualizado con éxito");
+                //JOptionPane.showMessageDialog(null, "El Renglón ha sido actualizado con éxito");
             }
             else{
                 JOptionPane.showMessageDialog(null, "No se pudo modificar el Renglón o no existe ese Id");

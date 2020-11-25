@@ -33,7 +33,7 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
         pdta = new PedidoData(con);
         prodta = new ProductoData(con);
         rdta = new RenglonData(con);
-        pedido = new Pedido();
+        pedido = null;
         eliminados=new ArrayList();
         estado="";
         modelo = new DefaultTableModel()
@@ -92,10 +92,14 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
         jBModifRenglon = new javax.swing.JButton();
         jBEntrega = new javax.swing.JButton();
         jBPagar = new javax.swing.JButton();
+        jlbMin = new javax.swing.JLabel();
+        jlbMax = new javax.swing.JLabel();
+        jlbInicioCamp = new javax.swing.JLabel();
+        jlbFinCamp = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Modificar un Pedido");
+        jLabel1.setText("Ver / Modificar un Pedido");
 
         jBSalir.setBackground(new java.awt.Color(153, 0, 0));
         jBSalir.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -159,7 +163,7 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
             }
         });
 
-        jBConfirmarPedido.setText("Confirmar Cambios Pedido");
+        jBConfirmarPedido.setText("Confirmar Pedido");
         jBConfirmarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBConfirmarPedidoActionPerformed(evt);
@@ -232,6 +236,18 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
             }
         });
 
+        jlbMin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jlbMin.setText("Monto Min. $");
+
+        jlbMax.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jlbMax.setText("Monto Máx. $");
+
+        jlbInicioCamp.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jlbInicioCamp.setText("Inicio Camp:");
+
+        jlbFinCamp.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jlbFinCamp.setText("Fin Camp:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -251,7 +267,7 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(jCBCampaña, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel8)
@@ -270,15 +286,21 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jSCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(46, 46, 46))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jCBRev, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBuscar)
-                                .addGap(53, 53, 53)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jCBRev, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jBuscar)
+                                        .addGap(53, 53, 53))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jlbInicioCamp)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jlbFinCamp)
+                                        .addGap(101, 101, 101)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jlbEstado)
                                     .addGroup(layout.createSequentialGroup()
@@ -293,31 +315,34 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jBPagar)
-                                    .addComponent(jBEntrega))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jBEntrega)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(197, 197, 197)
-                                .addComponent(jBSalir)))))
+                                .addComponent(jBSalir))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbAnular)
+                                .addGap(25, 25, 25)
+                                .addComponent(jBConfirmarPedido))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBCargarRenglon)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBModifRenglon)
+                                .addGap(4, 4, 4)
+                                .addComponent(jBorrarRenglon)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlbMin)
+                            .addComponent(jlbEstrellas))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlbMax)
+                            .addComponent(jlbCosto))
+                        .addGap(63, 63, 63)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jBCargarRenglon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBModifRenglon)
-                .addGap(4, 4, 4)
-                .addComponent(jBorrarRenglon)
-                .addGap(18, 18, 18)
-                .addComponent(jlbEstrellas)
-                .addGap(59, 59, 59)
-                .addComponent(jlbCosto)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbAnular)
-                .addGap(54, 54, 54)
-                .addComponent(jBConfirmarPedido)
-                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,7 +360,6 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlbFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCBCampaña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jdFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -345,45 +369,52 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
                                 .addComponent(jBEntrega)))))
-                .addGap(9, 9, 9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jdFechaPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jBPagar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlbInicioCamp)))
+                    .addComponent(jBPagar)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jlbFinCamp)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jlbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCBProduc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCBSelectUso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcheckUso))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jBCargarRenglon)
-                            .addComponent(jlbEstrellas)
-                            .addComponent(jlbCosto)
-                            .addComponent(jBModifRenglon)
-                            .addComponent(jBorrarRenglon))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jBConfirmarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                            .addComponent(jbAnular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCBProduc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBSelectUso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcheckUso))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBCargarRenglon)
+                    .addComponent(jlbEstrellas)
+                    .addComponent(jlbCosto)
+                    .addComponent(jBModifRenglon)
+                    .addComponent(jBorrarRenglon))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBConfirmarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbAnular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlbMin)
+                    .addComponent(jlbMax))
                 .addContainerGap())
         );
 
@@ -399,35 +430,39 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
-        buscarPedido();
+        CargarPedido();
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jBConfirmarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarPedidoActionPerformed
         
-        Producto produc=new Producto();
         if(modelo.getRowCount()>=1)
         {
-            for(int i=0;i<modelo.getRowCount();i++)
+            if(pedido.calcularTotalCosto()>=pedido.getCampaña().getMontoMinimo())
             {
-                int cant = Integer.parseInt(modelo.getValueAt(i, 2).toString());
-                int caja = Integer.parseInt(modelo.getValueAt(i, 3).toString());
-                pedido.getRenglones().get(i).setCantidad(cant);
-                pedido.getRenglones().get(i).setNro_caja(caja);
-            }
-            int confirmar = JOptionPane.showConfirmDialog(this, "Confirmar Pedido", "Desea Confirmar éste Pedido?", JOptionPane.OK_OPTION);
-            if(confirmar ==0)
-            {
-                if(!eliminados.isEmpty())
+                for(int i=0;i<modelo.getRowCount();i++)
                 {
-                    for(int i=0;i<eliminados.size();i++)
-                    {
-                        rdta.BorrarRenglon(eliminados.get(i));
-                    }
+                    int cant = Integer.parseInt(modelo.getValueAt(i, 2).toString());
+                    int caja = Integer.parseInt(modelo.getValueAt(i, 3).toString());
+                    pedido.getRenglones().get(i).setCantidad(cant);
+                    pedido.getRenglones().get(i).setNro_caja(caja);
                 }
-                pdta.actualizarPedido(pedido);
-                
-                pedido.imprimirPedido();
+                int confirmar = JOptionPane.showConfirmDialog(this, "Confirmar Pedido", "Desea Confirmar éste Pedido?", JOptionPane.OK_OPTION);
+                if(confirmar ==0)
+                {
+                    if(!eliminados.isEmpty())
+                    {
+                        for(int i=0;i<eliminados.size();i++)
+                        {
+                            rdta.BorrarRenglon(eliminados.get(i));
+                        }
+                    }
+                    pdta.actualizarPedido(pedido);
+                    JOptionPane.showMessageDialog(this, "Pedido Actualizado con éxito");
+                }
             }
+            else{
+                JOptionPane.showMessageDialog(this, "Para Confirmar el pedido debe alcanzar el monto mínimo\n Monto minimo:" + pedido.getCampaña().getMontoMinimo());
+            }            
         }
         else{
             JOptionPane.showMessageDialog(this, "Agregue algun producto antes de confirmar el pedido");
@@ -448,8 +483,7 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
 
                 modelo.addRow(new Object[]{prod.getCodigo(), prod.getNombre(), cant,
                 caja, prod.getPrecioCosto(), prod.getPrecioVenta(), prod.getCantEstrellas()});
-                jlbCosto.setText("Costo Total $"+pedido.calcularTotalCosto());
-                jlbEstrellas.setText("Estrellas Totales: "+pedido.mostrarEstrellasTotales());
+                configurarLabelsMontos(pedido);
                 jBorrarRenglon.setEnabled(true);   
             }else{ JOptionPane.showMessageDialog(this, "Debe asignar un número de caja superior a 0");}
         }else{
@@ -471,8 +505,7 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
             }
             pedido.eliminarRenglon(fila);
             modelo.removeRow(fila);
-            jlbCosto.setText("Costo Total $"+pedido.calcularTotalCosto());
-            jlbEstrellas.setText("Estrellas Totales: "+pedido.mostrarEstrellasTotales());
+            configurarLabelsMontos(pedido);
         }
         else{
             JOptionPane.showMessageDialog(this, "Seleccione el producto que desee eliminar del pedido");
@@ -493,7 +526,7 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
             {
                 pedido.setAnulado(!pedido.isAnulado());
                 pdta.cambiarEstado(pedido, pedido.isAnulado());
-                buscarPedido();
+                CargarPedido();
             }
         } 
         else{
@@ -515,8 +548,8 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
                     pedido.getRenglones().get(fila).setNro_caja(caja);
                     modelo.setValueAt(cant, fila, 2);
                     modelo.setValueAt(caja, fila, 3);
-                    jlbCosto.setText("Costo Total $"+pedido.calcularTotalCosto());
-                    jlbEstrellas.setText("Estrellas Totales: "+pedido.mostrarEstrellasTotales());
+                    
+                    configurarLabelsMontos(pedido);
                 }else{
                     JOptionPane.showMessageDialog(this, "Debe Asignar un N° de caja superior a 0 para el producto.");
                 }
@@ -534,21 +567,24 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
         
         if(pedido.getFechaEntrega()!=null)
         {
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-            String fecha = formato.format(jdFechaPago.getDate());
-            LocalDate fechaP = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            if(fechaP.isAfter(pedido.getFechaEntrega()))
+            if(jdFechaPago.getDate()!=null)
             {
-                int confirma = JOptionPane.showConfirmDialog(this, "Asignar Fecha de Pago", "¿Confirma que desea asignar fecha de pago a éste Pedido?", JOptionPane.OK_OPTION);
-                if(confirma ==0)
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                String fecha = formato.format(jdFechaPago.getDate());
+                LocalDate fechaP = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                if(fechaP.isAfter(pedido.getFechaEntrega()))
                 {
+                    int confirma = JOptionPane.showConfirmDialog(this, "Asignar Fecha de Pago", "¿Confirma que desea asignar fecha de pago a éste Pedido?", JOptionPane.OK_OPTION);
+                    if(confirma ==0)
+                    {
 
-                    pdta.pagarPedido(pedido, fechaP);
-                    JOptionPane.showMessageDialog(this, "Fecha de Pago Cargada con éxito");
-                    buscarPedido();
+                        pdta.pagarPedido(pedido, fechaP);
+                        JOptionPane.showMessageDialog(this, "Fecha de Pago Cargada con éxito");
+                        CargarPedido();
+                    }
+                }else {
+                JOptionPane.showMessageDialog(this, "Debe asignar una Fecha de Pago posterior a la de entrega");
                 }
-            }else {
-                    JOptionPane.showMessageDialog(this, "Debe asignar una Fecha de Pago posterior a la de entrega");
             }
         }else
         {
@@ -559,22 +595,29 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
 
     private void jBEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntregaActionPerformed
         
-        
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        String fecha = formato.format(jdFechaEntrega.getDate());
-        LocalDate fechaP = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        if (fechaP.isAfter(pedido.getFechaIngreso()))
+        Pedido pcontrol= pdta.buscarPedidoCampRev(pedido.getCampaña(), pedido.getRevendedora());
+        if(pcontrol.calcularTotalCosto()<pcontrol.getCampaña().getMontoMinimo())
         {
-            int confirma = JOptionPane.showConfirmDialog(this, "Asignar Fecha de Entrega", "¿Confirma que desea asignar fecha de entrega a éste Pedido?", JOptionPane.OK_OPTION);
-               if(confirma ==0)
+                    JOptionPane.showMessageDialog(this, "No se puede entregar un pedido con monto menor al mínimo de campaña.\n"
+                            + "Controle que todos los productos deseados esten cargados en el pedido y confirme el pedido");
+        }
+        else{
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            String fecha = formato.format(jdFechaEntrega.getDate());
+            LocalDate fechaP = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            if (fechaP.isAfter(pedido.getFechaIngreso()))
             {
+                int confirma = JOptionPane.showConfirmDialog(this, "Asignar Fecha de Entrega", "¿Confirma que desea asignar fecha de entrega a éste Pedido?", JOptionPane.OK_OPTION);
+                   if(confirma ==0)
+                {
 
-                JOptionPane.showMessageDialog(this, "Fecha de Entrega Cargada con éxito");
-                pdta.entregarPedido(pedido, fechaP);
-                buscarPedido();
+                    JOptionPane.showMessageDialog(this, "Fecha de Entrega Cargada con éxito");
+                    pdta.entregarPedido(pedido, fechaP);
+                    CargarPedido();
+                }
+            }else{
+                    JOptionPane.showMessageDialog(this, "Debe asignar una Fecha de Pago posterior a la de Ingreso");
             }
-        }else{
-                JOptionPane.showMessageDialog(this, "Debe asignar una Fecha de Pago posterior a la de Ingreso");
         }
     }//GEN-LAST:event_jBEntregaActionPerformed
 
@@ -613,6 +656,10 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlbEstado;
     private javax.swing.JLabel jlbEstrellas;
     private javax.swing.JLabel jlbFechaInicio;
+    private javax.swing.JLabel jlbFinCamp;
+    private javax.swing.JLabel jlbInicioCamp;
+    private javax.swing.JLabel jlbMax;
+    private javax.swing.JLabel jlbMin;
     // End of variables declaration//GEN-END:variables
 
     private void cargarRev(){
@@ -626,7 +673,10 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
         ArrayList<Campaña>listaCamp = campdta.obtenerCampañas();
         for(int i =0;i<listaCamp.size();i++)
         {
+            if(listaCamp.get(i).getFechaInicio().isBefore(java.time.LocalDate.now()))
+            {
             jCBCampaña.addItem(listaCamp.get(i));
+            }
         }
         jCBCampaña.setSelectedIndex(jCBCampaña.getItemCount()-1);
     }
@@ -676,6 +726,7 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
     
     private void cargarTabla(Pedido p)
     {
+        borrarFilas();
         Producto prod;
         for (int i=0;i<p.getRenglones().size();i++)
         {
@@ -714,7 +765,38 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
         jBEntrega.setEnabled(false);
         jBPagar.setEnabled(false);
         jlbEstado.setForeground(Color.black);
+        configurarLabelsMontos(pedido);
+        jlbFinCamp.setText("Fin Camp:");
+        jlbInicioCamp.setText("Inicio Camp:");
+        
     }
+    
+    private void configurarLabelsMontos(Pedido ped)
+    {
+        jlbMin.setForeground(Color.black);
+        jlbMax.setForeground(Color.black);
+        jlbMin.setText("Monto Mín. $");
+        jlbMax.setText("Monto Máx. $");
+        if(pedido!=null)
+        {
+            float costo = ped.calcularTotalCosto();
+            jlbMin.setText("Monto Mín. $"+ped.getCampaña().getMontoMinimo());
+            jlbMax.setText("Monto Máx. $"+ped.getCampaña().getMontoMaximo());
+            jlbCosto.setText("Costo Total $"+pedido.calcularTotalCosto());
+            jlbEstrellas.setText("Estrellas Totales: "+pedido.mostrarEstrellasTotales());
+            if(ped.getCampaña().getMontoMinimo()<=costo)
+            {
+                jlbMin.setForeground(Color.green);
+            }
+            else{
+                jlbMin.setForeground(Color.red);
+            }if(ped.getCampaña().getMontoMaximo()<=costo)
+            {
+                jlbMin.setForeground(Color.green);
+            }
+        }
+    }
+    
     private void configurarBotonAnular(){
         if(pedido.isAnulado())
         {
@@ -727,7 +809,7 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
             }
     }
     
-    private void buscarPedido(){
+    private void CargarPedido(){
         
         Revendedora rev = (Revendedora) jCBRev.getSelectedItem();
         Campaña camp = (Campaña)jCBCampaña.getSelectedItem();
@@ -737,66 +819,75 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
         if(pedido!=null)
         {
             String estado= pedido.devolverEstado();
-            System.out.println(estado);
             jlbFechaInicio.setText("Fecha Inicio:        "+pedido.getFechaIngreso().toString());
             jlbEstado.setText("Estado:                 "+estado);
-            
+            jlbInicioCamp.setText("Inicio Camp: "+ camp.getFechaInicio());
+            jlbFinCamp.setText("Fin Camp: "+camp.getFechaFin());
+            configurarLabelsMontos(pedido);
             configurarBotonAnular();
             jbAnular.setEnabled(true);
-            borrarFilas();
             cargarTabla(pedido);
-            switch(estado)
+            if(java.time.LocalDate.now().isAfter(camp.getFechaInicio())&&java.time.LocalDate.now().isBefore(camp.getFechaFin()))
             {
-                case ("Ingresado"):
-                    jCBProduc.setEnabled(true);
-                    jBCargarRenglon.setEnabled(true);
-                    jBorrarRenglon.setEnabled(true);
-                    jBModifRenglon.setEnabled(true);
-                    jdFechaEntrega.setEnabled(true);
-                    jdFechaPago.setEnabled(true);
-                    jCBSelectUso.setEnabled(true);
-                    jSCaja.setEnabled(true);
-                    jSCant.setEnabled(true);
-                    jBEntrega.setEnabled(true);
-                    jBPagar.setEnabled(true);
-                    jBConfirmarPedido.setEnabled(true);
-                    
-                break;
-                case ("Entregado"):
+                switch(estado)
+                {
+                    case ("Ingresado"):
+                        jCBProduc.setEnabled(true);
+                        jBCargarRenglon.setEnabled(true);
+                        jBorrarRenglon.setEnabled(true);
+                        jBModifRenglon.setEnabled(true);
+                        jdFechaEntrega.setEnabled(true);
+                        jdFechaPago.setEnabled(true);
+                        jCBSelectUso.setEnabled(true);
+                        jSCaja.setEnabled(true);
+                        jSCant.setEnabled(true);
+                        jBEntrega.setEnabled(true);
+                        jBPagar.setEnabled(true);
+                        jBConfirmarPedido.setEnabled(true);
 
-                    jdFechaEntrega.setDate(Date.valueOf(pedido.getFechaEntrega()));
-                    jdFechaEntrega.setEnabled(false);
-                    jdFechaPago.setEnabled(true);
-                    jBPagar.setEnabled(true);
-                break;
-                case ("Vencido"):
-                    jdFechaEntrega.setDate(Date.valueOf(pedido.getFechaEntrega()));
-                    jdFechaEntrega.setEnabled(false);
-                    jdFechaPago.setEnabled(true);
-                    jBPagar.setEnabled(true);
-                    jlbEstado.setForeground(Color.red);
-                break;
-                case ("Pagado"):
-                    jdFechaEntrega.setDate(Date.valueOf(pedido.getFechaEntrega()));
-                    jdFechaEntrega.setEnabled(false);
-                    jdFechaPago.setDate(Date.valueOf(pedido.getFechaPago()));
-                    jdFechaPago.setEnabled(false);
-                break;
-                case ("Anulado"):
-                    if(pedido.getFechaEntrega()!=null)
-                    {
-                    jdFechaEntrega.setDate(Date.valueOf(pedido.getFechaEntrega()));
-                    jdFechaEntrega.setEnabled(false);
-                    }else{
-                    }
-                    if(pedido.getFechaPago()!=null)
-                    {
-                    jdFechaPago.setDate(Date.valueOf(pedido.getFechaPago()));
-                    jdFechaPago.setEnabled(false);
-                    }
-                    jbAnular.setText("Reactivar");
-                    jbAnular.setBackground(Color.green);
-                    break;                                
+                    break;
+                    case ("Entregado"):
+
+                        jdFechaEntrega.setDate(Date.valueOf(pedido.getFechaEntrega()));
+                        jdFechaEntrega.setEnabled(false);
+                        jdFechaPago.setEnabled(true);
+                        jBPagar.setEnabled(true);
+                    break;
+                    case ("Vencido"):
+                        jdFechaEntrega.setDate(Date.valueOf(pedido.getFechaEntrega()));
+                        jdFechaEntrega.setEnabled(false);
+                        jdFechaPago.setEnabled(true);
+                        jBPagar.setEnabled(true);
+                        jlbEstado.setForeground(Color.red);
+                    break;
+                    case ("Pagado"):
+                        jdFechaEntrega.setDate(Date.valueOf(pedido.getFechaEntrega()));
+                        jdFechaEntrega.setEnabled(false);
+                        jdFechaPago.setDate(Date.valueOf(pedido.getFechaPago()));
+                        jdFechaPago.setEnabled(false);
+                    break;
+                    case ("Anulado"):
+                        if(pedido.getFechaEntrega()!=null)
+                        {
+                        jdFechaEntrega.setDate(Date.valueOf(pedido.getFechaEntrega()));
+                        jdFechaEntrega.setEnabled(false);
+                        }else{
+                        }
+                        if(pedido.getFechaPago()!=null)
+                        {
+                        jdFechaPago.setDate(Date.valueOf(pedido.getFechaPago()));
+                        jdFechaPago.setEnabled(false);
+                        }
+                        jbAnular.setText("Reactivar");
+                        jbAnular.setBackground(Color.green);
+                        break;                                
+                }
+            }
+            else
+            {
+                configurarBotonAnular();
+                JOptionPane.showMessageDialog(this, "La Campaña para éste pedido ha terminado.\n No puedes modificar el Pedido");
+                
             }
         }
         else{
