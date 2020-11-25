@@ -243,10 +243,13 @@ public class PedidoData
                 
                 pedido.setRevendedora(rev);
                 pedido.setCampaña(camp);
-//                pedido.setRenglones(new ArrayList());
                 pedido.setCantCajas(rs.getInt(7));
                 pedido.setTotalCosto(rs.getFloat(8));
                 pedido.setAnulado(rs.getBoolean(9));
+                Conexion conex= new Conexion();
+                RenglonData rd = new RenglonData(conex);
+                pedido.setRenglones(rd.listarRenglonesXPedido(pedido.getIdPedido()));
+                conex.cerrarConexion();
             }
             ps.close();
         }

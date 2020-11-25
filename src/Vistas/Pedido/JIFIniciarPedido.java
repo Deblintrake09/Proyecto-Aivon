@@ -36,9 +36,8 @@ public class JIFIniciarPedido extends javax.swing.JInternalFrame {
         {
             @Override
             public boolean isCellEditable(int row, int column)
-            {   if(column==2|| column==3)
-                    return true;
-                return false;//This causes all cells to be not editable
+            {  
+                return false;
             }
         };
         armarCabecera();
@@ -83,6 +82,7 @@ public class JIFIniciarPedido extends javax.swing.JInternalFrame {
         jBorrarRenglon = new javax.swing.JButton();
         jlbCosto = new javax.swing.JLabel();
         jlbEstrellas = new javax.swing.JLabel();
+        jBModifRenglon = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -182,17 +182,19 @@ public class JIFIniciarPedido extends javax.swing.JInternalFrame {
         jlbEstrellas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jlbEstrellas.setText("Estrellas Totales: ");
 
+        jBModifRenglon.setText("Modificar Renglon");
+        jBModifRenglon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModifRenglonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(229, 239, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(228, 228, 228)
-                        .addComponent(jBSalir))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,6 +235,11 @@ public class JIFIniciarPedido extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jSCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(46, 46, 46))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(228, 228, 228)
+                        .addComponent(jBSalir))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -240,23 +247,22 @@ public class JIFIniciarPedido extends javax.swing.JInternalFrame {
                                 .addComponent(jBIniciar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(194, 194, 194)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBConfirmarPedido)
-                        .addGap(95, 95, 95)))
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBCargarRenglon)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBModifRenglon)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBorrarRenglon)
+                                .addGap(44, 44, 44)
+                                .addComponent(jlbEstrellas)
+                                .addGap(26, 26, 26)
+                                .addComponent(jlbCosto))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(531, 531, 531)
+                                .addComponent(jBConfirmarPedido)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jBCargarRenglon)
-                .addGap(31, 31, 31)
-                .addComponent(jBorrarRenglon)
-                .addGap(59, 59, 59)
-                .addComponent(jlbEstrellas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jlbCosto)
-                .addGap(82, 82, 82))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,16 +299,17 @@ public class JIFIniciarPedido extends javax.swing.JInternalFrame {
                     .addComponent(jCBSelectUso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcheckUso))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCargarRenglon)
                     .addComponent(jBorrarRenglon)
                     .addComponent(jlbEstrellas)
-                    .addComponent(jlbCosto))
-                .addGap(11, 11, 11)
+                    .addComponent(jlbCosto)
+                    .addComponent(jBModifRenglon))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBConfirmarPedido)
-                .addContainerGap())
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -347,8 +354,8 @@ public class JIFIniciarPedido extends javax.swing.JInternalFrame {
         {
             for(int i=0;i<modelo.getRowCount();i++)
             {
-                int cant = Integer.parseInt(jSCant.getValue().toString());
-                int caja = Integer.parseInt(jSCaja.getValue().toString());
+                int cant = Integer.parseInt(modelo.getValueAt(i, 2).toString());
+                int caja = Integer.parseInt(modelo.getValueAt(i, 3).toString());
                 pedido.getRenglones().get(i).setCantidad(cant);
                 pedido.getRenglones().get(i).setNro_caja(caja);
             }
@@ -417,11 +424,41 @@ public class JIFIniciarPedido extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBorrarRenglonActionPerformed
 
+    private void jBModifRenglonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModifRenglonActionPerformed
+        int fila = jTPedido.getSelectedRow();
+        if(fila!=-1)
+        {
+            int cant =Integer.parseInt(jSCant.getValue().toString());
+            int caja = Integer.parseInt(jSCaja.getValue().toString());
+            if(caja>0)
+            {
+                if(caja>0)
+                {
+                    pedido.getRenglones().get(fila).setCantidad(cant);
+                    pedido.getRenglones().get(fila).setNro_caja(caja);
+                    modelo.setValueAt(cant, fila, 2);
+                    modelo.setValueAt(caja, fila, 3);
+                    jlbCosto.setText("Costo Total $"+pedido.calcularTotalCosto());
+                    jlbEstrellas.setText("Estrellas Totales: "+pedido.mostrarEstrellasTotales());
+                }else{
+                    JOptionPane.showMessageDialog(this, "Debe Asignar un N° de caja superior a 0 para el producto.");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Ingrese una cantidad de producto superior a 0. \n Si no desea ingresar dicho producto borre el renglon");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Seleccione el renglon que desee modificar");
+        }
+    }//GEN-LAST:event_jBModifRenglonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCargarRenglon;
     private javax.swing.JButton jBConfirmarPedido;
     private javax.swing.JButton jBIniciar;
+    private javax.swing.JButton jBModifRenglon;
     private javax.swing.JButton jBSalir;
     private javax.swing.JButton jBorrarRenglon;
     private javax.swing.JComboBox<Producto> jCBProduc;

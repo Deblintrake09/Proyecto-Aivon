@@ -90,6 +90,40 @@ public class ProductoData {
         }
         return prod;
     }
+    public Producto buscarPorID(int ID)
+    {
+        Producto prod = null;
+        String query = "SELECT * FROM producto WHERE ID_PRODUCTO LIKE (?)";
+        try
+        {
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, ID);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())
+            {
+                prod= new Producto();
+                prod.setIdProducto(rs.getInt(1));
+                prod.setCodigo(rs.getString(2));
+                prod.setNombre(rs.getString(3));
+                prod.setUso(rs.getString(4));
+                prod.setTamaño(rs.getInt(5));
+                prod.setPrecioCosto(rs.getFloat(6));
+                prod.setPrecioVenta(rs.getFloat(7));
+                prod.setCantEstrellas(rs.getInt(8));
+                prod.setAnulado(rs.getBoolean(9));
+            }
+            else
+            {
+                 JOptionPane.showMessageDialog(null, "No se pudo encontrar el producto con código: " + ID);
+                
+            }   
+            ps.close();
+        }
+            catch (SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        return prod;
+    }
     
     public ArrayList<Producto> listarPorUSO(String uso){
         String query = "SELECT * FROM producto WHERE USO = ?";

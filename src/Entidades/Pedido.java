@@ -189,7 +189,10 @@ public class Pedido {
      }
     public String devolverEstado(){
         String st = null;
-        if(this.fechaEntrega == null){
+        if(this.isAnulado()){
+            st="Anulado";
+        }
+        else if(this.fechaEntrega == null){
             st="Ingresado";
         }
         else if(this.getFechaEntrega()!=null && this.fechaPago==null){
@@ -202,9 +205,6 @@ public class Pedido {
         else if(this.getFechaEntrega()!=null && this.fechaPago!=null){
             st="Pagado";
         }        
-        else if(this.isAnulado()==true){
-            st="Anulado";
-        }
         return st;
     }
     
