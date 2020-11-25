@@ -1,6 +1,5 @@
 package Vistas.Producto;
 
-import Vistas.Producto.*;
 import javax.swing.JOptionPane;
 import Entidades.Producto;
 import Modelo.*;
@@ -260,15 +259,15 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         // TODO add your handling code here:
-     try   
-     {
-         if(jTFNombre.getText()!=null && jTFCodigo.getText()!=null && jTFUso.getText()!=null 
-                && jTFTamaño.getText()!=null && jTFCosto.getText()!=null && jtfVenta.getText()!=null)
+
+         if(!(jTFNombre.getText().isEmpty()) && !(jTFCodigo.getText().isEmpty()) && !(jTFUso.getText().isEmpty())
+                && !(jTFTamaño.getText().isEmpty()) && !(jTFCosto.getText().isEmpty()) && !(jtfVenta.getText().isEmpty()))
         {
             String codigo = jTFCodigo.getText();
             String nombre= jTFNombre.getText();
             String uso=jTFUso.getText();
             int tam= Integer.parseInt(jTFTamaño.getText());
+            try{
             float costo=Float.parseFloat(jTFCosto.getText());
             float venta=Float.parseFloat(jtfVenta.getText());
             int estrellas = (Integer)JspinEstrellas.getValue();
@@ -276,18 +275,20 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
             pData.agregarProducto(prod);
             JOptionPane.showMessageDialog(null,"Se ha guardado el producto con exito!");
             limpiar();
+            }
+            catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(this, "El costo contiene más de un punto", "Warning", JOptionPane.WARNING_MESSAGE);
+           }
         }
-     }
-     catch(Exception e)
-     {
-         JOptionPane.showMessageDialog(null,"No se ha guardado");
-     }
+         else{
+             JOptionPane.showMessageDialog(this, "Hay campos vacíos!", "Warning" ,JOptionPane.WARNING_MESSAGE);
+         }
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jTFNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNombreKeyReleased
-        chequeo1();
-        if((!jTFNombre.getText().isEmpty()) && (!jTFCodigo.getText().isEmpty()) && (!jTFUso.getText().isEmpty())
-                && (!jTFTamaño.getText().isEmpty()) && (!jTFCosto.getText().isEmpty()) && (!jtfVenta.getText().isEmpty()))
+
+        if(!(jTFNombre.getText().isEmpty()) && !(jTFCodigo.getText().isEmpty()) && !(jTFUso.getText().isEmpty())
+                && !(jTFTamaño.getText().isEmpty()) && !(jTFCosto.getText().isEmpty()) && !(jtfVenta.getText().isEmpty()))
         {
             jBGuardar.setEnabled(true);
         }
@@ -300,9 +301,9 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTFNombreActionPerformed
 
     private void jTFCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCodigoKeyReleased
-        chequeo1();
-        if((!jTFNombre.getText().isEmpty()) && (!jTFCodigo.getText().isEmpty()) && (!jTFUso.getText().isEmpty())
-                && (!jTFTamaño.getText().isEmpty()) && (!jTFCosto.getText().isEmpty()) && (!jtfVenta.getText().isEmpty()))
+
+        if(!(jTFNombre.getText().isEmpty()) && !(jTFCodigo.getText().isEmpty()) && !(jTFUso.getText().isEmpty())
+                && !(jTFTamaño.getText().isEmpty()) && !(jTFCosto.getText().isEmpty()) && !(jtfVenta.getText().isEmpty()))
         {
             jBGuardar.setEnabled(true);
         }
@@ -311,9 +312,9 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTFCodigoKeyReleased
 
     private void jTFUsoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsoKeyReleased
-        chequeo1();
-        if((!jTFNombre.getText().isEmpty()) && (!jTFCodigo.getText().isEmpty()) && (!jTFUso.getText().isEmpty())
-                && (!jTFTamaño.getText().isEmpty()) && (!jTFCosto.getText().isEmpty()) && (!jtfVenta.getText().isEmpty()))
+
+        if(!(jTFNombre.getText().isEmpty()) && !(jTFCodigo.getText().isEmpty()) && !(jTFUso.getText().isEmpty())
+                && !(jTFTamaño.getText().isEmpty()) && !(jTFCosto.getText().isEmpty()) && !(jtfVenta.getText().isEmpty()))
         {
             jBGuardar.setEnabled(true);
         }
@@ -322,9 +323,9 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTFUsoKeyReleased
 
     private void jTFTamañoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTamañoKeyReleased
-        chequeo1();
-        if((!jTFNombre.getText().isEmpty()) && (!jTFCodigo.getText().isEmpty()) && (!jTFUso.getText().isEmpty())
-                && (!jTFTamaño.getText().isEmpty()) && (!jTFCosto.getText().isEmpty()) && (!jtfVenta.getText().isEmpty()))
+
+        if(!(jTFNombre.getText().isEmpty()) && !(jTFCodigo.getText().isEmpty()) && !(jTFUso.getText().isEmpty())
+                && !(jTFTamaño.getText().isEmpty()) && !(jTFCosto.getText().isEmpty()) && !(jtfVenta.getText().isEmpty()))
         {
             jBGuardar.setEnabled(true);
         }
@@ -333,9 +334,9 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTFTamañoKeyReleased
 
     private void jTFCostoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCostoKeyReleased
-        chequeo1();
-        if((!jTFNombre.getText().isEmpty()) && (!jTFCodigo.getText().isEmpty()) && (!jTFUso.getText().isEmpty())
-                && (!jTFTamaño.getText().isEmpty()) && (!jTFCosto.getText().isEmpty()) && (!jtfVenta.getText().isEmpty()))
+
+        if(!(jTFNombre.getText().isEmpty()) && !(jTFCodigo.getText().isEmpty()) && !(jTFUso.getText().isEmpty())
+                && !(jTFTamaño.getText().isEmpty()) && !(jTFCosto.getText().isEmpty()) && !(jtfVenta.getText().isEmpty()))
         {
             jBGuardar.setEnabled(true);
         }
@@ -344,9 +345,9 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTFCostoKeyReleased
 
     private void jtfVentaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfVentaKeyReleased
-        chequeo1(); 
-        if((!jTFNombre.getText().isEmpty()) && (!jTFCodigo.getText().isEmpty()) && (!jTFUso.getText().isEmpty())
-                && (!jTFTamaño.getText().isEmpty()) && (!jTFCosto.getText().isEmpty()) && (!jtfVenta.getText().isEmpty()))
+
+        if(!(jTFNombre.getText().isEmpty()) && !(jTFCodigo.getText().isEmpty()) && !(jTFUso.getText().isEmpty())
+                && !(jTFTamaño.getText().isEmpty()) && !(jTFCosto.getText().isEmpty()) && !(jtfVenta.getText().isEmpty()))
         {
             jBGuardar.setEnabled(true);
         }
@@ -392,7 +393,7 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
 
     private void jTFTamañoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTamañoKeyTyped
          char validar = evt.getKeyChar();
-        if(!(Character.isDigit(validar)) && validar != 8 && validar !=46){
+        if(!(Character.isDigit(validar)) && validar != 8){
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(this, "Ingrese solo números");
@@ -425,7 +426,7 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTFCodigoKeyTyped
     
-    private void chequeo1()
+   /* private void chequeo1()
     {
         if((!jTFNombre.getText().isEmpty()) && (!jTFCodigo.getText().isEmpty()) && (!jTFUso.getText().isEmpty())
                 && (!jTFTamaño.getText().isEmpty()) && (!jTFCosto.getText().isEmpty()) && (!jtfVenta.getText().isEmpty()))
@@ -434,7 +435,7 @@ public class JIFAgregarProducto extends javax.swing.JInternalFrame {
         }
         else
             jBGuardar.setEnabled(false);
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner JspinEstrellas;

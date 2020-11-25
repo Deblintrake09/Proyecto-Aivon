@@ -1,6 +1,5 @@
 package Vistas.Producto;
 
-import Vistas.Producto.*;
 import javax.swing.JOptionPane;
 import Entidades.Producto;
 import Modelo.*;
@@ -267,7 +266,7 @@ public class JIFModificarProductos extends javax.swing.JInternalFrame {
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         // TODO add your handling code here:
-        int opcion = JOptionPane.showConfirmDialog(null, "Realmente desea salir?", "Confirmar salida", JOptionPane.CLOSED_OPTION, JOptionPane.CANCEL_OPTION);
+        int opcion = JOptionPane.showConfirmDialog(this, "Realmente desea salir?", "Confirmar salida", JOptionPane.CLOSED_OPTION, JOptionPane.CANCEL_OPTION);
         if(opcion==0){
             dispose();
         }
@@ -275,30 +274,40 @@ public class JIFModificarProductos extends javax.swing.JInternalFrame {
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
      
-      if(jBCambiarEstado.getText()=="Reactivar")
+      if(jBCambiarEstado.getText().equals("Reactivar"))
       {
           JOptionPane.showMessageDialog(this, "No se puede modificar un Producto anulado");
       }
-      if(jBCambiarEstado.getText()=="Anular Producto")
+      if(jBCambiarEstado.getText().equals("Anular Producto"))
       {
-        if(jTFNombre.getText()!=null&&jTFCodigo.getText()!=null)
+        if((!jTFNombre.getText().isEmpty()) && (!jTFCodigo.getText().isEmpty()) && (!jTFUso.getText().isEmpty())
+                && (!jTFTamaño.getText().isEmpty()) && (!jTFCosto.getText().isEmpty()) && (!jtfVenta.getText().isEmpty()))
         {
             String codigo = jTFCodigo.getText();
             String nombre= jTFNombre.getText();
             String uso=jTFUso.getText();
             int tam= Integer.parseInt(jTFTamaño.getText());
+            try{
             float costo=Float.parseFloat(jTFCosto.getText());
             float venta=Float.parseFloat(jtfVenta.getText());
             int estrellas = (Integer)JspinEstrellas.getValue();
             Producto prodMod=new Producto(prod.getIdProducto(),codigo,nombre,uso,tam,costo,venta,estrellas);
             pData.modificarProducto(prodMod);
+            //JOptionPane.showMessageDialog(this, "Producto modificado con exito");
+            limpiar();
+            }
+            catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(this, "El costo contiene más de un punto", "Warning", JOptionPane.WARNING_MESSAGE);
+           }
         }
-        limpiar();
+        else{
+            JOptionPane.showMessageDialog(this, "Hay campos vacíos!", "Warning" ,JOptionPane.WARNING_MESSAGE);
+        }
       } 
     }//GEN-LAST:event_jBModificarActionPerformed
 
     private void jTFNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNombreKeyReleased
-        if(jTFNombre.getText()!=null&&jTFCodigo.getText()!=null)
+        if(!(jTFNombre.getText().isEmpty()) && !(jTFCodigo.getText().isEmpty()))
         {
             jBModificar.setEnabled(true);
         }
@@ -316,7 +325,7 @@ public class JIFModificarProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBCambiarEstadoActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        if(jTFCodigo.getText()!=null)
+        if(!(jTFCodigo.getText().isEmpty()))
         {
             prod=new Producto();
             prod= pData.buscarPorCodigo(jTFCodigo.getText());
@@ -339,7 +348,7 @@ public class JIFModificarProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jTFCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCodigoKeyReleased
-        if(jTFCodigo.getText()!=null)
+        if(!(jTFCodigo.getText().isEmpty()))
         {
             jBBuscar.setEnabled(true);
         }
@@ -386,7 +395,7 @@ public class JIFModificarProductos extends javax.swing.JInternalFrame {
 
     private void jTFTamañoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTamañoKeyTyped
         char validar = evt.getKeyChar();
-        if(!(Character.isDigit(validar)) && validar != 8 && validar !=46){
+        if(!(Character.isDigit(validar)) && validar != 8 ){
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(this, "Ingrese solo números");

@@ -244,6 +244,7 @@ public class JIFModificarCampaña extends javax.swing.JInternalFrame
             campaña.setFechaInicio(fechaI);
             String fechaFin = formato.format(validarLapso());
             LocalDate fechaF = LocalDate.parse(fechaFin, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            try{
             float montMin = Float.parseFloat(jTFMontoMinimo.getText());
             float montMax = Float.parseFloat(jTFMontoMaximo.getText());
             if(montMin < montMax){
@@ -258,6 +259,11 @@ public class JIFModificarCampaña extends javax.swing.JInternalFrame
             }
             else{
                 JOptionPane.showMessageDialog(this, "El monto máximo debe ser mayor al mínimo");
+            }
+            }
+            catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(this, "En monto contiene más de un punto", "Warning", JOptionPane.WARNING_MESSAGE);
+                
             }
         }
         else

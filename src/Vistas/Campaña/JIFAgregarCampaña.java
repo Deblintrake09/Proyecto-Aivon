@@ -199,7 +199,6 @@ public class JIFAgregarCampaña extends javax.swing.JInternalFrame
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         // TODO add your handling code here:
-        //try{
             if( jDCFechaIni.getDate()!=null 
                 && !(jTFMontoMin.getText().isEmpty()) && !(jTFMontoMax.getText().isEmpty()))
             {   
@@ -209,22 +208,27 @@ public class JIFAgregarCampaña extends javax.swing.JInternalFrame
                 LocalDate fechaI = LocalDate.parse(fechaInicio, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 String fechaFin = formato.format(validarLapso());
                 LocalDate fechaF = LocalDate.parse(fechaFin, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                try{
                 float montoMinimo = Float.parseFloat(jTFMontoMin.getText());
                 float montoMaximo = Float.parseFloat(jTFMontoMax.getText());
                 if(montoMinimo < montoMaximo){
                     campaña = new Campaña(numeroCampaña,fechaI,fechaF,montoMinimo,montoMaximo);
                     campañaData.agregarCampaña(campaña);
                     JOptionPane.showMessageDialog(this, "La campaña fue cargada con éxito");
+                    limpiar();
                 }
-                else{
-                    JOptionPane.showMessageDialog(this, "El monto máximo debe ser mayor al mínimo");
+                    else{
+                        JOptionPane.showMessageDialog(this, "El monto máximo debe ser mayor al mínimo");
+                    }
+                }
+                catch(NumberFormatException e){
+                    JOptionPane.showMessageDialog(this, "En monto contiene más de un punto", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
             }
             else
             {
                 JOptionPane.showMessageDialog(this,"Por favor llene todos los campos");
-            }
-            limpiar();        
+            }     
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed

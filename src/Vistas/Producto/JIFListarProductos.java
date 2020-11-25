@@ -78,11 +78,6 @@ public class JIFListarProductos extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTRev);
 
         jcbSelectUso.setMaximumRowCount(10);
-        jcbSelectUso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbSelectUsoActionPerformed(evt);
-            }
-        });
 
         jchckFiltrar.setText("Filtrar por Uso");
 
@@ -140,10 +135,6 @@ public class JIFListarProductos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         cargarProductos();
     }//GEN-LAST:event_JBCargarActionPerformed
-
-    private void jcbSelectUsoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSelectUsoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbSelectUsoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
