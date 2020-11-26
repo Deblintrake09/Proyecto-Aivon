@@ -2,8 +2,10 @@ package Vistas.Campaña;
 
 import Entidades.Campaña;
 import Modelo.*;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import javax.swing.JOptionPane;
@@ -12,7 +14,7 @@ import javax.swing.JOptionPane;
 public class JIFAgregarCampaña extends javax.swing.JInternalFrame 
 {
     private Conexion con;
-    private Campaña campaña;
+    private Campaña campaña = null;
     private CampañaData campañaData;
     
     public JIFAgregarCampaña() 
@@ -20,7 +22,8 @@ public class JIFAgregarCampaña extends javax.swing.JInternalFrame
         initComponents();
         con = new Conexion();
         campañaData = new CampañaData(con);
-        jDCFechaIni.getDateEditor().setEnabled(false);
+        fechaInicioAgregarCampaña();
+        jDCFechaIni.setEnabled(false);
         jDCFechaFin.setEnabled(false);
         campActual();
         
@@ -257,8 +260,9 @@ public class JIFAgregarCampaña extends javax.swing.JInternalFrame
     
     private void limpiar()
     {
-        Calendar c2 = new GregorianCalendar();
-        jDCFechaIni.setCalendar(c2);
+//        Calendar c2 = new GregorianCalendar();
+//        jDCFechaIni.setCalendar(c2);
+        fechaInicioAgregarCampaña();
         jDCFechaFin.setDate(null);
         jTFMontoMin.setText(null);
         jTFMontoMax.setText(null);
@@ -298,4 +302,30 @@ public class JIFAgregarCampaña extends javax.swing.JInternalFrame
         cam = listCamp.size()+1;
         jLNro.setText(String.valueOf(cam));
     }
+   private Campaña ultimaCampaña()
+   {
+       Campaña campa = null; 
+       ArrayList<Campaña> listCamp = campañaData.obtenerCampañas();
+       for(Campaña items: listCamp)
+       {
+           if(!items.getAnulado())
+           {
+               campa = items;
+           }
+        }
+        return campa;
+    }
+   
+   private void fechaInicioAgregarCampaña()
+   {
+       ZoneId zi = ZoneId.systemDefault();
+       Date d = Date.from(ultimaCampaña().getFechaFin().atStartOfDay(zi).toInstant());
+       Calendar cl = Calendar.getInstance();
+       cl.setTime(d);
+       cl.add(Calendar.DAY_OF_YEAR,1);
+       Date d1 = cl.getTime();
+       jDCFechaIni.setDate(d1);  
+    }
+   
+
 }
