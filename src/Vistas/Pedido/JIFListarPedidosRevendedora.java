@@ -40,6 +40,7 @@ public class JIFListarPedidosRevendedora extends javax.swing.JInternalFrame {
         jTRev = new javax.swing.JTable();
         jcbSelectRevendedora = new javax.swing.JComboBox<>();
         jlbselector = new javax.swing.JLabel();
+        jlbEstrellas = new javax.swing.JLabel();
 
         setResizable(true);
         setMinimumSize(new java.awt.Dimension(800, 400));
@@ -79,14 +80,12 @@ public class JIFListarPedidosRevendedora extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTRev);
 
         jcbSelectRevendedora.setMaximumRowCount(10);
-        jcbSelectRevendedora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbSelectRevendedoraActionPerformed(evt);
-            }
-        });
 
         jlbselector.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jlbselector.setText("Elija Revendedora a ver:");
+
+        jlbEstrellas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jlbEstrellas.setText("Total de Estrellas: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,6 +110,10 @@ public class JIFListarPedidosRevendedora extends javax.swing.JInternalFrame {
                         .addComponent(JBCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlbEstrellas)
+                .addGap(223, 223, 223))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +127,10 @@ public class JIFListarPedidosRevendedora extends javax.swing.JInternalFrame {
                     .addComponent(jcbSelectRevendedora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlbselector))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlbEstrellas)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,10 +149,6 @@ public class JIFListarPedidosRevendedora extends javax.swing.JInternalFrame {
         cargarPedidos();
     }//GEN-LAST:event_JBCargarActionPerformed
 
-    private void jcbSelectRevendedoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSelectRevendedoraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbSelectRevendedoraActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCargar;
@@ -155,6 +157,7 @@ public class JIFListarPedidosRevendedora extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTRev;
     private javax.swing.JComboBox<Revendedora> jcbSelectRevendedora;
+    private javax.swing.JLabel jlbEstrellas;
     private javax.swing.JLabel jlbselector;
     // End of variables declaration//GEN-END:variables
     private void armarCabecera(){
@@ -193,15 +196,22 @@ public class JIFListarPedidosRevendedora extends javax.swing.JInternalFrame {
     
     private void cargarPedidos(){
         borrarFilas();
+        int estrellas=0;
         if(jcbSelectRevendedora.getSelectedIndex()>=0)
         {
             Revendedora rev= (Revendedora)jcbSelectRevendedora.getSelectedItem();
             listaPed = pedData.buscarPedidoXRev(rev.getDni());
          for(Pedido ped: listaPed){
              modelo.addRow(new Object[]{ped.getCampaña().getNroCampaña(), ped.getFechaIngreso(),ped.getFechaEntrega(),ped.getFechaPago(), ped.getCantCajas(),ped.calcularTotalCosto(), ped.mostrarEstrellasTotales(),ped.controlarMontos(),ped.isAnulado()});
+             if(!ped.isAnulado())
+             {
+                 estrellas+= ped.mostrarEstrellasTotales();
+             }
+             
 
          }
         }
+        jlbEstrellas.setText("Total de Estrellas: "+estrellas);
     }
 
     private void cargarSelector() {

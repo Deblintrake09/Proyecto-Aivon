@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2020 a las 20:46:03
+-- Tiempo de generación: 26-11-2020 a las 03:33:41
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.2.33
 
@@ -158,19 +158,19 @@ ALTER TABLE `revendedora`
 -- AUTO_INCREMENT de la tabla `campaña`
 --
 ALTER TABLE `campaña`
-  MODIFY `ID_CAMPAÑA` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_CAMPAÑA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `ID_PEDIDO` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_PEDIDO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `ID_PRODUCTO` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_PRODUCTO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `renglon_pedido`
@@ -182,7 +182,7 @@ ALTER TABLE `renglon_pedido`
 -- AUTO_INCREMENT de la tabla `revendedora`
 --
 ALTER TABLE `revendedora`
-  MODIFY `ID_REV` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_REV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
