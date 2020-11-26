@@ -818,11 +818,15 @@ public class JIFModificarPedido extends javax.swing.JInternalFrame {
         pedido =  pdta.buscarPedidoCampRev(camp, rev);
         if(pedido!=null)
         {
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            String fecha = formato.format(Date.valueOf(pedido.getFechaIngreso()));
+            String fechaIC= formato.format(Date.valueOf(camp.getFechaInicio()));
+            String fechaFinC= formato.format(Date.valueOf(camp.getFechaFin()));
             String estado= pedido.devolverEstado();
-            jlbFechaInicio.setText("Fecha Inicio:        "+pedido.getFechaIngreso().toString());
+            jlbFechaInicio.setText("Fecha Inicio:        "+fecha);
             jlbEstado.setText("Estado:                 "+estado);
-            jlbInicioCamp.setText("Inicio Camp: "+ camp.getFechaInicio());
-            jlbFinCamp.setText("Fin Camp: "+camp.getFechaFin());
+            jlbInicioCamp.setText("Inicio Camp: "+ fechaIC);
+            jlbFinCamp.setText("Fin Camp: "+ fechaFinC);
             configurarLabelsMontos(pedido);
             configurarBotonAnular();
             jbAnular.setEnabled(true);

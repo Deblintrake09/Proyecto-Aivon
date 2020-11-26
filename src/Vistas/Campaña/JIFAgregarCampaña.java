@@ -2,7 +2,6 @@ package Vistas.Campaña;
 
 import Entidades.Campaña;
 import Modelo.*;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -23,7 +22,7 @@ public class JIFAgregarCampaña extends javax.swing.JInternalFrame
         con = new Conexion();
         campañaData = new CampañaData(con);
         fechaInicioAgregarCampaña();
-        jDCFechaIni.setEnabled(false);
+        jDCFechaIni.getDateEditor().setEnabled(false);
         jDCFechaFin.setEnabled(false);
         campActual();
         
@@ -299,8 +298,13 @@ public class JIFAgregarCampaña extends javax.swing.JInternalFrame
    private void campActual(){
         int cam;
         ArrayList<Campaña> listCamp = campañaData.obtenerCampañas();
+        if(listCamp.size()>=1){
         cam = listCamp.size()+1;
         jLNro.setText(String.valueOf(cam));
+        }
+        else{
+        jLNro.setText("1");
+        }
     }
    private Campaña ultimaCampaña()
    {
@@ -316,15 +320,20 @@ public class JIFAgregarCampaña extends javax.swing.JInternalFrame
         return campa;
     }
    
-   private void fechaInicioAgregarCampaña()
-   {
-       ZoneId zi = ZoneId.systemDefault();
-       Date d = Date.from(ultimaCampaña().getFechaFin().atStartOfDay(zi).toInstant());
-       Calendar cl = Calendar.getInstance();
-       cl.setTime(d);
-       cl.add(Calendar.DAY_OF_YEAR,1);
-       Date d1 = cl.getTime();
-       jDCFechaIni.setDate(d1);  
+   private void fechaInicioAgregarCampaña(){   
+       Campaña cam = campañaData.buscarNroCampaña(1);
+       if(cam!= null){
+        ZoneId zi = ZoneId.systemDefault();
+        Date d = Date.from(ultimaCampaña().getFechaFin().atStartOfDay(zi).toInstant());
+        Calendar cl = Calendar.getInstance();
+        cl.setTime(d);
+        cl.add(Calendar.DAY_OF_YEAR,1);
+        Date d1 = cl.getTime();
+        jDCFechaIni.setDate(d1);}
+       else{
+           Calendar c2 = new GregorianCalendar();
+            jDCFechaIni.setCalendar(c2);
+       }
     }
    
 

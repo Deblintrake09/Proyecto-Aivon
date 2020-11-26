@@ -537,18 +537,24 @@ public class JIFIniciarPedido extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlbMax;
     private javax.swing.JLabel jlbMin;
     // End of variables declaration//GEN-END:variables
-    private void campActual(){
+        private void campActual(){
+        try{
         int cam;
         String fecha = fecha();
         LocalDate dT = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         ArrayList<Campaña> listCamp = campdta.obtenerCampañas();
         for(int i =0; i<listCamp.size(); i++){
-            if(listCamp.get(i).getFechaInicio().isBefore(dT) && listCamp.get(i).getFechaFin().isAfter(dT)){
+            if(listCamp.get(i).getFechaInicio().isEqual(dT) || listCamp.get(i).getFechaInicio().isBefore(dT) && listCamp.get(i).getFechaFin().isAfter(dT)){
                 cam= listCamp.get(i).getNroCampaña();
                 jLNumCamp.setText(String.valueOf(cam));
             }
         }
         camp = campdta.buscarNroCampaña(Integer.parseInt(jLNumCamp.getText()));
+        }
+        catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "No hay campaña iniciada hoy", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Consulte la fecha de inicio de campaña o si existen");
+        }
     }
     
     private String fecha(){
